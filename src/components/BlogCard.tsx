@@ -7,14 +7,14 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
       href={`/blogs/${blog.slug}`}
       className="group block rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900"
     >
-      <h2 className="mb-2 font-mono text-xl font-bold text-teal-300 transition-colors group-hover:text-teal-200">
+      <h2 className="font-mono text-2xl font-extrabold tracking-wide text-teal-300 drop-shadow-[0_0_8px_rgba(45,212,191,0.35)] transition-colors group-hover:text-teal-200 md:text-3xl">
         <span aria-hidden="true" className="mr-2">
           {blog.emoji}
         </span>
         {blog.title}
       </h2>
 
-      <p className="mb-4 text-sm leading-relaxed text-slate-200">
+      <p className="my-6 text-base font-bold leading-relaxed text-slate-200 md:text-lg">
         {blog.description}
       </p>
 
