@@ -1,14 +1,18 @@
-"use client";
-
-import { useMemo, useState } from "react";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { ParticlesBackground } from "@/components/ParticlesBackground";
+
+/*
+Temporarily commented out projects UI:
+
+import { useMemo, useState } from "react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectsFilterNav } from "@/components/ProjectsFilterNav";
 import { projects, type ProjectFilter } from "@/lib/projects";
+*/
 
 export default function ProjectsPage() {
+  /*
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>("All");
 
   const filteredProjects = useMemo(() => {
@@ -19,6 +23,7 @@ export default function ProjectsPage() {
       ),
     );
   }, [activeFilter]);
+  */
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-black">
@@ -39,15 +44,30 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="mx-auto max-w-xl text-base text-slate-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-lg">
-            Browse my projects by technology stack.
-            <br />
-            Select a category to filter and explore.
+            A refreshed project showcase is on the way.
           </p>
-
-          <ProjectsFilterNav active={activeFilter} onChange={setActiveFilter} />
         </section>
 
-        <section aria-label="Project list" className="mt-10">
+        <section
+          aria-label="Projects placeholder"
+          className="flex flex-1 items-center justify-center py-12"
+        >
+          <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-black/40 px-8 py-16 text-center shadow-2xl backdrop-blur-sm">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-300">
+              Projects
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">
+              Adding projects soon
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-base text-slate-300">
+              I&apos;m updating this section right now. Check back soon for the full
+              project showcase.
+            </p>
+          </div>
+
+          {/*
+          <ProjectsFilterNav active={activeFilter} onChange={setActiveFilter} />
+
           {filteredProjects.length === 0 ? (
             <p className="mt-16 text-center text-slate-300">
               No projects match this filter yet. Check back soon!
@@ -61,6 +81,7 @@ export default function ProjectsPage() {
               ))}
             </ul>
           )}
+          */}
         </section>
       </main>
 
