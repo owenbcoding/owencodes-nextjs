@@ -3,8 +3,18 @@ import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
-const TO_EMAIL = "eoghankb@gmail.com";
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "Owencodes Contact <onboarding@resend.dev>";
+const TO_EMAIL = process.env.CONTACT_MAIL_TO ?? "eoghankb@gmail.com";
+
+function resolveFromAddress(): string {
+  if (process.env.CONTACT_FROM_EMAIL) return process.env.CONTACT_FROM_EMAIL;
+
+  const address = process.env.MAIL_FROM_ADDRESS;
+  const name = process.env.MAIL_FROM_NAME;
+  if (address && name) return `${name} <${address}>`;
+  if (address) return address;
+
+  return "Owencodes Contact <onboarding@resend.dev>";
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -71,9 +81,15 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey =
+    process.env.RESEND_API_KEY ??
+    process.env.RESEND_KEY ??
+    process.env.MAIL_PASSWORD;
+
   if (!apiKey) {
-    console.error("RESEND_API_KEY is not configured.");
+    console.error(
+      "Resend API key is not configured (set RESEND_API_KEY, RESEND_KEY or MAIL_PASSWORD).",
+    );
     return NextResponse.json(
       { error: "Email service is not configured. Please try again later." },
       { status: 500 },
@@ -81,6 +97,7 @@ export async function POST(request: Request) {
   }
 
   const resend = new Resend(apiKey);
+  const fromAddress = resolveFromAddress();
 
   const subject = `New portfolio contact from ${trimmedName}`;
   const textBody = `New message from your portfolio contact form.
@@ -106,7 +123,7 @@ ${trimmedMessage}
 
   try {
     const { error } = await resend.emails.send({
-      from: FROM_EMAIL,
+      from: fromAddress,
       to: [TO_EMAIL],
       replyTo: trimmedEmail,
       subject,
