@@ -9,7 +9,6 @@ import type { ISourceOptions } from "@tsparticles/engine";
 const DEFAULT_TECH_WORDS = [
   "Laravel",
   "Vue.js",
-  "React",
   "Next.js",
   "TypeScript",
   "JavaScript",

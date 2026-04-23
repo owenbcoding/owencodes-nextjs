@@ -26,14 +26,6 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
 export const projects: Project[] = [
   {
-    slug: "api-app-placeholder",
-    title: "Project Title",
-    description: "Project description",
-    stacks: ["Laravel"],
-    status: "coming-soon",
-    statusLabel: "Coming Soon!",
-  },
-  {
     slug: "shopify-store-redesign",
     title: "Shopify Store Redesign",
     description: "A store I scaled and redesigned based in Ireland.",
@@ -41,6 +33,14 @@ export const projects: Project[] = [
     stacks: ["Shopify", "Ecommerce"],
     status: "live",
     statusLabel: "New Theme launching soon",
+  },
+  {
+    slug: "api-app-placeholder",
+    title: "Project Title",
+    description: "Project description",
+    stacks: ["Laravel"],
+    status: "coming-soon",
+    statusLabel: "Coming Soon!",
   },
   {
     slug: "coming-soon-1",

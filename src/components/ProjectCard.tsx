@@ -27,7 +27,7 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <ul className="mb-4 flex min-h-[28px] flex-wrap gap-2">
+      <ul className="mb-4 flex flex-wrap gap-2">
         {project.stacks.map((stack) => (
           <li
             key={`${project.slug}-${stack}`}
