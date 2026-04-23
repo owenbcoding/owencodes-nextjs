@@ -26,13 +26,12 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
 export const projects: Project[] = [
   {
-    slug: "igdb-api-app",
-    title: "API App",
-    description:
-      "A video game app that pulls data from the IGDB API and displays game information and more.",
-    image: "/images/projects/igdb-app.png",
-    stacks: ["Laravel", "Tailwind CSS", "REST APIs", "Livewire", "Alpine.js"],
-    status: "live",
+    slug: "api-app-placeholder",
+    title: "Project Title",
+    description: "Project description",
+    stacks: ["Laravel"],
+    status: "coming-soon",
+    statusLabel: "Coming Soon!",
   },
   {
     slug: "shopify-store-redesign",

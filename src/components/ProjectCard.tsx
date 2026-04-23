@@ -2,12 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 
-const statusTone: Record<Project["status"], string> = {
-  live: "text-teal-300",
-  "coming-soon": "text-teal-200",
-  "in-development": "text-teal-200",
-};
-
 export function ProjectCard({ project }: { project: Project }) {
   const hasImage = Boolean(project.image);
 
@@ -33,7 +27,7 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <ul className="mb-4 flex flex-wrap gap-2">
+      <ul className="mb-4 flex min-h-[28px] flex-wrap gap-2">
         {project.stacks.map((stack) => (
           <li
             key={`${project.slug}-${stack}`}
@@ -44,13 +38,9 @@ export function ProjectCard({ project }: { project: Project }) {
         ))}
       </ul>
 
-      <p className="mb-4 text-sm leading-relaxed text-slate-200">{project.description}</p>
-
-      {project.statusLabel && hasImage && (
-        <p className={`mb-2 text-sm font-medium ${statusTone[project.status]}`}>
-          {project.statusLabel}
-        </p>
-      )}
+      <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-200">
+        {project.description}
+      </p>
 
       <div className="mt-auto flex items-center justify-center pt-2">
         {project.link ? (
