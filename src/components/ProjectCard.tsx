@@ -7,7 +7,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article className="flex h-full flex-col rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:transform hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900">
-      <h3 className="mb-4 text-center text-lg font-semibold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+      <h3 className="mb-4 text-lg font-semibold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
         {project.title}
       </h3>
 

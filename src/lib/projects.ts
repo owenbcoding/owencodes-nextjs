@@ -27,7 +27,7 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 export const projects: Project[] = [
   {
     slug: "shopify-store-redesign",
-    title: "Shopify Store Redesign",
+    title: "Shopify Store",
     description: "A store I scaled and redesigned based in Ireland.",
     image: "/images/projects/shopify-store.png",
     stacks: ["Shopify", "Ecommerce"],
