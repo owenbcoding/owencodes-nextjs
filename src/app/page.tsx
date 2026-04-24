@@ -21,9 +21,7 @@ export default function Home() {
             Hi I&apos;m Owen,
           </h1>
           <p className="mb-2 text-base text-slate-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-lg">
-            Owencodes - Full Stack Developer
-            <br />
-            &amp; AI Integrations.
+           Full Stack Developer with AI Integrations
           </p>
 
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
