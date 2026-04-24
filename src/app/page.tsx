@@ -46,7 +46,7 @@ export default function Home() {
                   className="mb-8 max-w-prose text-lg leading-relaxed whitespace-pre-line text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-xl"
                   style={{ minHeight: 160, overflow: "hidden", letterSpacing: "0.025em", wordSpacing: "0.05em" }}
                 >
-                  I am a full stack PHP developer. I help businesses and creators bring their ideas to life with
+                  I am a Full Stack Developer. I help businesses and creators bring their ideas to life with
                   full-stack apps and AI integrations.
                 </p>
               </div>
