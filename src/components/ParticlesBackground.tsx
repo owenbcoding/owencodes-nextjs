@@ -6,10 +6,9 @@ import { loadSlim } from "@tsparticles/slim";
 import { loadTextShape } from "@tsparticles/shape-text";
 import type { ISourceOptions } from "@tsparticles/engine";
 
-const TECH_WORDS = [
+const DEFAULT_TECH_WORDS = [
   "Laravel",
   "Vue.js",
-  "React",
   "Next.js",
   "TypeScript",
   "JavaScript",
@@ -27,7 +26,15 @@ const TECH_WORDS = [
   "< />",
 ];
 
-export function ParticlesBackground() {
+type ParticlesBackgroundProps = {
+  words?: string[];
+  id?: string;
+};
+
+export function ParticlesBackground({
+  words = DEFAULT_TECH_WORDS,
+  id = "projects-particles",
+}: ParticlesBackgroundProps = {}) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -53,7 +60,7 @@ export function ParticlesBackground() {
         type: "text",
         options: {
           text: {
-            value: TECH_WORDS,
+            value: words,
             font: "Geist Mono, JetBrains Mono, Menlo, monospace",
             style: "",
             weight: "700",
@@ -117,8 +124,8 @@ export function ParticlesBackground() {
   };
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0">
-      <Particles id="projects-particles" options={options} />
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <Particles id={id} options={options} />
     </div>
   );
 }

@@ -19,6 +19,10 @@
   }
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -36,4 +40,10 @@ body {
 
 .animate-scroll {
   animation: scroll 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll {
+    animation: none;
+  }
 }
