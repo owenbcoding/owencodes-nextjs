@@ -14,6 +14,8 @@ const skills = [
   { name: "shopify", icon: "logos:shopify" },
 ];
 
+const duplicatedSkills = [...skills, ...skills];
+
 export function SkillsSection() {
   return (
     <section aria-labelledby="skills-heading" className="mt-12">
@@ -25,19 +27,14 @@ export function SkillsSection() {
       </h2>
 
       <div className="mx-auto mt-5 max-w-5xl">
-        <div className="mask-[linear-gradient(to_right,transparent_0,black_128px,black_calc(100%-128px),transparent_100%)] inline-flex w-full flex-nowrap overflow-hidden">
-          <ul className="animate-scroll flex shrink-0 items-center justify-center md:justify-start [&_li]:mx-8">
-            {skills.map((skill) => (
-              <li key={`skills-main-${skill.name}`} className="flex min-w-[80px] flex-col items-center space-y-2">
-                <Icon icon={skill.icon} width="48" height="48" />
-                <span className="text-sm text-teal-300">{skill.name}</span>
-              </li>
-            ))}
-          </ul>
-
-          <ul className="animate-scroll flex shrink-0 items-center justify-center md:justify-start [&_li]:mx-8" aria-hidden="true">
-            {skills.map((skill) => (
-              <li key={`skills-copy-${skill.name}`} className="flex min-w-[80px] flex-col items-center space-y-2">
+        <div className="mask-[linear-gradient(to_right,transparent_0,black_128px,black_calc(100%-128px),transparent_100%)] w-full overflow-hidden">
+          <ul className="animate-scroll flex w-max min-w-max flex-nowrap items-center [&_li]:mx-8">
+            {duplicatedSkills.map((skill, index) => (
+              <li
+                key={`${skill.name}-${index}`}
+                className="flex min-w-[80px] shrink-0 flex-col items-center space-y-2"
+                aria-hidden={index >= skills.length}
+              >
                 <Icon icon={skill.icon} width="48" height="48" />
                 <span className="text-sm text-teal-300">{skill.name}</span>
               </li>
