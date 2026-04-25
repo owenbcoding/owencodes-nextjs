@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ProjectCardDescription } from "@/components/ProjectCardDescription";
 import type { Project } from "@/lib/projects";
 
 function ProjectMedia({ project }: { project: Project }) {
@@ -96,9 +97,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      <p className="theme-body shrink-0 antialiased mb-4 line-clamp-2 text-sm font-medium leading-relaxed tracking-wide md:text-base">
-        {project.description}
-      </p>
+      <ProjectCardDescription text={project.description} idPrefix={project.slug} />
 
       <div className="mt-auto flex shrink-0 items-center justify-center pt-2">
         {hasLink ? (
