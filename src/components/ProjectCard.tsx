@@ -2,8 +2,39 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 
+function ProjectMedia({ project }: { project: Project }) {
+  if (project.video) {
+    return (
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={project.video}
+        muted
+        playsInline
+        preload="metadata"
+        aria-label={project.title}
+      />
+    );
+  }
+  if (project.image) {
+    return (
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+        className="object-cover"
+      />
+    );
+  }
+  return (
+    <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-teal-100/90">
+      {project.statusLabel ?? "Coming soon"}
+    </span>
+  );
+}
+
 export function ProjectCard({ project }: { project: Project }) {
-  const hasImage = Boolean(project.image);
+  const hasMedia = Boolean(project.image || project.video);
   const hasLink = Boolean(project.link);
   const imageHref = project.imageHref ?? project.link?.href;
   const hasImageLink = Boolean(imageHref);
@@ -16,63 +47,38 @@ export function ProjectCard({ project }: { project: Project }) {
       </h3>
 
       <div
-        className={`relative mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-lg border border-teal-500/20 bg-teal-900/40 ${
+        className={`relative mb-4 aspect-video overflow-hidden rounded-lg border border-teal-500/20 bg-teal-900/40 ${
           hasLink ? "" : "cursor-pointer"
         }`}
       >
-        {hasImageLink ? (
-          isExternalImageLink ? (
-            <a
-              href={imageHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${project.title}`}
-              className="block h-full w-full cursor-pointer"
-            >
-              {hasImage ? (
-                <Image
-                  src={project.image as string}
-                  alt={project.title}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <span className="flex h-full w-full items-center justify-center text-sm font-medium text-teal-100/90">
-                  {project.statusLabel ?? "Coming soon"}
-                </span>
-              )}
-            </a>
-          ) : (
-            <Link href={imageHref!} aria-label={`Open ${project.title}`} className="block h-full w-full cursor-pointer">
-              {hasImage ? (
-                <Image
-                  src={project.image as string}
-                  alt={project.title}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <span className="flex h-full w-full items-center justify-center text-sm font-medium text-teal-100/90">
-                  {project.statusLabel ?? "Coming soon"}
-                </span>
-              )}
-            </Link>
-          )
-        ) : hasImage ? (
-          <Image
-            src={project.image as string}
-            alt={project.title}
-            fill
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
-          />
-        ) : (
-          <span className="text-sm font-medium text-teal-100/90">
+        {hasMedia ? <ProjectMedia project={project} /> : (
+          <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-teal-100/90">
             {project.statusLabel ?? "Coming soon"}
           </span>
         )}
+        {hasImageLink
+          ? isExternalImageLink
+            ? (
+                <a
+                  href={imageHref!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10 cursor-pointer"
+                  aria-label={`Open ${project.title} preview`}
+                >
+                  <span className="sr-only">Open {project.title}</span>
+                </a>
+              )
+            : (
+                <Link
+                  href={imageHref!}
+                  className="absolute inset-0 z-10 cursor-pointer"
+                  aria-label={`Open ${project.title} preview`}
+                >
+                  <span className="sr-only">Open {project.title}</span>
+                </Link>
+              )
+          : null}
       </div>
 
       <ul className="mb-4 flex flex-wrap gap-2">

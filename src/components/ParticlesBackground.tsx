@@ -124,8 +124,8 @@ export function ParticlesBackground({
   };
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <Particles id={id} options={options} />
+    <div className="pointer-events-none absolute inset-0 z-0 w-full min-w-0 max-w-full overflow-hidden">
+      <Particles id={id} options={options} className="!size-full" />
     </div>
   );
 }

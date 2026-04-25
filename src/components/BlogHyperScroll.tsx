@@ -92,7 +92,7 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
   return (
     <section
       aria-label="Blog posts"
-      className="mt-14 flex min-h-0 flex-1 flex-col overflow-hidden"
+      className="mt-0 flex min-h-0 flex-1 flex-col overflow-hidden"
     >
 
       <ol
@@ -135,12 +135,16 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
                 href={`/blogs/${blog.slug}`}
                 tabIndex={isReadable ? 0 : -1}
                 aria-label={`Read ${blog.title} — about ${blog.readingMinutes} min`}
-                className="group relative flex min-h-[20px] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-3xl bg-slate-950/90 p-4 shadow-[0_20px_70px_rgba(0,0,0,0.5)] ring-1 ring-teal-300/10 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:ring-2 hover:ring-teal-300/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300/70 md:min-h-[60px] md:p-6"
+                className="group relative flex min-h-[20px] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-slate-950/35 p-4 shadow-[0_20px_70px_rgba(0,0,0,0.5)] ring-1 ring-white/5 backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/20 hover:ring-2 hover:ring-teal-300/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300/70 md:min-h-[60px] md:p-6"
               >
-                <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-teal-400/20 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 left-8 h-60 w-60 rounded-full bg-cyan-500/10 blur-3xl" />
+                <div className="pointer-events-none absolute -right-16 -top-20 z-0 h-52 w-52 rounded-full bg-teal-400/20 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-24 left-8 z-0 h-60 w-60 rounded-full bg-cyan-500/10 blur-3xl" />
+                <div
+                  className="pointer-events-none absolute inset-0 z-0 rounded-3xl bg-linear-to-b from-white/6 to-transparent"
+                  aria-hidden
+                />
 
-                <div className="relative flex items-start justify-between gap-6">
+                <div className="relative z-10 flex items-start justify-between gap-6">
                   <div>
                     <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-teal-300">
                       Post {postNumber}
@@ -158,7 +162,7 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
                   </div>
                 </div>
 
-                <div className="relative mt-6 flex flex-wrap items-end justify-between gap-4">
+                <div className="relative z-10 mt-6 flex flex-wrap items-end justify-between gap-4">
                   <div>
                     <p className="max-w-2xl text-sm font-semibold leading-relaxed text-slate-200 md:text-lg">
                       {blog.description}

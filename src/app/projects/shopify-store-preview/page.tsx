@@ -2,12 +2,29 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 
-function PreviewPanel({ title, description }: { title: string; description: string }) {
+const BEFORE_SRC = "/images/shopify-old.mp4";
+const AFTER_SRC = "/images/shopify-new.mp4";
+
+function PreviewPanel({
+  title,
+  description,
+  src,
+}: {
+  title: string;
+  description: string;
+  src: string;
+}) {
   return (
     <article className="flex h-full flex-col rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm">
       <h2 className="mb-4 text-2xl font-semibold text-white">{title}</h2>
-      <div className="mb-4 flex aspect-video items-center justify-center rounded-lg border border-teal-500/20 bg-teal-900/30 text-center text-teal-100/90">
-        Video placeholder
+      <div className="relative mb-4 aspect-video overflow-hidden rounded-lg border border-teal-500/20 bg-black">
+        <video
+          className="h-full w-full object-cover"
+          src={src}
+          controls
+          playsInline
+          preload="metadata"
+        />
       </div>
       <p className="text-sm leading-relaxed text-slate-200">{description}</p>
     </article>
@@ -32,8 +49,7 @@ export default function ShopifyStorePreviewPage() {
             Before and After
           </h1>
           <p className="mx-auto max-w-2xl text-base text-slate-200 md:text-lg">
-            A side-by-side preview space for your Shopify redesign videos. When you add the final clips, these two
-            panels can be replaced with embedded video previews.
+            Original store walkthrough before the redesign, and the same flows on the new theme and layout.
           </p>
 
           <div className="mt-6 flex items-center justify-center gap-4">
@@ -57,11 +73,13 @@ export default function ShopifyStorePreviewPage() {
         <section className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <PreviewPanel
             title="Before"
-            description="Use this panel for the original store walkthrough video before the redesign."
+            src={BEFORE_SRC}
+            description="Original BRÍ Oils store experience before the redesign and theme work."
           />
           <PreviewPanel
             title="After"
-            description="Use this panel for the updated store walkthrough video after the redesign."
+            src={AFTER_SRC}
+            description="Updated storefront after scaling, theming, and design changes."
           />
         </section>
       </main>
