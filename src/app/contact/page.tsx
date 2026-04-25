@@ -20,7 +20,7 @@ export default function ContactPage() {
 
       <MainNavigation />
 
-      <main className="relative z-10 mx-auto mt-14 flex w-full max-w-3xl flex-1 flex-col px-4 py-8">
+      <main className="relative z-10 mx-auto mt-18 flex w-full max-w-3xl flex-1 flex-col px-4 py-8">
         <section
           aria-labelledby="contact-heading"
           className="mx-auto mt-8 w-full max-w-xl rounded-xl border border-white/10 bg-black/50 p-8 shadow-2xl backdrop-blur-md sm:p-10"

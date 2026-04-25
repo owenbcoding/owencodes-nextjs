@@ -45,7 +45,7 @@ export default async function BlogDetailPage({
 
       <MainNavigation />
 
-      <main className="relative z-10 mx-auto mt-14 flex w-full max-w-3xl flex-1 flex-col px-4 py-8">
+      <main className="relative z-10 mx-auto mt-18 flex w-full max-w-3xl flex-1 flex-col px-4 py-8">
         <Link
           href="/blogs"
           className="mb-6 inline-flex items-center gap-1 self-start text-sm text-teal-300 transition-colors hover:text-teal-200"

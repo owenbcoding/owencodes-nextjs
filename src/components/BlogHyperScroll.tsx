@@ -92,11 +92,11 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
   return (
     <section
       aria-label="Blog posts"
-      className="mt-0 flex min-h-0 flex-1 flex-col overflow-hidden"
+      className="mt-0 flex h-full min-h-48 flex-1 flex-col overflow-hidden"
     >
 
       <ol
-        className="perspective-distant relative flex min-h-0 flex-1 touch-none items-start justify-center overflow-hidden pt-4 md:pt-6"
+        className="perspective-distant relative flex h-full min-h-48 flex-1 touch-none items-start justify-center overflow-hidden pt-3 sm:pt-4 md:pt-6"
         tabIndex={0}
         onWheel={handleWheel}
         onKeyDown={handleKeyDown}

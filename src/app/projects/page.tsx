@@ -30,7 +30,7 @@ export default function ProjectsPage() {
 
       <MainNavigation />
 
-      <main className="relative z-10 mx-auto mt-14 flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
+      <main className="relative z-10 mx-auto mt-18 flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
         <section aria-labelledby="projects-heading" className="text-center">
           <h1
             id="projects-heading"
