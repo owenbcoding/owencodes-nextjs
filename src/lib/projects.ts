@@ -92,7 +92,7 @@ export const projects: Project[] = [
   },
   {
     slug: "coming-soon-2",
-    title: "Blog Site",
+    title: "Project title",
     description: "Project description",
     stacks: ["Laravel", "Blade", "Livewire", "TailwindCSS", "Alpine.js"],
     status: "in-development",
