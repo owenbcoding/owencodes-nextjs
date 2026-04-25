@@ -8,7 +8,7 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
       aria-label={`Read ${blog.title} — about ${blog.readingMinutes} min`}
       className="group block cursor-pointer rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/60"
     >
-      <h2 className="font-mono text-2xl font-extrabold tracking-wide text-teal-300 drop-shadow-[0_0_8px_rgba(45,212,191,0.35)] transition-colors group-hover:text-teal-200 md:text-3xl">
+      <h2 className="theme-title-font text-2xl font-extrabold text-teal-300 drop-shadow-[0_0_8px_rgba(45,212,191,0.35)] transition-colors group-hover:text-teal-200 md:text-3xl">
         <span aria-hidden="true" className="mr-2">
           {blog.emoji}
         </span>

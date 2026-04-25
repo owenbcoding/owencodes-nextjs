@@ -20,8 +20,8 @@ export default function Home() {
           >
             Hi I&apos;m Owen,
           </h1>
-          <p className="theme-subheading mb-2 text-base md:text-lg">
-            Owen Byrne - Full Stack Developer!
+          <p className="theme-body mb-2 text-lg leading-relaxed md:text-xl">
+            Full Stack Developer!
           </p>
 
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
@@ -41,8 +41,8 @@ export default function Home() {
                   About me!
                 </h2>
                 <p
-                  className="theme-body mb-8 max-w-prose text-lg leading-relaxed whitespace-pre-line md:text-xl"
-                  style={{ minHeight: 160, overflow: "hidden", letterSpacing: "0.025em", wordSpacing: "0.05em" }}
+                  className="theme-body max-w-prose text-lg leading-relaxed whitespace-pre-line md:text-xl"
+                  style={{ minHeight: 160, overflow: "hidden" }}
                 >
                   I am a Full Stack Developer. I help businesses and creators bring their ideas to life with
                   full-stack apps and AI integrations.

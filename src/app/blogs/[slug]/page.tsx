@@ -55,7 +55,7 @@ export default async function BlogDetailPage({
 
         <article className="rounded-lg border border-white/10 bg-black/30 p-8 shadow-2xl backdrop-blur-sm">
           <header className="mb-6 border-b border-white/5 pb-4">
-            <h1 className="font-mono text-3xl font-bold text-teal-300">
+            <h1 className="theme-title-font text-3xl font-bold text-teal-300">
               <span aria-hidden="true" className="mr-2">
                 {blog.emoji}
               </span>

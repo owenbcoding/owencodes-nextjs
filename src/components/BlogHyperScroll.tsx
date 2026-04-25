@@ -149,7 +149,7 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
                     <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-teal-300">
                       Post {postNumber}
                     </p>
-                    <h2 className="mt-3 max-w-2xl font-mono text-2xl font-black tracking-tight text-white drop-shadow-[0_0_18px_rgba(45,212,191,0.18)] md:text-4xl">
+                    <h2 className="theme-title-font mt-3 max-w-2xl text-2xl font-black text-white drop-shadow-[0_0_18px_rgba(45,212,191,0.18)] md:text-4xl">
                       <span aria-hidden="true" className="mr-3">
                         {blog.emoji}
                       </span>

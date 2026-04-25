@@ -42,7 +42,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article className="cursor-default flex h-full flex-col rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
-      <h3 className="mb-4 text-lg font-semibold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+      <h3 className="theme-title-font mb-4 text-md font-semibold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
         {project.title}
       </h3>
 
@@ -92,7 +92,7 @@ export function ProjectCard({ project }: { project: Project }) {
         ))}
       </ul>
 
-      <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-200">
+      <p className="theme-body antialiased mb-4 line-clamp-2 text-sm font-medium leading-relaxed tracking-wide md:text-base">
         {project.description}
       </p>
 

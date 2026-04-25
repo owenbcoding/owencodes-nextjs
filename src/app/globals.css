@@ -1,15 +1,26 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Xeno Byte";
+  src: url("/fonts/XenoByte.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --font-xeno-byte: "Xeno Byte", "Courier New", monospace;
+  --font-readable-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-readable: var(--font-readable-mono);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-readable);
+  --font-mono: var(--font-readable-mono);
 }
 
 :root[data-theme="light"] {
@@ -32,7 +43,7 @@ body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-readable);
 }
 
 .site-shell {
@@ -54,16 +65,25 @@ body {
 
 .theme-heading {
   color: #ffffff;
+  font-family: var(--font-xeno-byte);
+  letter-spacing: 0.035em;
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 60%));
+}
+
+.theme-title-font {
+  font-family: var(--font-xeno-byte);
+  letter-spacing: 0.035em;
 }
 
 .theme-subheading {
   color: #e2e8f0;
+  line-height: 1.6;
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 60%));
 }
 
 .theme-body {
   color: #ffffff;
+  line-height: 1.7;
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 60%));
 }
 
@@ -78,16 +98,25 @@ body {
 
 .theme-brand-link {
   color: #ffffff;
+  font-family: var(--font-xeno-byte);
+  letter-spacing: 0.04em;
 }
 
 .theme-brand-link:hover {
   color: #5eead4;
 }
 
-.theme-nav-link,
+.theme-nav-link {
+  color: #e5e7eb;
+  font-family: var(--font-xeno-byte);
+  letter-spacing: 0.04em;
+}
+
 .theme-github-link,
 .theme-toggle {
   color: #e5e7eb;
+  font-family: var(--font-readable);
+  letter-spacing: 0.01em;
 }
 
 .theme-nav-link:hover,

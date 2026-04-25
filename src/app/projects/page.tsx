@@ -34,11 +34,11 @@ export default function ProjectsPage() {
         <section aria-labelledby="projects-heading" className="text-center">
           <h1
             id="projects-heading"
-            className="mb-4 mt-5 text-4xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+            className="theme-heading mb-4 mt-5 text-4xl font-bold"
           >
             Projects
           </h1>
-          <p className="mx-auto max-w-xl text-base text-slate-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-lg">
+          <p className="theme-body mx-auto max-w-prose text-md leading-relaxed md:text-xl">
             Browse my projects by technology stack.
             <br />
             Select a category to filter and explore.

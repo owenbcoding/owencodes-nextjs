@@ -55,7 +55,7 @@ export default function BlogsPage() {
       <main className="relative z-10 mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col justify-center gap-0 px-4 pb-4">
         <h1
           id="blogs-heading"
-          className="shrink-0 text-center mb-20 text-2xl font-bold tracking-wide text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-3xl"
+          className="theme-heading mb-20 shrink-0 text-center text-2xl font-bold md:text-3xl"
         >
           My Blogs
         </h1>
