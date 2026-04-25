@@ -5,10 +5,10 @@ import { SkillsSection } from "@/components/SkillsSection";
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-black">
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-br from-black via-slate-950 to-teal-950" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-black/70 via-transparent to-teal-900/40" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+    <div className="site-shell relative flex min-h-screen flex-col overflow-x-hidden">
+      <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
+      <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
+      <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
 
       <MainNavigation />
 
@@ -16,12 +16,12 @@ export default function Home() {
         <section aria-labelledby="intro-heading" className="relative z-10 text-center">
           <h1
             id="intro-heading"
-            className="mb-4 mt-5 text-4xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+            className="theme-heading mb-4 mt-5 text-4xl font-bold"
           >
             Hi I&apos;m Owen,
           </h1>
-          <p className="mb-2 text-base text-slate-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-lg">
-           Full Stack Developer with AI Integrations
+          <p className="theme-subheading mb-2 text-base md:text-lg">
+            Owen Byrne - Full Stack Developer!
           </p>
 
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
@@ -37,11 +37,11 @@ export default function Home() {
 
             <div className="mt-10 flex w-full flex-col items-center md:ml-10 md:w-1/2 md:items-start">
               <div className="mx-auto flex flex-col items-center justify-center gap-2">
-                <h2 className="text-4xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                <h2 className="theme-heading text-4xl font-bold">
                   About me!
                 </h2>
                 <p
-                  className="mb-8 max-w-prose text-lg leading-relaxed whitespace-pre-line text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] md:text-xl"
+                  className="theme-body mb-8 max-w-prose text-lg leading-relaxed whitespace-pre-line md:text-xl"
                   style={{ minHeight: 160, overflow: "hidden", letterSpacing: "0.025em", wordSpacing: "0.05em" }}
                 >
                   I am a Full Stack Developer. I help businesses and creators bring their ideas to life with

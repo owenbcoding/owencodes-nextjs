@@ -21,7 +21,7 @@ export function SkillsSection() {
     <section aria-labelledby="skills-heading" className="mt-12">
       <h2
         id="skills-heading"
-        className="text-center text-4xl font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+        className="theme-heading text-center text-4xl font-bold"
       >
         My Skills
       </h2>
@@ -36,7 +36,7 @@ export function SkillsSection() {
                 aria-hidden={index >= skills.length}
               >
                 <Icon icon={skill.icon} width="48" height="48" />
-                <span className="text-sm text-teal-300">{skill.name}</span>
+                <span className="theme-accent-text text-sm">{skill.name}</span>
               </li>
             ))}
           </ul>
