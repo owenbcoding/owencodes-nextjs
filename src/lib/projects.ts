@@ -5,6 +5,8 @@ export type Project = {
   title: string;
   description: string;
   image?: string;
+  /** Muted video thumbnail for the card (e.g. product walkthrough). */
+  video?: string;
   stacks: string[];
   status: ProjectStatus;
   statusLabel?: string;
@@ -30,7 +32,7 @@ export const projects: Project[] = [
     slug: "shopify-store-redesign",
     title: "Shopify Store",
     description: "A store I scaled and redesigned based in Ireland.",
-    image: "/images/projects/shopify-store.png",
+    video: "/images/shopify-new.mp4",
     stacks: ["Shopify", "Liquid", "Dawn theme", "Ecommerce"],
     status: "live",
     statusLabel: "New Theme launching soon",
@@ -42,6 +44,7 @@ export const projects: Project[] = [
     title: "Note Flow",
     description:
       "A free multi-user app. Import your NOTES directory or GitHub repository into your profile, or write directly in the app. AI-powered note generation with no paid tier.",
+    image: "/images/note-flow.png",
     stacks: ["Next.js", "OpenAI", "AI"],
     status: "in-development",
     link: { href: "https://note-flow-livid.vercel.app/", label: "Visit live site" },
@@ -50,6 +53,7 @@ export const projects: Project[] = [
     slug: "specsage",
     title: "Specsage",
     description: "Specsage is a AI-powered PC builder assistant.",
+    image: "/images/Specsage.png",
     stacks: ["Next.js", "CrewAI", "OpenAI", "Firecrawl"],
     status: "in-development",
     statusLabel: "In Development",
@@ -67,6 +71,7 @@ export const projects: Project[] = [
     slug: "playlisted",
     title: "Playlisted",
     description: "A playlist discovery and sharing app.",
+    image: "/images/playlisted-live.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js"],
     status: "in-development",
   },
@@ -74,6 +79,7 @@ export const projects: Project[] = [
     slug: "hackerinn",
     title: "Hackerinn",
     description: "A hacker community platform for accountability and growth.",
+    image: "/images/hackerinn.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js"],
     status: "in-development",
   },
