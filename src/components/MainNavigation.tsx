@@ -63,46 +63,6 @@ export function MainNavigation() {
           </a>
         </div>
       </div>
-
-      {isMenuOpen && (
-        <div className="mx-auto max-w-6xl px-4 pb-3 md:hidden sm:px-6">
-          <div
-            id="mobile-navigation-menu"
-          >
-            {navItems.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  aria-current={active ? "page" : undefined}
-                  className={`block rounded-xl px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
-                    active
-                      ? "bg-white/10 text-teal-400"
-                      : "text-gray-200 hover:bg-white/10 hover:text-teal-400"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-
-            <a
-              href="https://github.com/owenbcoding"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMenuOpen(false)}
-              className="flex items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-semibold text-gray-200 transition duration-200 hover:bg-white/10 hover:text-white"
-            >
-              <span>Github</span>
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 .5C5.3.5 0 5.8 0 12.4c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.2-1.3-1.5-1.3-1.5-1.1-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.1 2 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.4.1-2.8 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.4.2 2.5.1 2.8.7.9 1.2 1.9 1.2 3.2 0 4.5-2.8 5.4-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.8 18.7.5 12 .5z" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
