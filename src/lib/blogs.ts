@@ -9,11 +9,25 @@ export type BlogMeta = {
   description: string;
   date: string;
   category: string;
+  readingMinutes: number;
 };
 
 export type Blog = BlogMeta & {
   content: string;
 };
+
+const WORDS_PER_MINUTE = 200;
+
+function calculateReadingMinutes(content: string): number {
+  const stripped = content
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`[^`]*`/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/[#>*_~`>\-]/g, " ");
+  const words = stripped.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+}
 
 export const BLOGS_PER_PAGE = 3;
 
@@ -32,6 +46,10 @@ function readBlogFile(fileName: string): Blog {
     description: String(data.description ?? ""),
     date: String(data.date ?? ""),
     category: String(data.category ?? "General"),
+    readingMinutes:
+      typeof data.readingMinutes === "number" && data.readingMinutes > 0
+        ? data.readingMinutes
+        : calculateReadingMinutes(content),
     content,
   };
 }
