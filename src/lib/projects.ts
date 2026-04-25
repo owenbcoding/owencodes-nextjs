@@ -78,7 +78,7 @@ export const projects: Project[] = [
   {
     slug: "hackerinn",
     title: "Hackerinn",
-    description: "A hacker community platform for accountability and growth.",
+    description: "A online community platform for accountability and growth.",
     image: "/images/hackerinn.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js"],
     status: "in-development",
