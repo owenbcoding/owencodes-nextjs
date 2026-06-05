@@ -26,12 +26,6 @@ export default function ContactPage() {
           className="mx-auto mt-8 w-full max-w-xl rounded-xl border border-white/10 bg-black/50 p-8 shadow-2xl backdrop-blur-md sm:p-10"
         >
           <header className="text-center">
-            <h1
-              id="contact-heading"
-              className="theme-heading text-3xl font-bold sm:text-4xl"
-            >
-              Contact me
-            </h1>
             <h2 className="theme-heading mt-2 text-2xl font-semibold sm:text-3xl">
               Let&apos;s work together!
             </h2>
