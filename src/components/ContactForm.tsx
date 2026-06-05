@@ -129,12 +129,12 @@ export function ContactForm() {
         role="note"
         className="rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-200"
       >
-        <p className="font-semibold text-white font-bold">Quick step before sending</p>
-        <p className="mt-1 text-slate-300">
+        <p className=" text-white font-bold">Quick step before sending</p>
+        <p className="mt-5 text-slate-300">
           Please book a discovery call time first &mdash; this helps filter spam
           and ensures we can actually chat.
         </p>
-        <p className="text-white mt-5 font-bold">The best way to set up a discovery call is through a google meeting link the form above is for more project details and the call is for a more detailed conversation about your project</p>
+        <p className="text-white mt-5 font-bold">The best way to set up a discovery call is through a google meeting link. The form above is for more project details and the call is for a more detailed conversation about your project</p>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
