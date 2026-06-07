@@ -79,7 +79,7 @@ export function ContactForm() {
           type="text"
           autoComplete="name"
           required
-          placeholder="Your name"
+          placeholder="Your Full name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
@@ -99,7 +99,7 @@ export function ContactForm() {
           type="email"
           autoComplete="email"
           required
-          placeholder="Your email"
+          placeholder="Your Work email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
@@ -117,8 +117,8 @@ export function ContactForm() {
           id="contact-message"
           name="message"
           required
-          rows={5}
-          placeholder="Describe what you want to chat about in detail"
+          rows={12}
+          placeholder={`Put anything here to start the conversation\n\nTell me about your project...\n\n• Business or project name\n• Goal of the website/app\n• Example websites you like\n• Pages required\n• Features needed (Login, User Accounts, Payments, Booking, Dashboard, etc.)\n• Existing branding, content, or assets\n• Domain and hosting status\n• Expected launch date\n• Budget range`}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="resize-y rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
