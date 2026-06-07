@@ -36,7 +36,6 @@ function ProjectMedia({ project }: { project: Project }) {
 
 export function ProjectCard({ project }: { project: Project }) {
   const hasMedia = Boolean(project.image || project.video);
-  const hasLink = Boolean(project.link);
   const imageHref = project.imageHref ?? project.link?.href;
   const hasImageLink = Boolean(imageHref);
   const isExternalImageLink = Boolean(imageHref?.startsWith("http"));
@@ -49,9 +48,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div className="flex min-h-0 flex-1 flex-col justify-center gap-6 mt-5">
         <div
-          className={`relative aspect-video w-full overflow-hidden rounded-lg border border-teal-500/20 bg-teal-900/40 ${
-            hasLink ? "" : "cursor-pointer"
-          }`}
+          className="relative aspect-video w-full overflow-hidden rounded-lg border border-teal-500/20 bg-teal-900/40"
         >
           {hasMedia ? <ProjectMedia project={project} /> : (
             <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-teal-100/90">
@@ -99,27 +96,6 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <ProjectCardDescription text={project.description} idPrefix={project.slug} />
 
-      <div className="mt-auto flex shrink-0 items-center justify-center pt-2">
-        {hasLink ? (
-          <a
-            href={project.link!.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={project.link!.label}
-            className="inline-flex cursor-pointer items-center justify-center text-teal-300/80 transition-colors hover:text-teal-200"
-          >
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M3 12h18" />
-              <path d="M12 3c2.5 2.7 4 5.9 4 9s-1.5 6.3-4 9c-2.5-2.7-4-5.9-4-9s1.5-6.3 4-9Z" />
-            </svg>
-          </a>
-        ) : (
-          <span aria-hidden="true" className="text-teal-500/60">
-            &mdash;
-          </span>
-        )}
-      </div>
     </article>
   );
 }
