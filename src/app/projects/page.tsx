@@ -39,9 +39,9 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="theme-body mx-auto max-w-prose text-md leading-relaxed md:text-xl">
-            Browse my projects by technology stack.
+            Browse my projects.
             <br />
-            Select a category to filter and explore.
+            Select a category to filter.
           </p>
 
           <ProjectsFilterNav active={activeFilter} onChange={setActiveFilter} />
