@@ -29,7 +29,7 @@ export default function Home() {
               src="/images/portrait-notint-removebg.png"
               className="relative z-20 mt-5 rounded-full opacity-90"
               style={{ minHeight: 160, overflow: "hidden" }}
-              alt="Owen - Full Stack PHP Developer with AI Integrations"
+              alt="Owen - Full Stack PHP Developer and AI Solutions and Automations"
               width={600}
               height={600}
               priority
@@ -45,7 +45,7 @@ export default function Home() {
                   style={{ minHeight: 160, overflow: "hidden" }}
                 >
                   I am a Full Stack Developer. I help businesses and creators bring their ideas to life with
-                  full-stack apps and AI integrations.
+                  full-stack apps and AI Solutions and Automations.
                 </p>
               </div>
             </div>
