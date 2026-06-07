@@ -52,7 +52,7 @@ export function ProjectCard({ project }: { project: Project }) {
         >
           {hasMedia ? <ProjectMedia project={project} /> : (
             <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-teal-100/90">
-              {project.statusLabel ?? "Coming soon"}
+              {project.statusLabel ?? "Working on it"}
             </span>
           )}
           {hasImageLink
