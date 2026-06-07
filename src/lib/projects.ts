@@ -88,8 +88,8 @@ export const projects: Project[] = [
   {
     slug: "task-app",
     title: "Task App",
-    description: "A productive task management application.",
-    stacks: ["Laravel", "TailwindCSS", "Blade", "PrismPHP", "Livewire"],
+    description: "A smart, AI-powered to-do app.",
+    stacks: ["Laravel", "TailwindCSS", "Blade", "PrismPHP", "Livewire", "AI"],
     status: "in-development",
   },
   {
