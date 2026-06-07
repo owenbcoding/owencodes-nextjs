@@ -15,7 +15,7 @@ const themeScript = `
 
 export const metadata: Metadata = {
   title: "Owencodes",
-  description: "Owencodes - Full Stack PHP Developer and AI Integrations.",
+  description: "Owencodes - Full Stack PHP Developer and AI Solutions and Automations.",
 };
 
 export default function RootLayout({
