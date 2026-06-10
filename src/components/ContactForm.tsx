@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 const CALENDLY_URL = "https://calendly.com/owencodes/30min";
 
@@ -11,14 +11,15 @@ type Status =
   | { kind: "error"; message: string };
 
 export function ContactForm() {
+  const formLoadedAt = useRef(Date.now());
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
   const [hasBooked, setHasBooked] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   const canSend =
-    hasBooked &&
     name.trim().length > 0 &&
     email.trim().length > 0 &&
     message.trim().length > 0 &&
@@ -39,12 +40,29 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          companyWebsite,
+          formLoadedAt: formLoadedAt.current,
+        }),
       });
 
       const data = (await res.json().catch(() => ({}))) as {
         error?: string;
       };
+
+      if (res.status === 429) {
+        const retryAfter = res.headers.get("Retry-After");
+        const minutes = retryAfter ? Math.max(1, Math.ceil(Number(retryAfter) / 60)) : null;
+        throw new Error(
+          data.error ??
+            (minutes
+              ? `Too many attempts. Please wait about ${minutes} minute${minutes === 1 ? "" : "s"} and try again.`
+              : "Too many attempts. Please wait a while and try again."),
+        );
+      }
 
       if (!res.ok) {
         throw new Error(data.error ?? "Something went wrong. Please try again.");
@@ -65,7 +83,23 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5" noValidate>
+    <form onSubmit={handleSubmit} className="relative mt-8 flex flex-col gap-5" noValidate>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+      >
+        <label htmlFor="contact-company-website">Company website</label>
+        <input
+          id="contact-company-website"
+          name="companyWebsite"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={companyWebsite}
+          onChange={(e) => setCompanyWebsite(e.target.value)}
+        />
+      </div>
+
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-name"
@@ -129,12 +163,12 @@ export function ContactForm() {
         role="note"
         className="rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-200"
       >
-        <p className=" text-white font-bold">Quick step before sending</p>
+        <p className="text-white font-bold">Prefer to talk live?</p>
         <p className="mt-5 text-slate-300">
-          Please book a discovery call time first &mdash; this helps filter spam
-          and ensures we can actually chat.
+          You can send a message anytime using the form above. If you&apos;d
+          like a discovery call, book a time below &mdash; the form is great for
+          project details, and the call is for a deeper conversation.
         </p>
-        <p className="text-white mt-5 font-bold">The best way to set up a discovery call is through a google meeting link. The form above is for more project details and the call is for a more detailed conversation about your project</p>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
@@ -178,11 +212,6 @@ export function ContactForm() {
         </p>
       )}
 
-      {!hasBooked && (
-        <p className="text-center text-xs text-slate-400">
-          Send Message unlocks once you&apos;ve booked a discovery call.
-        </p>
-      )}
     </form>
   );
 }
