@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {
+  checkContactProtection,
+  getClientIp,
+  recordSuccessfulContact,
+  validateContactEmail,
+  type ContactProtectionResult,
+} from "@/lib/contact-protection";
 
 export const runtime = "nodejs";
 
@@ -17,6 +24,24 @@ function resolveFromAddress(): string {
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function protectionResponse(
+  result: Extract<ContactProtectionResult, { allowed: false }>,
+) {
+  if (result.silent) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const headers: HeadersInit = {};
+  if (result.retryAfterSeconds > 0) {
+    headers["Retry-After"] = String(result.retryAfterSeconds);
+  }
+
+  const status =
+    result.kind === "blocked" || result.kind === "rate_limited" ? 429 : 400;
+
+  return NextResponse.json({ error: result.message }, { status, headers });
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -39,10 +64,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, message } = payload as {
+  const { name, email, message, companyWebsite, formLoadedAt } = payload as {
     name?: unknown;
     email?: unknown;
     message?: unknown;
+    companyWebsite?: unknown;
+    formLoadedAt?: unknown;
   };
 
   if (
@@ -79,6 +106,27 @@ export async function POST(request: Request) {
       { error: "Message is too long." },
       { status: 400 },
     );
+  }
+
+  const clientIp = getClientIp(request);
+  const protection = checkContactProtection({
+    ip: clientIp,
+    name: trimmedName,
+    email: trimmedEmail,
+    message: trimmedMessage,
+    companyWebsite:
+      typeof companyWebsite === "string" ? companyWebsite : undefined,
+    formLoadedAt:
+      typeof formLoadedAt === "number" ? formLoadedAt : undefined,
+  });
+
+  if (!protection.allowed) {
+    return protectionResponse(protection);
+  }
+
+  const emailValidation = await validateContactEmail(trimmedEmail);
+  if (emailValidation) {
+    return protectionResponse(emailValidation);
   }
 
   const apiKey =
@@ -139,6 +187,7 @@ ${trimmedMessage}
       );
     }
 
+    recordSuccessfulContact(clientIp);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Unexpected contact form error:", err);
