@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const themeScript = `
@@ -36,6 +37,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: themeScript }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );
