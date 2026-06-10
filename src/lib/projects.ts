@@ -69,7 +69,7 @@ export const projects: Project[] = [
   {
     slug: "playlisted",
     title: "Playlisted",
-    description: "A playlist discovery and sharing app.",
+    description: "A social music app to chat about songs and artists.",
     image: "/images/playlisted-live.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js"],
     status: "in-development",
