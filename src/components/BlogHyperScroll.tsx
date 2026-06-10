@@ -110,8 +110,11 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
           const distance = index - activePosition;
           const absoluteDistance = Math.abs(distance);
           const isReadable = absoluteDistance < 0.65;
+          const isNearActive = absoluteDistance < 0.75;
           const cardStyle = {
-            opacity: clamp(1 - absoluteDistance * 0.42, 0, 1),
+            opacity: isNearActive
+              ? 1
+              : clamp(1 - absoluteDistance * 0.42, 0, 1),
             transform: [
               `translate3d(0, ${distance * 38}%, ${-Math.abs(distance) * 220}px)`,
               `rotateX(${distance * -7}deg)`,
@@ -135,12 +138,20 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
                 href={`/blogs/${blog.slug}`}
                 tabIndex={isReadable ? 0 : -1}
                 aria-label={`Read ${blog.title} — about ${blog.readingMinutes} min`}
-                className="group relative flex min-h-[20px] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-slate-950/35 p-4 shadow-[0_20px_70px_rgba(0,0,0,0.5)] ring-1 ring-white/5 backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/20 hover:ring-2 hover:ring-teal-300/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300/70 md:min-h-[60px] md:p-6"
+                className={`group relative flex min-h-[20px] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border p-4 shadow-[0_20px_70px_rgba(0,0,0,0.5)] ring-1 transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/20 hover:ring-2 hover:ring-teal-300/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300/70 md:min-h-[60px] md:p-6 ${
+                  isNearActive
+                    ? "border-white/15 bg-slate-950/95 ring-white/10 backdrop-blur-md"
+                    : "border-white/10 bg-slate-950/35 ring-white/5 backdrop-blur-2xl backdrop-saturate-150"
+                }`}
               >
                 <div className="pointer-events-none absolute -right-16 -top-20 z-0 h-52 w-52 rounded-full bg-teal-400/20 blur-3xl" />
                 <div className="pointer-events-none absolute -bottom-24 left-8 z-0 h-60 w-60 rounded-full bg-cyan-500/10 blur-3xl" />
                 <div
-                  className="pointer-events-none absolute inset-0 z-0 rounded-3xl bg-linear-to-b from-white/6 to-transparent"
+                  className={`pointer-events-none absolute inset-0 z-0 rounded-3xl ${
+                    isNearActive
+                      ? "bg-linear-to-b from-white/8 via-slate-950/20 to-slate-950/40"
+                      : "bg-linear-to-b from-white/6 to-transparent"
+                  }`}
                   aria-hidden
                 />
 
