@@ -6,7 +6,7 @@ import { MainNavigation } from "@/components/MainNavigation";
 export const metadata = {
   title: "Contact | Owencodes",
   description:
-    "Get in touch with Owen. Book a discovery call and send a message to start a new project.",
+    "Get in touch with Owen. Send a message or book a discovery call to start a new project.",
 };
 
 export default function ContactPage() {
