@@ -28,6 +28,27 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
 export const projects: Project[] = [
   {
+    slug: "shopify-store-redesign",
+    title: "Shopify Store",
+    description: "A store I scaled and redesigned based in Ireland.",
+    video: "/images/shopify-new.mp4",
+    stacks: ["Shopify", "Liquid", "Dawn theme", "Ecommerce"],
+    status: "live",
+    statusLabel: "New Theme launching soon",
+    imageHref: "/projects/shopify-store-preview",
+    link: { href: "https://brioils.store/", label: "Visit live site" },
+  },
+  {
+    slug: "note-flow",
+    title: "Note Flow",
+    description:
+      "A free multi-user app. Import your NOTES directory or GitHub repository into your profile, or write directly in the app. AI-powered note generation with no paid tier.",
+    image: "/images/note-flow.png",
+    stacks: ["Next.js", "OpenAI", "AI"],
+    status: "in-development",
+    link: { href: "https://note-flow-livid.vercel.app/", label: "Visit live site" },
+  },
+  {
     slug: "specsage",
     title: "Specsage",
     description: "Specsage is a AI-powered PC builder assistant.",
@@ -63,27 +84,6 @@ export const projects: Project[] = [
     statusLabel: "In Development",
     imageHref: "https://www.leadscout.work/",
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
-  },
-  {
-    slug: "shopify-store-redesign",
-    title: "Shopify Store",
-    description: "A store I scaled and redesigned based in Ireland.",
-    video: "/images/shopify-new.mp4",
-    stacks: ["Shopify", "Liquid", "Dawn theme", "Ecommerce"],
-    status: "live",
-    statusLabel: "New Theme launching soon",
-    imageHref: "/projects/shopify-store-preview",
-    link: { href: "https://brioils.store/", label: "Visit live site" },
-  },
-  {
-    slug: "note-flow",
-    title: "Note Flow",
-    description:
-      "A free multi-user app. Import your NOTES directory or GitHub repository into your profile, or write directly in the app. AI-powered note generation with no paid tier.",
-    image: "/images/note-flow.png",
-    stacks: ["Next.js", "OpenAI", "AI"],
-    status: "in-development",
-    link: { href: "https://note-flow-livid.vercel.app/", label: "Visit live site" },
   },
   {
     slug: "task-app",
