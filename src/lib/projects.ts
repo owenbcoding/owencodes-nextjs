@@ -44,7 +44,7 @@ export const projects: Project[] = [
     description:
       "A free multi-user app. Import your NOTES directory or GitHub repository into your profile, or write directly in the app. AI-powered note generation with no paid tier.",
     image: "/images/note-flow.png",
-    stacks: ["Next.js", "OpenAI", "AI"],
+    stacks: ["Next.js", "TailwindCSS", "OpenAI", "AI"],
     status: "in-development",
     link: { href: "https://note-flow-livid.vercel.app/", label: "Visit live site" },
   },
