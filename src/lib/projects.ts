@@ -45,7 +45,7 @@ export const projects: Project[] = [
       "A free multi-user app. Import your NOTES directory or GitHub repository into your profile, or write directly in the app. AI-powered note generation with no paid tier.",
     image: "/images/note-flow.png",
     stacks: ["Next.js", "TailwindCSS", "OpenAI", "AI"],
-    status: "in-development",
+    status: "live",
     link: { href: "https://note-flow-livid.vercel.app/", label: "Visit live site" },
   },
   {
@@ -54,8 +54,7 @@ export const projects: Project[] = [
     description: "Specsage is a AI-powered PC builder assistant.",
     image: "/images/Specsage.png",
     stacks: ["Next.js", "CrewAI", "OpenAI", "Firecrawl", "AI"],
-    status: "in-development",
-    statusLabel: "In Development",
+    status: "live",
     link: { href: "https://www.specsage.tech/", label: "Visit live site" },
   },
   {
@@ -64,7 +63,7 @@ export const projects: Project[] = [
     description: "A online community platform for accountability and growth.",
     image: "/images/hackerinn.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-    status: "in-development",
+    status: "coming-soon",
   },
   {
     slug: "playlisted",
@@ -72,7 +71,7 @@ export const projects: Project[] = [
     description: "A social music app to chat about songs and artists.",
     image: "/images/playlisted-live.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-    status: "in-development",
+    status: "coming-soon",
   },
   {
     slug: "leadscout",
@@ -80,8 +79,7 @@ export const projects: Project[] = [
     description: "A freelancing program to help find clients nearby online.",
     image: "/images/Leadscout-app.png",
     stacks: ["Next.js", "TailwindCSS", "TypeScript"],
-    status: "in-development",
-    statusLabel: "In Development",
+    status: "live",
     imageHref: "https://www.leadscout.work/",
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
   },
@@ -91,7 +89,7 @@ export const projects: Project[] = [
     description: "A platform for sharing developer stories.",
     image: "/images/devstories.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-    status: "in-development",
+    status: "coming-soon",
   },
   {
     slug: "task-app",
