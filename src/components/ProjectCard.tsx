@@ -3,6 +3,32 @@ import Link from "next/link";
 import { ProjectCardDescription } from "@/components/ProjectCardDescription";
 import type { Project } from "@/lib/projects";
 
+function projectPlaceholderLabel(project: Project) {
+  if (project.statusLabel) return project.statusLabel;
+  if (project.status === "coming-soon") return "Coming soon";
+  return "In development";
+}
+
+function ProjectCardPlaceholder({ project }: { project: Project }) {
+  if (project.status === "coming-soon") {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-teal-950/90 via-slate-950 to-black px-4 text-center">
+        <span className="theme-title-font text-sm font-medium text-teal-100/75">
+          Coming soon
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-teal-950/90 via-slate-950 to-black px-4 text-center">
+      <span className="rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-teal-300">
+        {projectPlaceholderLabel(project)}
+      </span>
+    </div>
+  );
+}
+
 function ProjectMedia({ project }: { project: Project }) {
   if (project.video) {
     return (
@@ -29,13 +55,14 @@ function ProjectMedia({ project }: { project: Project }) {
   }
   return (
     <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-teal-100/90">
-      {project.statusLabel ?? "Coming soon"}
+      {projectPlaceholderLabel(project)}
     </span>
   );
 }
 
 export function ProjectCard({ project }: { project: Project }) {
-  const hasMedia = Boolean(project.image || project.video);
+  const isLive = project.status === "live";
+  const hasMedia = isLive && Boolean(project.image || project.video);
   const imageHref = project.imageHref ?? project.link?.href;
   const hasImageLink = Boolean(imageHref);
   const isExternalImageLink = Boolean(imageHref?.startsWith("http"));
@@ -47,12 +74,8 @@ export function ProjectCard({ project }: { project: Project }) {
       </h3>
 
       <div className="relative mt-5 aspect-video w-full shrink-0 overflow-hidden rounded-lg border border-teal-500/20 bg-teal-900/40">
-        {hasMedia ? <ProjectMedia project={project} /> : (
-          <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-teal-100/90">
-            {project.statusLabel ?? "Working on it"}
-          </span>
-        )}
-        {hasImageLink
+        {hasMedia ? <ProjectMedia project={project} /> : <ProjectCardPlaceholder project={project} />}
+        {hasMedia && hasImageLink
           ? isExternalImageLink
             ? (
                 <a
