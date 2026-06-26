@@ -64,6 +64,7 @@ export const projects: Project[] = [
     image: "/images/hackerinn.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
     status: "coming-soon",
+    statusLabel: "On the roadmap",
   },
   {
     slug: "playlisted",
@@ -72,6 +73,7 @@ export const projects: Project[] = [
     image: "/images/playlisted-live.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
     status: "coming-soon",
+    statusLabel: "Planned",
   },
   {
     slug: "leadscout",
@@ -90,6 +92,7 @@ export const projects: Project[] = [
     image: "/images/devstories.png",
     stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
     status: "coming-soon",
+    statusLabel: "Concept",
   },
   {
     slug: "task-app",
