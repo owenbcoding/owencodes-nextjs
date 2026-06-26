@@ -5,7 +5,7 @@ import type { Project } from "@/lib/projects";
 
 function projectPlaceholderLabel(project: Project) {
   if (project.statusLabel) return project.statusLabel;
-  if (project.status === "coming-soon") return "Coming soon";
+  if (project.status === "coming-soon") return "Planned";
   return "In development";
 }
 
@@ -14,7 +14,7 @@ function ProjectCardPlaceholder({ project }: { project: Project }) {
     return (
       <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-teal-950/90 via-slate-950 to-black px-4 text-center">
         <span className="theme-title-font text-sm font-medium text-teal-100/75">
-          Coming soon
+          {projectPlaceholderLabel(project)}
         </span>
       </div>
     );
