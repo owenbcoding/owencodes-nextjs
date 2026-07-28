@@ -43,14 +43,14 @@ export function NewsletterSignup() {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
         placeholder="Enter your email"
-        className="w-full rounded-full border border-cyan-400/40 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400"
+        className="w-full text-center rounded-full border border-cyan-400/40 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400"
       />
       <button
         type="submit"
         disabled={isSubmitting}
         className="rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {isSubmitting ? "Joining..." : "Join updates"}
+        {isSubmitting ? "Subscribe"  : "Subscribe"}
       </button>
     </form>
   );
