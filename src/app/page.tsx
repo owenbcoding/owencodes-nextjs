@@ -3,6 +3,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { SkillsSection } from "@/components/SkillsSection";
 import {
   getSiteUrl,
@@ -119,17 +120,25 @@ export default function Home() {
             />
 
             <div className="mt-10 flex w-full flex-col items-center md:ml-10 md:w-1/2 md:items-start">
-              <div className="mx-auto flex flex-col items-center justify-center gap-2">
+              <div className="mx-auto flex w-full max-w-prose flex-col items-start justify-center gap-2 text-left">
                 <h2 className="theme-heading text-4xl font-bold">
                   About me!
                 </h2>
                 <p
-                  className="theme-body max-w-prose text-lg leading-relaxed whitespace-pre-line md:text-xl"
+                  className="theme-body text-lg leading-relaxed whitespace-pre-line md:text-xl"
                   style={{ minHeight: 160, overflow: "hidden" }}
                 >
                   I am a Full Stack Developer. I help businesses and creators bring their ideas to life with
                   full-stack apps and Automation Solutions.
                 </p>
+
+                <div className="mt-3 w-full">
+                  <h3 className="theme-heading text-xl font-semibold">Stay in the loop</h3>
+                  <p className="theme-body mt-2 text-sm leading-relaxed md:text-base">
+                    Get occasional updates when I ship a new project or publish a new post.
+                  </p>
+                  <NewsletterSignup />
+                </div>
               </div>
             </div>
           </div>
