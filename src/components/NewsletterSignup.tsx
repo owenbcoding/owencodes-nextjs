@@ -6,11 +6,13 @@ export function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
     setMessage("");
+    setIsError(false);
 
     try {
       const response = await fetch("/api/newsletter/subscribe", {
@@ -21,11 +23,13 @@ export function NewsletterSignup() {
 
       const result = (await response.json()) as { message?: string };
       setMessage(result.message ?? "Thanks for subscribing.");
+      setIsError(!response.ok);
       if (response.ok) {
         setEmail("");
       }
     } catch {
       setMessage("Something went wrong. Please try again later.");
+      setIsError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -42,16 +46,25 @@ export function NewsletterSignup() {
         required
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        placeholder="Enter email to subscribe"
+        placeholder="Enter email to Subscribe"
         className="w-full text-center rounded-full border border-cyan-400/40 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400"
       />
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
+        className="rounded-full cursor-pointer bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {isSubmitting ? "Subscribe"  : "Subscribe"}
+        {isSubmitting ? "Subscribing..." : "Subscribe"}
       </button>
+
+      {message ? (
+        <p
+          className={`text-sm ${isError ? "text-rose-300" : "text-emerald-300"} sm:basis-full`}
+          aria-live="polite"
+        >
+          {message}
+        </p>
+      ) : null}
     </form>
   );
 }
