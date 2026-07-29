@@ -56,6 +56,30 @@ function resolveFromAddress(): string {
   return "Owencodes Newsletter <onboarding@resend.dev>";
 }
 
+function resolveNoReplyFromAddress(): string {
+  if (process.env.NEWSLETTER_NO_REPLY_FROM) {
+    return process.env.NEWSLETTER_NO_REPLY_FROM;
+  }
+
+  const address = process.env.MAIL_FROM_ADDRESS;
+  if (address && address.includes("@")) {
+    const [, domain] = address.split("@");
+    if (domain) {
+      return `Owencodes No Reply <no-reply@${domain}>`;
+    }
+  }
+
+  return "Owencodes No Reply <onboarding@resend.dev>";
+}
+
+function extractEmailAddress(value: string): string {
+  const angleMatch = value.match(/<([^>]+)>/);
+  if (angleMatch?.[1]) {
+    return angleMatch[1].trim();
+  }
+  return value.trim();
+}
+
 function isContactAlreadyPresent(message: string): boolean {
   return /already|exists|duplicate/i.test(message);
 }
@@ -159,7 +183,7 @@ export async function sendWelcomeEmail(email: string): Promise<{
   }
 
   const { resend } = config;
-  const fromAddress = resolveFromAddress();
+  const fromAddress = resolveNoReplyFromAddress();
   const siteUrl = getSiteUrl();
   const subject = "Welcome to Owencodes updates";
   const textBody = [
@@ -181,6 +205,7 @@ export async function sendWelcomeEmail(email: string): Promise<{
     from: fromAddress,
     to: [trimmed],
     subject,
+    replyTo: [extractEmailAddress(fromAddress)],
     text: textBody,
     html: htmlBody,
   });
