@@ -128,8 +128,7 @@ export default function Home() {
                   className="theme-body text-lg leading-relaxed whitespace-pre-line md:text-xl"
                   style={{ minHeight: 160, overflow: "hidden" }}
                 >
-                  I am a Full Stack Developer. I help businesses and creators bring their ideas to life with
-                  full-stack apps and Automation Solutions.
+                  I am a Full Stack Developer. I specialize in building automation solutions that streamline processes and enhance efficiency. With a passion for coding and problem-solving, I enjoy creating innovative applications that make a difference.
                 </p>
 
                 <div className="mt-3 w-full">
