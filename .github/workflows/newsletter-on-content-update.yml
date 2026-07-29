@@ -1,0 +1,45 @@
+name: Newsletter On Content Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: Email subject
+        required: false
+        default: New update from Owencodes
+      title:
+        description: Email title
+        required: false
+        default: Fresh updates from Owencodes
+      preview:
+        description: Short preview line
+        required: false
+        default: I published a new update on my portfolio.
+      content:
+        description: Newsletter body text
+        required: true
+      url:
+        description: Link to include in the email
+        required: false
+        default: ""
+
+jobs:
+  send-newsletter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Send newsletter update
+        env:
+          NEWSLETTER_SEND_ENDPOINT: ${{ secrets.NEWSLETTER_SEND_ENDPOINT }}
+          NEWSLETTER_SEND_TOKEN: ${{ secrets.NEWSLETTER_SEND_TOKEN }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          MANUAL_NEWSLETTER_SUBJECT: ${{ github.event.inputs.subject }}
+          MANUAL_NEWSLETTER_TITLE: ${{ github.event.inputs.title }}
+          MANUAL_NEWSLETTER_PREVIEW: ${{ github.event.inputs.preview }}
+          MANUAL_NEWSLETTER_CONTENT: ${{ github.event.inputs.content }}
+          MANUAL_NEWSLETTER_URL: ${{ github.event.inputs.url }}
+        run: node scripts/send-newsletter-update.mjs
