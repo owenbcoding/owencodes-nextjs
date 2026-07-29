@@ -1,11 +1,10 @@
-import fs from "node:fs";
-import path from "node:path";
 import { Resend } from "resend";
 import { getSiteUrl } from "@/lib/site";
 
 export type NewsletterSubscriber = {
+  id?: string;
   email: string;
-  subscribedAt: string;
+  subscribedAt?: string;
 };
 
 export type NewsletterSendPayload = {
@@ -17,7 +16,34 @@ export type NewsletterSendPayload = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const NEWSLETTER_FILE_PATH = path.join(process.cwd(), "data", "newsletter-subscribers.json");
+
+function resolveResendConfig():
+  | { resend: Resend; audienceId: string }
+  | { error: string } {
+  const apiKey =
+    process.env.RESEND_API_KEY ??
+    process.env.RESEND_KEY ??
+    process.env.MAIL_PASSWORD;
+
+  if (!apiKey) {
+    return { error: "Resend API key is not configured." };
+  }
+
+  const audienceId =
+    process.env.RESEND_AUDIENCE_ID ?? process.env.RESEND_SEGMENT_ID;
+
+  if (!audienceId) {
+    return {
+      error:
+        "Resend audience is not configured. Set RESEND_AUDIENCE_ID.",
+    };
+  }
+
+  return {
+    resend: new Resend(apiKey),
+    audienceId,
+  };
+}
 
 function resolveFromAddress(): string {
   if (process.env.CONTACT_FROM_EMAIL) return process.env.CONTACT_FROM_EMAIL;
@@ -30,50 +56,16 @@ function resolveFromAddress(): string {
   return "Owencodes Newsletter <onboarding@resend.dev>";
 }
 
-function ensureSubscribersFile(): void {
-  const directory = path.dirname(NEWSLETTER_FILE_PATH);
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, { recursive: true });
-  }
-
-  if (!fs.existsSync(NEWSLETTER_FILE_PATH)) {
-    fs.writeFileSync(NEWSLETTER_FILE_PATH, "[]", "utf8");
-  }
+function isContactAlreadyPresent(message: string): boolean {
+  return /already|exists|duplicate/i.test(message);
 }
 
-export function getNewsletterSubscribers(): NewsletterSubscriber[] {
-  ensureSubscribersFile();
-
-  try {
-    const raw = fs.readFileSync(NEWSLETTER_FILE_PATH, "utf8");
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
-    return parsed.filter(
-      (item): item is NewsletterSubscriber =>
-        typeof item === "object" &&
-        item !== null &&
-        typeof (item as NewsletterSubscriber).email === "string" &&
-        typeof (item as NewsletterSubscriber).subscribedAt === "string",
-    );
-  } catch {
-    return [];
-  }
-}
-
-export function saveNewsletterSubscribers(subscribers: NewsletterSubscriber[]): void {
-  ensureSubscribersFile();
-  fs.writeFileSync(NEWSLETTER_FILE_PATH, JSON.stringify(subscribers, null, 2), "utf8");
-}
-
-export function addNewsletterSubscriber(email: string): {
+export async function addNewsletterSubscriber(email: string): Promise<{
   ok: boolean;
   created: boolean;
   message: string;
   subscriber?: NewsletterSubscriber;
-} {
+}> {
   const trimmed = email.trim().toLowerCase();
   if (!trimmed || !EMAIL_RE.test(trimmed)) {
     return {
@@ -83,44 +75,135 @@ export function addNewsletterSubscriber(email: string): {
     };
   }
 
-  const subscribers = getNewsletterSubscribers();
-  const existing = subscribers.find((item) => item.email === trimmed);
-  if (existing) {
+  const config = resolveResendConfig();
+  if ("error" in config) {
+    return {
+      ok: false,
+      created: false,
+      message: config.error,
+    };
+  }
+
+  const { resend, audienceId } = config;
+
+  const existing = await resend.contacts.get({
+    audienceId,
+    email: trimmed,
+  });
+
+  if (existing.data) {
     return {
       ok: true,
       created: false,
       message: "You’re already subscribed to updates.",
+      subscriber: {
+        id: existing.data.id,
+        email: existing.data.email,
+        subscribedAt: existing.data.created_at,
+      },
     };
   }
 
-  const subscriber: NewsletterSubscriber = {
+  const created = await resend.contacts.create({
+    audienceId,
     email: trimmed,
-    subscribedAt: new Date().toISOString(),
-  };
+    unsubscribed: false,
+  });
 
-  subscribers.push(subscriber);
-  saveNewsletterSubscribers(subscribers);
+  if (created.error) {
+    if (isContactAlreadyPresent(created.error.message)) {
+      return {
+        ok: true,
+        created: false,
+        message: "You’re already subscribed to updates.",
+      };
+    }
+
+    return {
+      ok: false,
+      created: false,
+      message: "Unable to subscribe right now. Please try again later.",
+    };
+  }
 
   return {
     ok: true,
     created: true,
     message: "Thanks for subscribing — you’ll hear from me with new updates.",
-    subscriber,
+    subscriber: {
+      id: created.data?.id,
+      email: trimmed,
+      subscribedAt: new Date().toISOString(),
+    },
   };
 }
 
-export function removeNewsletterSubscriber(email: string): boolean {
+export async function removeNewsletterSubscriber(email: string): Promise<boolean> {
   const trimmed = email.trim().toLowerCase();
   if (!trimmed) return false;
 
-  const subscribers = getNewsletterSubscribers();
-  const nextSubscribers = subscribers.filter((item) => item.email !== trimmed);
-  if (nextSubscribers.length === subscribers.length) {
+  const config = resolveResendConfig();
+  if ("error" in config) {
     return false;
   }
 
-  saveNewsletterSubscribers(nextSubscribers);
-  return true;
+  const { resend, audienceId } = config;
+  const removed = await resend.contacts.remove({
+    audienceId,
+    email: trimmed,
+  });
+
+  return Boolean(removed.data?.deleted);
+}
+
+async function getNewsletterSubscribers(): Promise<{
+  subscribers: NewsletterSubscriber[];
+  error?: string;
+}> {
+  const config = resolveResendConfig();
+  if ("error" in config) {
+    return {
+      subscribers: [],
+      error: config.error,
+    };
+  }
+
+  const { resend, audienceId } = config;
+  const subscribers: NewsletterSubscriber[] = [];
+  let after: string | undefined;
+
+  while (true) {
+    const listResponse = await resend.contacts.list({
+      audienceId,
+      limit: 100,
+      ...(after ? { after } : {}),
+    });
+
+    if (listResponse.error) {
+      return {
+        subscribers: [],
+        error: "Unable to load newsletter subscribers from Resend.",
+      };
+    }
+
+    const batch = listResponse.data?.data ?? [];
+    subscribers.push(
+      ...batch.map((item) => ({
+        id: item.id,
+        email: item.email,
+        subscribedAt: item.created_at,
+      })),
+    );
+
+    if (!listResponse.data?.has_more || batch.length === 0) {
+      break;
+    }
+
+    after = batch[batch.length - 1]?.id;
+    if (!after) break;
+  }
+
+  return { subscribers };
 }
 
 function escapeHtml(value: string): string {
@@ -138,17 +221,27 @@ export async function sendNewsletter(payload: NewsletterSendPayload): Promise<{
   errors: string[];
   error?: string;
 }> {
-  const apiKey = process.env.RESEND_API_KEY ?? process.env.RESEND_KEY ?? process.env.MAIL_PASSWORD;
-  if (!apiKey) {
+  const config = resolveResendConfig();
+  if ("error" in config) {
     return {
       ok: false,
       sentCount: 0,
       errors: [],
-      error: "Resend is not configured yet.",
+      error: config.error,
     };
   }
 
-  const subscribers = getNewsletterSubscribers();
+  const subscribersResult = await getNewsletterSubscribers();
+  if (subscribersResult.error) {
+    return {
+      ok: false,
+      sentCount: 0,
+      errors: [],
+      error: subscribersResult.error,
+    };
+  }
+
+  const subscribers = subscribersResult.subscribers;
   if (subscribers.length === 0) {
     return {
       ok: true,
@@ -157,7 +250,7 @@ export async function sendNewsletter(payload: NewsletterSendPayload): Promise<{
     };
   }
 
-  const resend = new Resend(apiKey);
+  const { resend } = config;
   const fromAddress = resolveFromAddress();
   const siteUrl = getSiteUrl();
   const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?email=`;
