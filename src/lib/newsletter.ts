@@ -138,6 +138,63 @@ export async function addNewsletterSubscriber(email: string): Promise<{
   };
 }
 
+export async function sendWelcomeEmail(email: string): Promise<{
+  ok: boolean;
+  error?: string;
+}> {
+  const trimmed = email.trim().toLowerCase();
+  if (!trimmed || !EMAIL_RE.test(trimmed)) {
+    return {
+      ok: false,
+      error: "Please enter a valid email address.",
+    };
+  }
+
+  const config = resolveResendConfig();
+  if ("error" in config) {
+    return {
+      ok: false,
+      error: config.error,
+    };
+  }
+
+  const { resend } = config;
+  const fromAddress = resolveFromAddress();
+  const siteUrl = getSiteUrl();
+  const subject = "Welcome to Owencodes updates";
+  const textBody = [
+    "Thanks for subscribing to updates from Owencodes.",
+    "",
+    "You’ll get occasional emails when I publish new blogs, projects, or useful updates.",
+    "",
+    `Visit the site: ${siteUrl}`,
+  ].join("\n");
+  const htmlBody = `
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
+      <h2 style="margin: 0 0 12px;">Welcome to Owencodes updates</h2>
+      <p style="margin: 0 0 12px;">Thanks for subscribing. You’ll get occasional emails when I publish new blogs, projects, or useful updates.</p>
+      <p style="margin: 16px 0 0;"><a href="${escapeHtml(siteUrl)}" style="color: #0891b2;">Visit the site</a></p>
+    </div>
+  `;
+
+  const { error } = await resend.emails.send({
+    from: fromAddress,
+    to: [trimmed],
+    subject,
+    text: textBody,
+    html: htmlBody,
+  });
+
+  if (error) {
+    return {
+      ok: false,
+      error: String(error),
+    };
+  }
+
+  return { ok: true };
+}
+
 export async function removeNewsletterSubscriber(email: string): Promise<boolean> {
   const trimmed = email.trim().toLowerCase();
   if (!trimmed) return false;
