@@ -13,7 +13,7 @@ import {
 } from "@/lib/site";
 
 const PORTRAIT_ALT =
-  "Owen - Full Stack Developer specializing in Automation Solutions";
+  "Owen - Full Stack Developer";
 
 export const metadata: Metadata = {
   title: {
