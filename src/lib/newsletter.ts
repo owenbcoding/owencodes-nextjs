@@ -143,6 +143,7 @@ export async function addNewsletterSubscriber(email: string): Promise<{
       };
     }
 
+    console.error("Failed to create newsletter contact:", created.error);
     return {
       ok: false,
       created: false,
@@ -211,6 +212,7 @@ export async function sendWelcomeEmail(email: string): Promise<{
   });
 
   if (error) {
+    console.error("Failed to send newsletter welcome email:", error);
     return {
       ok: false,
       error: String(error),
