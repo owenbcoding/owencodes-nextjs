@@ -7,12 +7,14 @@ export function NewsletterSignup() {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isWarning, setIsWarning] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
     setMessage("");
     setIsError(false);
+    setIsWarning(false);
 
     try {
       const response = await fetch("/api/newsletter/subscribe", {
@@ -21,15 +23,17 @@ export function NewsletterSignup() {
         body: JSON.stringify({ email }),
       });
 
-      const result = (await response.json()) as { message?: string };
+      const result = (await response.json()) as { message?: string; warning?: boolean };
       setMessage(result.message ?? "Thanks for subscribing.");
       setIsError(!response.ok);
+      setIsWarning(Boolean(result.warning));
       if (response.ok) {
         setEmail("");
       }
     } catch {
       setMessage("Something went wrong. Please try again later.");
       setIsError(true);
+      setIsWarning(false);
     } finally {
       setIsSubmitting(false);
     }
@@ -59,7 +63,7 @@ export function NewsletterSignup() {
 
       {message ? (
         <p
-          className={`text-sm ${isError ? "text-rose-300" : "text-emerald-300"} sm:basis-full`}
+          className={`text-sm ${isError ? "text-rose-300" : isWarning ? "text-amber-300" : "text-emerald-300"} sm:basis-full`}
           aria-live="polite"
         >
           {message}
