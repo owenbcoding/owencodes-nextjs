@@ -12,7 +12,7 @@ type TypewriterTextProps = {
 export function TypewriterText({
   text,
   className,
-  speedMs = 45,
+  speedMs = 120,
   startDelayMs = 300,
 }: TypewriterTextProps) {
   const [charCount, setCharCount] = useState(0);
