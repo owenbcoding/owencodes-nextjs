@@ -183,40 +183,30 @@ export async function sendWelcomeEmail(email: string): Promise<{
     };
   }
 
+  const templateId = process.env.RESEND_WELCOME_TEMPLATE_ID;
+  if (!templateId) {
+    return {
+      ok: false,
+      error: "Welcome email template is not configured.",
+    };
+  }
+
   const { resend } = config;
   const fromAddress = resolveNoReplyFromAddress();
   const siteUrl = getSiteUrl();
   const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?email=${encodeURIComponent(trimmed)}`;
-  const subject = "Welcome to Owencodes updates";
-  const textBody = [
-    "Thanks for subscribing to updates from Owencodes.",
-    "",
-    "You’ll get occasional emails when I publish new blogs, projects, or useful updates.",
-    "",
-    `Visit the site: ${siteUrl}`,
-    "",
-    `Unsubscribe: ${unsubscribeUrl}`,
-  ].join("\n");
-  const htmlBody = `
-    <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
-      <h2 style="margin: 0 0 12px;">Welcome to Owencodes updates</h2>
-      <p style="margin: 0 0 12px;">Thanks for subscribing. You’ll get occasional emails when I publish new blogs, projects, or useful updates.</p>
-      <p style="margin: 16px 0 0;"><a href="${escapeHtml(siteUrl)}" style="color: #0891b2;">Visit the site</a></p>
-      <p style="margin: 24px 0 0; font-size: 12px; color: #64748b;">
-        You’re receiving this because you subscribed to updates from Owencodes.
-        <br />
-        <a href="${escapeHtml(unsubscribeUrl)}" style="color: #64748b;">Unsubscribe</a>
-      </p>
-    </div>
-  `;
 
   const { error } = await resend.emails.send({
     from: fromAddress,
     to: [trimmed],
-    subject,
     replyTo: [extractEmailAddress(fromAddress)],
-    text: textBody,
-    html: htmlBody,
+    template: {
+      id: templateId,
+      variables: {
+        SITE_URL: siteUrl,
+        UNSUBSCRIBE_URL: unsubscribeUrl,
+      },
+    },
   });
 
   if (error) {
@@ -248,56 +238,6 @@ export async function removeNewsletterSubscriber(email: string): Promise<boolean
   return Boolean(removed.data?.deleted);
 }
 
-async function getNewsletterSubscribers(): Promise<{
-  subscribers: NewsletterSubscriber[];
-  error?: string;
-}> {
-  const config = resolveResendConfig();
-  if ("error" in config) {
-    return {
-      subscribers: [],
-      error: config.error,
-    };
-  }
-
-  const { resend, audienceId } = config;
-  const subscribers: NewsletterSubscriber[] = [];
-  let after: string | undefined;
-
-  while (true) {
-    const listResponse = await resend.contacts.list({
-      audienceId,
-      limit: 100,
-      ...(after ? { after } : {}),
-    });
-
-    if (listResponse.error) {
-      return {
-        subscribers: [],
-        error: "Unable to load newsletter subscribers from Resend.",
-      };
-    }
-
-    const batch = listResponse.data?.data ?? [];
-    subscribers.push(
-      ...batch.map((item) => ({
-        id: item.id,
-        email: item.email,
-        subscribedAt: item.created_at,
-      })),
-    );
-
-    if (!listResponse.data?.has_more || batch.length === 0) {
-      break;
-    }
-
-    after = batch[batch.length - 1]?.id;
-    if (!after) break;
-  }
-
-  return { subscribers };
-}
-
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -309,83 +249,66 @@ function escapeHtml(value: string): string {
 
 export async function sendNewsletter(payload: NewsletterSendPayload): Promise<{
   ok: boolean;
-  sentCount: number;
-  errors: string[];
+  broadcastId?: string;
   error?: string;
 }> {
   const config = resolveResendConfig();
   if ("error" in config) {
     return {
       ok: false,
-      sentCount: 0,
-      errors: [],
       error: config.error,
     };
   }
 
-  const subscribersResult = await getNewsletterSubscribers();
-  if (subscribersResult.error) {
-    return {
-      ok: false,
-      sentCount: 0,
-      errors: [],
-      error: subscribersResult.error,
-    };
-  }
-
-  const subscribers = subscribersResult.subscribers;
-  if (subscribers.length === 0) {
-    return {
-      ok: true,
-      sentCount: 0,
-      errors: [],
-    };
-  }
-
-  const { resend } = config;
+  const { resend, audienceId } = config;
   const fromAddress = resolveFromAddress();
   const siteUrl = getSiteUrl();
-  const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?email=`;
-  const errors: string[] = [];
 
-  for (const subscriber of subscribers) {
-    const textBody = `${payload.title}\n\n${payload.preview}\n\n${payload.content}\n\nRead more: ${payload.url ?? siteUrl}`;
-    const htmlBody = `
-      <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
-        <h2 style="margin: 0 0 12px;">${escapeHtml(payload.title)}</h2>
-        <p style="margin: 0 0 12px;">${escapeHtml(payload.preview)}</p>
-        <div style="padding: 16px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; margin: 16px 0; white-space: pre-line;">
-          ${escapeHtml(payload.content)}
-        </div>
-        <p style="margin: 16px 0 0;"><a href="${escapeHtml(payload.url ?? siteUrl)}" style="color: #0891b2;">Read the update</a></p>
-        <p style="margin: 24px 0 0; font-size: 12px; color: #64748b;">
-          You’re receiving this because you subscribed to updates from Owencodes.
-          <br />
-          <a href="${escapeHtml(`${unsubscribeUrl}${encodeURIComponent(subscriber.email)}`)}" style="color: #64748b;">Unsubscribe</a>
-        </p>
+  const textBody = [
+    payload.title,
+    "",
+    payload.preview,
+    "",
+    payload.content,
+    "",
+    `Read more: ${payload.url ?? siteUrl}`,
+    "",
+    "Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}",
+  ].join("\n");
+
+  const htmlBody = `
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
+      <h2 style="margin: 0 0 12px;">${escapeHtml(payload.title)}</h2>
+      <p style="margin: 0 0 12px;">${escapeHtml(payload.preview)}</p>
+      <div style="padding: 16px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; margin: 16px 0; white-space: pre-line;">
+        ${escapeHtml(payload.content)}
       </div>
-    `;
+      <p style="margin: 16px 0 0;"><a href="${escapeHtml(payload.url ?? siteUrl)}" style="color: #0891b2;">Read the update</a></p>
+      <p style="margin: 24px 0 0; font-size: 12px; color: #64748b;">
+        You’re receiving this because you subscribed to updates from Owencodes.
+        <br />
+        <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color: #64748b;">Unsubscribe</a>
+      </p>
+    </div>
+  `;
 
-    try {
-      const { error } = await resend.emails.send({
-        from: fromAddress,
-        to: [subscriber.email],
-        subject: payload.subject,
-        text: textBody,
-        html: htmlBody,
-      });
+  const { data, error } = await resend.broadcasts.create({
+    audienceId,
+    from: fromAddress,
+    subject: payload.subject,
+    previewText: payload.preview,
+    html: htmlBody,
+    text: textBody,
+    send: true,
+  });
 
-      if (error) {
-        errors.push(`${subscriber.email}: ${String(error)}`);
-      }
-    } catch (err) {
-      errors.push(`${subscriber.email}: ${String(err)}`);
-    }
+  if (error) {
+    console.error("Failed to send newsletter broadcast:", error);
+    return {
+      ok: false,
+      error: String(error),
+    };
   }
 
-  return {
-    ok: errors.length === 0,
-    sentCount: subscribers.length - errors.length,
-    errors,
-  };
+  return { ok: true, broadcastId: data?.id };
 }
