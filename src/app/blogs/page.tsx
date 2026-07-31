@@ -72,7 +72,7 @@ export default function BlogsPage() {
               sizes="(min-width: 1200px) 72rem, 100vw"
             />
           </div>
-          <div className="relative z-10 mt-6 flex h-full min-h-0 flex-1 flex-col sm:mt-8 md:mt-10">
+          <div className="relative z-10 flex h-full min-h-0 flex-1 flex-col">
             <BlogHyperScroll blogs={blogs} />
           </div>
         </div>
