@@ -186,6 +186,7 @@ export async function sendWelcomeEmail(email: string): Promise<{
   const { resend } = config;
   const fromAddress = resolveNoReplyFromAddress();
   const siteUrl = getSiteUrl();
+  const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?email=${encodeURIComponent(trimmed)}`;
   const subject = "Welcome to Owencodes updates";
   const textBody = [
     "Thanks for subscribing to updates from Owencodes.",
@@ -193,12 +194,19 @@ export async function sendWelcomeEmail(email: string): Promise<{
     "You’ll get occasional emails when I publish new blogs, projects, or useful updates.",
     "",
     `Visit the site: ${siteUrl}`,
+    "",
+    `Unsubscribe: ${unsubscribeUrl}`,
   ].join("\n");
   const htmlBody = `
     <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
       <h2 style="margin: 0 0 12px;">Welcome to Owencodes updates</h2>
       <p style="margin: 0 0 12px;">Thanks for subscribing. You’ll get occasional emails when I publish new blogs, projects, or useful updates.</p>
       <p style="margin: 16px 0 0;"><a href="${escapeHtml(siteUrl)}" style="color: #0891b2;">Visit the site</a></p>
+      <p style="margin: 24px 0 0; font-size: 12px; color: #64748b;">
+        You’re receiving this because you subscribed to updates from Owencodes.
+        <br />
+        <a href="${escapeHtml(unsubscribeUrl)}" style="color: #64748b;">Unsubscribe</a>
+      </p>
     </div>
   `;
 
@@ -346,7 +354,7 @@ export async function sendNewsletter(payload: NewsletterSendPayload): Promise<{
       <div style="font-family: Arial, Helvetica, sans-serif; color: #0f172a; line-height: 1.6;">
         <h2 style="margin: 0 0 12px;">${escapeHtml(payload.title)}</h2>
         <p style="margin: 0 0 12px;">${escapeHtml(payload.preview)}</p>
-        <div style="padding: 16px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; margin: 16px 0;">
+        <div style="padding: 16px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; margin: 16px 0; white-space: pre-line;">
           ${escapeHtml(payload.content)}
         </div>
         <p style="margin: 16px 0 0;"><a href="${escapeHtml(payload.url ?? siteUrl)}" style="color: #0891b2;">Read the update</a></p>
