@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { SkillsSection } from "@/components/SkillsSection";
+import { TypewriterText } from "@/components/TypewriterText";
 import {
   getSiteUrl,
   HOME_DESCRIPTION,
@@ -105,7 +106,7 @@ export default function Home() {
             Hi I&apos;m Owen,
           </h1>
           <p className="theme-body mb-2 text-lg leading-relaxed md:text-xl">
-            known as Owencodes online.
+            <TypewriterText text="known as Owencodes online." />
           </p>
 
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
