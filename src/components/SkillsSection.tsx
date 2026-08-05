@@ -21,13 +21,13 @@ export function SkillsSection() {
     <section aria-labelledby="skills-heading" className="mt-12">
       <h2
         id="skills-heading"
-        className="theme-heading text-center text-4xl font-bold"
+        className="theme-heading pb-2 text-center text-4xl leading-[1.6] font-bold"
       >
         My Skills
       </h2>
 
       <div className="mx-auto mt-5 max-w-5xl">
-        <div className="mask-[linear-gradient(to_right,transparent_0,black_128px,black_calc(100%-128px),transparent_100%)] w-full overflow-hidden">
+        <div className="mask-[linear-gradient(to_right,transparent_0,black_8%,black_92%,transparent_100%)] w-full overflow-hidden">
           <ul className="animate-scroll flex w-max min-w-max flex-nowrap items-center [&_li]:mx-8">
             {duplicatedSkills.map((skill, index) => (
               <li
