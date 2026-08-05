@@ -133,7 +133,7 @@ export default function Home() {
                 </p>
 
                 <div className="mt-3 w-full">
-                  <h3 className="theme-heading text-xl font-semibold">Stay in the loop</h3>
+                  <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">Stay in the loop</h3>
                   <p className="theme-body mt-2 text-sm leading-relaxed md:text-base">
                     Get occasional updates when I ship a new project or publish a new post.
                   </p>
