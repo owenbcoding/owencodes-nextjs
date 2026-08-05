@@ -229,16 +229,13 @@ export async function removeNewsletterSubscriber(email: string): Promise<boolean
     return false;
   }
 
-  const { resend, audienceId } = config;
-  const existing = await resend.contacts.get({ audienceId, email: trimmed });
+  const { resend } = config;
+  const existing = await resend.contacts.get(trimmed);
   if (!existing.data) {
     return false;
   }
 
-  const removed = await resend.contacts.remove({
-    audienceId,
-    email: trimmed,
-  });
+  const removed = await resend.contacts.remove(trimmed);
 
   return Boolean(removed.data?.deleted);
 }
