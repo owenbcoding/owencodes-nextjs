@@ -41,9 +41,6 @@ export function NewsletterSignup() {
 
   return (
     <div className="mt-6">
-      <p className="mb-2 text-xs text-amber-300/80">
-        Newsletter is currently under construction — some things may be broken.
-      </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 lg:flex-row">
         <label className="sr-only" htmlFor="newsletter-email">
           Email address
