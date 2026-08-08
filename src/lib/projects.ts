@@ -12,6 +12,8 @@ export type Project = {
   statusLabel?: string;
   imageHref?: string;
   link?: { href: string; label: string };
+  /** Renders an empty placeholder card with no content. */
+  blank?: boolean;
 };
 
 export const PROJECT_FILTERS = [
@@ -28,6 +30,14 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
 export const projects: Project[] = [
   {
+    slug: "blank-1",
+    title: "",
+    description: "",
+    stacks: [],
+    status: "coming-soon",
+    blank: true,
+  },
+  {
     slug: "shopify-store-redesign",
     title: "Shopify Store",
     description: "A store I scaled and redesigned based in Ireland.",
@@ -39,14 +49,14 @@ export const projects: Project[] = [
     link: { href: "https://brioils.store/", label: "Visit live site" },
   },
   {
-    slug: "note-flow",
-    title: "Note Flow",
-    description:
-      "A free multi-user app. Import your NOTES directory or GitHub repository into your profile, or write directly in the app. AI-powered note generation with no paid tier.",
-    image: "/images/note-flow.png",
-    stacks: ["Next.js", "TailwindCSS", "OpenAI", "AI"],
+    slug: "leadscout",
+    title: "Leadscout",
+    description: "A freelancing program to help find clients nearby online.",
+    image: "/images/Leadscout-app.png",
+    stacks: ["Next.js", "TailwindCSS", "TypeScript"],
     status: "live",
-    link: { href: "https://note-flow-livid.vercel.app/", label: "Visit live site" },
+    imageHref: "https://www.leadscout.work/",
+    link: { href: "https://www.leadscout.work/", label: "Visit live site" },
   },
   {
     slug: "specsage",
@@ -75,16 +85,6 @@ export const projects: Project[] = [
   //   status: "coming-soon",
   //   statusLabel: "Planned",
   // },
-  {
-    slug: "leadscout",
-    title: "Leadscout",
-    description: "A freelancing program to help find clients nearby online.",
-    image: "/images/Leadscout-app.png",
-    stacks: ["Next.js", "TailwindCSS", "TypeScript"],
-    status: "live",
-    imageHref: "https://www.leadscout.work/",
-    link: { href: "https://www.leadscout.work/", label: "Visit live site" },
-  },
   // {
   //   slug: "devstories",
   //   title: "DevStories",
