@@ -41,7 +41,7 @@ export function TypewriterText({
 
   return (
     <span className={className}>
-      <span aria-hidden="true">
+      <span aria-hidden="true" className="whitespace-pre-line">
         {text.slice(0, charCount)}
         <span
           className={`ml-0.5 inline-block w-0.5 bg-current align-middle ${
