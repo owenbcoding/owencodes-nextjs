@@ -12,8 +12,6 @@ export type Project = {
   statusLabel?: string;
   imageHref?: string;
   link?: { href: string; label: string };
-  /** Renders an empty placeholder card with no content. */
-  blank?: boolean;
 };
 
 export const PROJECT_FILTERS = [
@@ -30,12 +28,13 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
 export const projects: Project[] = [
   {
-    slug: "blank-1",
-    title: "",
-    description: "",
-    stacks: [],
-    status: "coming-soon",
-    blank: true,
+    slug: "tracton-biodiversity-group",
+    title: "Tracton B Group",
+    description: "A community made website for a local wildlife community",
+    image: "/images/tractontbg.png",
+    stacks: ["Next.js", "TailwindCSS", "TypeScript"],
+    status: "live",
+    link: { href: "https://www.tractonbiodiversity.org/", label: "Visit live site" },
   },
   {
     slug: "shopify-store-redesign",
