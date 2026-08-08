@@ -105,10 +105,6 @@ export default function Home() {
           >
             Hi I&apos;m Owen,
           </h1>
-          <p className="theme-body mb-2 text-lg leading-relaxed md:text-xl">
-            <TypewriterText text={"known as Eoghan Byrne in Irish,\nor Owencodes online."} />
-          </p>
-
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
             <Image
               src="/images/portrait-notint-removebg.png"
@@ -129,7 +125,8 @@ export default function Home() {
                   className="theme-body text-lg leading-relaxed whitespace-pre-line md:text-xl"
                   style={{ minHeight: 160, overflow: "hidden" }}
                 >
-                  I am a Full Stack Developer. With a passion for coding and problem-solving, I enjoy creating innovative applications that make a difference.
+                  I am a Full Stack Developer. With a passion for coding and problem-solving, I enjoy creating innovative applications that make a difference.{" "}
+                  <TypewriterText text="Known as owencodes online." />
                 </p>
 
                 <div className="mt-3 w-full">
