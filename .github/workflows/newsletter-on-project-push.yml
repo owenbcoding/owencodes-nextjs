@@ -1,0 +1,50 @@
+name: Newsletter On Project Push
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "src/lib/projects.ts"
+
+jobs:
+  notify-subscribers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Snapshot before/after project file
+        id: snapshot
+        run: |
+          set -euo pipefail
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+          ZERO_SHA="0000000000000000000000000000000000000000"
+
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "$ZERO_SHA" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "Falling back to parent of current commit (no usable previous SHA)."
+            BEFORE="${AFTER}^"
+          fi
+
+          git show "${BEFORE}:src/lib/projects.ts" > /tmp/before-projects.ts 2>/dev/null || : > /tmp/before-projects.ts
+          git show "${AFTER}:src/lib/projects.ts" > /tmp/after-projects.ts
+
+      - name: Notify subscribers about project changes
+        env:
+          NEWSLETTER_SEND_ENDPOINT: ${{ secrets.NEWSLETTER_SEND_ENDPOINT }}
+          NEWSLETTER_SEND_TOKEN: ${{ secrets.NEWSLETTER_SEND_TOKEN }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          BEFORE_PROJECTS_FILE: /tmp/before-projects.ts
+          AFTER_PROJECTS_FILE: /tmp/after-projects.ts
+        run: node scripts/notify-project-changes.mjs
