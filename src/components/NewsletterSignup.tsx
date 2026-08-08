@@ -51,7 +51,7 @@ export function NewsletterSignup() {
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="Enter your email"
+          placeholder="Enter email to Subscribe its free!"
           className="w-full min-w-0 flex-1 text-center rounded-full border border-cyan-400/40 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400"
         />
         <button
