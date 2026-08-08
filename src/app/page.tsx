@@ -106,7 +106,7 @@ export default function Home() {
             Hi I&apos;m Owen,
           </h1>
           <p className="theme-body mb-2 text-lg leading-relaxed md:text-xl">
-            <TypewriterText text="known as Eoghan Byrne in Irish and Owencodes online." />
+            <TypewriterText text={"known as Eoghan Byrne in Irish,\nor Owencodes online."} />
           </p>
 
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
