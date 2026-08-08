@@ -61,15 +61,6 @@ function ProjectMedia({ project }: { project: Project }) {
 }
 
 export function ProjectCard({ project }: { project: Project }) {
-  if (project.blank) {
-    return (
-      <article
-        aria-hidden="true"
-        className="h-full min-h-0 rounded-lg border border-white/10 bg-black/30 shadow-2xl backdrop-blur-sm"
-      />
-    );
-  }
-
   const isLive = project.status === "live";
   const hasMedia = isLive && Boolean(project.image || project.video);
   const imageHref = project.imageHref ?? project.link?.href;
