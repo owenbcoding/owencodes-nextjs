@@ -4,15 +4,24 @@ import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
+import { useTheme } from "@/lib/useTheme";
+
+const DARK_SQUARE_COLORS = ["#2dd4bf", "#14b8a6", "#5eead4", "#0d9488"];
+// Deeper teals so the squares stay visible against the light background
+// instead of blending into the cream/mint gradient.
+const LIGHT_SQUARE_COLORS = ["#0f766e", "#115e59", "#0d9488", "#134e4a"];
 
 export function ContactBackground() {
   const [ready, setReady] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => setReady(true));
   }, []);
+
+  const squareColors = theme === "light" ? LIGHT_SQUARE_COLORS : DARK_SQUARE_COLORS;
 
   const options: ISourceOptions = {
     fullScreen: { enable: false },
@@ -26,7 +35,7 @@ export function ContactBackground() {
       },
       shape: { type: "square" },
       color: {
-        value: ["#2dd4bf", "#14b8a6", "#5eead4", "#0d9488"],
+        value: squareColors,
       },
       opacity: {
         value: { min: 0.2, max: 0.55 },
@@ -82,6 +91,7 @@ export function ContactBackground() {
 
       {ready && (
         <Particles
+          key={theme}
           id="contact-particles"
           options={options}
           className="absolute inset-0"
