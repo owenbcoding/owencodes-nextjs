@@ -157,19 +157,18 @@ body {
 :root[data-theme="light"] .site-bg-primary {
   background-image: linear-gradient(
     to bottom right,
-    #f6f1e8 0%,
-    #eef3ef 40%,
-    #dcefe9 70%,
-    #bfe8dd 100%
+    #faf8f3 0%,
+    #f6f1e8 60%,
+    #f1ece0 100%
   );
 }
 
 :root[data-theme="light"] .site-bg-side {
-  background-image: linear-gradient(to right, rgb(255 255 255 / 25%), transparent, rgb(45 212 191 / 18%));
+  background-image: linear-gradient(to right, rgb(255 255 255 / 20%), transparent, transparent);
 }
 
 :root[data-theme="light"] .site-bg-bottom {
-  background-image: linear-gradient(to top, rgb(15 23 42 / 6%), transparent, transparent);
+  background-image: linear-gradient(to top, rgb(15 23 42 / 4%), transparent, transparent);
 }
 
 :root[data-theme="light"] .theme-heading {
