@@ -52,7 +52,7 @@ export function NewsletterSignup() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="Enter email to Subscribe its free!"
-          className="w-full min-w-0 flex-1 text-center rounded-full border border-cyan-400/40 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400"
+          className="theme-input w-full min-w-0 flex-1 text-center rounded-full border border-cyan-400/40 px-4 py-3 text-sm outline-none transition focus:border-cyan-400"
         />
         <button
           type="submit"
@@ -64,7 +64,7 @@ export function NewsletterSignup() {
 
         {message ? (
           <p
-            className={`text-sm ${isError ? "text-rose-300" : isWarning ? "text-amber-300" : "text-emerald-300"} sm:basis-full`}
+            className={`text-sm ${isError ? "theme-status-error" : isWarning ? "theme-status-warning" : "theme-status-success"} sm:basis-full`}
             aria-live="polite"
           >
             {message}

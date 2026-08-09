@@ -103,7 +103,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-name"
-          className="text-sm font-semibold text-white"
+          className="theme-card-title text-sm font-semibold"
         >
           Name
         </label>
@@ -116,14 +116,14 @@ export function ContactForm() {
           placeholder="Your Full name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
+          className="theme-input theme-input-border rounded-md border px-3 py-2 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-email"
-          className="text-sm font-semibold text-white"
+          className="theme-card-title text-sm font-semibold"
         >
           Email
         </label>
@@ -136,14 +136,14 @@ export function ContactForm() {
           placeholder="Your Work email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
+          className="theme-input theme-input-border rounded-md border px-3 py-2 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-message"
-          className="text-sm font-semibold text-white"
+          className="theme-card-title text-sm font-semibold"
         >
           Message
         </label>
@@ -155,16 +155,16 @@ export function ContactForm() {
           placeholder={`Put anything here to start the conversation\n\nTell me about your project...\n\n• Business or project name\n• Goal of the website/app\n• Example websites you like\n• Pages required\n• Features needed (Login, User Accounts, Payments, Booking, Dashboard, etc.)\n• If you have any existing branding and or assets available\n• Domain and hosting status\n• Expected launch date\n• Budget range`}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="resize-y rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
+          className="theme-input theme-input-border resize-y rounded-md border px-3 py-2 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
         />
       </div>
 
       <div
         role="note"
-        className="rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-200"
+        className="theme-card rounded-md border px-4 py-3 text-sm"
       >
-        <p className="text-white font-bold">Prefer to talk live?</p>
-        <p className="mt-5 text-slate-300">
+        <p className="theme-card-title font-bold">Prefer to talk live?</p>
+        <p className="theme-muted-soft mt-5">
           You can send a message anytime using the form above. If you&apos;d
           like a discovery call, book a time below &mdash; the form is great for
           project details, and the call is for a deeper conversation.
@@ -177,8 +177,8 @@ export function ContactForm() {
           onClick={handleBookCall}
           className={`flex-1 rounded-md border px-4 py-2.5 text-sm font-semibold transition-colors ${
             hasBooked
-              ? "border-teal-400/60 bg-teal-500/10 text-teal-200 hover:bg-teal-500/20"
-              : "border-white/20 bg-black/60 text-white hover:border-white/40 hover:bg-black/80"
+              ? "theme-accent-text border-teal-400/60 bg-teal-500/10 hover:bg-teal-500/20"
+              : "theme-card theme-card-title hover:opacity-80"
           }`}
         >
           {hasBooked ? "Call booked \u2713" : "Book discovery call"}
@@ -197,7 +197,7 @@ export function ContactForm() {
       {status.kind === "success" && (
         <p
           role="status"
-          className="rounded-md border border-teal-500/40 bg-teal-500/10 px-3 py-2 text-sm text-teal-200"
+          className="theme-status-success rounded-md border border-teal-500/40 bg-teal-500/10 px-3 py-2 text-sm"
         >
           {status.message}
         </p>
@@ -206,7 +206,7 @@ export function ContactForm() {
       {status.kind === "error" && (
         <p
           role="alert"
-          className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-200"
+          className="theme-status-error rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm"
         >
           {status.message}
         </p>

@@ -21,10 +21,10 @@ export function ProjectsFilterNav({ active, onChange }: Props) {
             type="button"
             onClick={() => onChange(filter)}
             aria-pressed={isActive}
-            className={`theme-body cursor-pointer rounded-full px-2 py-0.5 text-xs font-medium leading-tight transition-colors duration-200 sm:text-sm ${
+            className={`cursor-pointer rounded-full px-2 py-0.5 text-xs font-medium leading-tight transition-colors duration-200 sm:text-sm ${
               isActive
-                ? "bg-white text-slate-900! shadow-[0_0_6px_rgba(45,212,191,0.45)]"
-                : "text-slate-200! hover:bg-white/10 hover:text-teal-300!"
+                ? "bg-white text-slate-900 shadow-[0_0_6px_rgba(45,212,191,0.45)]"
+                : "theme-pill"
             }`}
           >
             {filter}
