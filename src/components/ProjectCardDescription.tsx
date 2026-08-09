@@ -45,7 +45,7 @@ export function ProjectCardDescription({ text, idPrefix }: ProjectCardDescriptio
         <button
           type="button"
           onClick={() => setExpanded((e) => !e)}
-          className="mt-1.5 w-full text-left text-sm font-medium text-teal-300/90 underline decoration-teal-500/50 underline-offset-2 transition-colors hover:text-teal-200 hover:decoration-teal-300/80 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400/60"
+          className="theme-accent-text mt-1.5 w-full text-left text-sm font-medium underline decoration-teal-500/50 underline-offset-2 transition-opacity hover:opacity-80 hover:decoration-teal-300/80 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400/60"
           aria-expanded={expanded}
           aria-controls={descId}
         >
