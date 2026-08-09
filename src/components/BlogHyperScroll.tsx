@@ -36,7 +36,7 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
 
   if (blogs.length === 0) {
     return (
-      <p className="mt-16 text-center text-slate-300">
+      <p className="theme-muted-soft mt-16 text-center">
         No blog posts yet. Check back soon!
       </p>
     );
@@ -140,8 +140,8 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
                 aria-label={`Read ${blog.title} — about ${blog.readingMinutes} min`}
                 className={`group relative flex min-h-[20px] w-full cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border p-4 shadow-[0_20px_70px_rgba(0,0,0,0.5)] ring-1 transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/20 hover:ring-2 hover:ring-teal-300/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300/70 md:min-h-[60px] md:p-6 ${
                   isNearActive
-                    ? "border-white/15 bg-slate-950/95 ring-white/10 backdrop-blur-md"
-                    : "border-white/10 bg-slate-950/35 ring-white/5 backdrop-blur-2xl backdrop-saturate-150"
+                    ? "theme-card-strong ring-white/10 backdrop-blur-md"
+                    : "theme-card ring-white/5 backdrop-blur-2xl backdrop-saturate-150"
                 }`}
               >
                 <div className="pointer-events-none absolute -right-16 -top-20 z-0 h-52 w-52 rounded-full bg-teal-400/20 blur-3xl" />
@@ -157,10 +157,10 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
 
                 <div className="relative z-10 flex items-start justify-between gap-6">
                   <div>
-                    <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-teal-300">
+                    <p className="theme-accent-text font-mono text-xs font-semibold uppercase tracking-[0.28em]">
                       Post {postNumber}
                     </p>
-                    <h2 className="theme-title-font mt-3 max-w-2xl text-2xl font-black text-white drop-shadow-[0_0_18px_rgba(45,212,191,0.18)] md:text-4xl">
+                    <h2 className="theme-title-font theme-card-title mt-3 max-w-2xl text-2xl font-black drop-shadow-[0_0_18px_rgba(45,212,191,0.18)] md:text-4xl">
                       <span aria-hidden="true" className="mr-3">
                         {blog.emoji}
                       </span>
@@ -168,28 +168,28 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
                     </h2>
                   </div>
 
-                  <div className="hidden rounded-full border border-teal-300/30 bg-teal-300/10 px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-teal-200 md:block">
+                  <div className="theme-accent-text hidden rounded-full border border-teal-300/30 bg-teal-300/10 px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.2em] md:block">
                     {blog.category}
                   </div>
                 </div>
 
                 <div className="relative z-10 mt-6 flex flex-wrap items-end justify-between gap-4">
                   <div>
-                    <p className="max-w-2xl text-sm font-semibold leading-relaxed text-slate-200 md:text-lg">
+                    <p className="theme-muted-soft max-w-2xl text-sm font-semibold leading-relaxed md:text-lg">
                       {blog.description}
                     </p>
-                    <div className="mt-5 flex flex-wrap items-center gap-3 text-xs text-slate-400 md:text-sm">
+                    <div className="theme-muted mt-5 flex flex-wrap items-center gap-3 text-xs md:text-sm">
                       <span>Published on {formatDate(blog.date)}</span>
-                      <span aria-hidden="true" className="text-teal-400">
+                      <span aria-hidden="true" className="theme-accent-text">
                         /
                       </span>
-                      <span className="font-medium text-teal-300 md:hidden">
+                      <span className="theme-accent-text font-medium md:hidden">
                         {blog.category}
                       </span>
                     </div>
                   </div>
 
-                  <span className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-teal-300 transition-all group-hover:gap-3 group-hover:text-teal-200 md:text-sm">
+                  <span className="theme-accent-text inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] transition-all group-hover:gap-3 group-hover:opacity-80 md:text-sm">
                     {blog.readingMinutes} min read
                     <svg
                       aria-hidden="true"
@@ -212,7 +212,7 @@ export function BlogHyperScroll({ blogs }: BlogHyperScrollProps) {
         })}
       </ol>
 
-      <p className="mt-3 text-center text-xs text-slate-500">
+      <p className="theme-muted mt-3 text-center text-xs">
         Use your mouse wheel, trackpad, arrow keys, or swipe to move through{" "}
         {blogs.length} {blogs.length === 1 ? "post" : "posts"}.
       </p>

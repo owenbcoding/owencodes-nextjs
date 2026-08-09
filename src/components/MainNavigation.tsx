@@ -68,7 +68,7 @@ export function MainNavigation() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="theme-brand-link text-lg font-bold transition-colors duration-200"
+          className="theme-brand-link rounded-full px-3 py-2 text-lg font-bold transition-colors duration-200"
         >
           Owencodes
         </Link>
@@ -93,8 +93,10 @@ export function MainNavigation() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <GitHubAnchor className="theme-github-link hidden items-center gap-2 rounded-full px-4 py-2 tracking-wide transition duration-200 md:inline-flex" />
+          <div className="flex items-center gap-0.5">
+            <ThemeToggle />
+            <GitHubAnchor className="theme-github-link hidden items-center gap-2 rounded-full px-4 py-2 tracking-wide transition duration-200 md:inline-flex" />
+          </div>
           <button
             type="button"
             onClick={() => setMobileOpen((o) => !o)}

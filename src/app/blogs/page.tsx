@@ -43,10 +43,10 @@ export default function BlogsPage() {
   const blogs = getAllBlogs();
 
   return (
-    <div className="relative flex min-h-dvh w-full min-w-0 max-w-full flex-col overflow-x-hidden overflow-y-auto overscroll-none bg-black">
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-br from-black via-slate-950 to-teal-950" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-black/70 via-transparent to-teal-900/40" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+    <div className="site-shell relative flex min-h-dvh w-full min-w-0 max-w-full flex-col overflow-x-hidden overflow-y-auto overscroll-none">
+      <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
+      <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
+      <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
 
       <ParticlesBackground words={BLOG_WORDS} id="blogs-particles" />
 
