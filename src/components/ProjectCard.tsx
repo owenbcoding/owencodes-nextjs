@@ -68,8 +68,8 @@ export function ProjectCard({ project }: { project: Project }) {
   const isExternalImageLink = Boolean(imageHref?.startsWith("http"));
 
   return (
-    <article className="cursor-default flex h-full min-h-0 flex-col rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
-      <h3 className="theme-title-font mb-4 shrink-0 text-center text-md font-semibold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+    <article className="theme-card cursor-default flex h-full min-h-0 flex-col rounded-lg border p-6 shadow-2xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+      <h3 className="theme-title-font theme-card-title mb-4 shrink-0 text-center text-md font-semibold">
         {project.title}
       </h3>
 
@@ -105,7 +105,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.stacks.map((stack) => (
             <li
               key={`${project.slug}-${stack}`}
-              className="rounded-md bg-teal-500/15 px-2 py-0.5 text-xs font-medium text-teal-200"
+              className="theme-accent-text rounded-md bg-teal-500/15 px-2 py-0.5 text-xs font-medium"
             >
               {stack}
             </li>

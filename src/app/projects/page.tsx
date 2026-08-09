@@ -21,10 +21,10 @@ export default function ProjectsPage() {
   }, [activeFilter]);
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-black">
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-br from-black via-slate-950 to-teal-950" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-black/70 via-transparent to-teal-900/40" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
+    <div className="site-shell relative flex min-h-screen flex-col overflow-x-hidden">
+      <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
+      <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
+      <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
 
       <ParticlesBackground />
 
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
 
         <section aria-label="Project list" className="mt-10">
           {filteredProjects.length === 0 ? (
-            <p className="mt-16 text-center text-slate-300">
+            <p className="theme-muted-soft mt-16 text-center">
               No projects match this filter yet. Check back soon!
             </p>
           ) : (
