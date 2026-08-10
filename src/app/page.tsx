@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Script from "next/script";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
@@ -128,6 +129,26 @@ export default function Home() {
                   I am a Full Stack Developer. With a passion for coding and problem-solving, I enjoy creating innovative applications that make a difference.{" "}
                   <TypewriterText text="Known as owencodes online." />
                 </p>
+
+                <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
+                  <div className="flex flex-col items-center">
+                    <Link
+                      href="/contact"
+                      className="rounded-full mt-2 cursor-pointer bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                    >
+                      Book a Call
+                    </Link>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <button
+                      disabled
+                      className="rounded-full cursor-not-allowed bg-cyan-400/50 px-5 py-3 text-sm font-semibold text-slate-950 opacity-70 flex flex-col items-center gap-1"
+                    >
+                      <span>Package site</span>
+                      <span className="text-xs">coming soon</span>
+                    </button>
+                  </div>
+                </div>
 
                 <div className="mt-3 w-full">
                   <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">Stay in the loop</h3>
