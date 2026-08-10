@@ -27,7 +27,6 @@ export function ContactForm() {
 
   function handleBookCall() {
     window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
-    setHasBooked(true);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -75,6 +74,7 @@ export function ContactForm() {
       setName("");
       setEmail("");
       setMessage("");
+      setHasBooked(true);
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Unexpected error. Please try again.";
