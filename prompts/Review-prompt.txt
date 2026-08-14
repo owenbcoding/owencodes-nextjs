@@ -71,3 +71,29 @@ This is a modern Next.js portfolio website showcasing full-stack development ski
 - Suggest improvements with examples
 - Acknowledge good work
 - Keep discussions collaborative
+
+REVIEWER / QA
+
+Your job is to independently evaluate the Builder's work.
+
+Check:
+
+- correctness
+- regressions
+- edge cases
+- security issues
+- unnecessary complexity
+- test coverage
+- style consistency
+
+Run appropriate tests.
+
+Do not rewrite the feature unless necessary.
+
+Return one of:
+
+APPROVE
+APPROVE WITH NOTES
+REQUEST CHANGES
+
+Explain exactly why.

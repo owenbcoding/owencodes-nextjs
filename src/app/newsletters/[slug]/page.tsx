@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { getNewsletterBySlug, getAllNewsletters, formatNewsletterDate } from "@/lib/newsletters";
+import { getSiteUrl } from "@/lib/site";
 
 interface NewsletterDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -81,12 +83,9 @@ export default async function NewsletterDetailPage({
           </header>
 
           <div className="prose prose-invert max-w-none dark:prose-invert">
-            <div
-              className="theme-body leading-relaxed [&>h2]:theme-heading [&>h2]:mt-8 [&>h2]:mb-4 [&>h2]:text-2xl [&>h2]:font-bold [&>h3]:theme-heading [&>h3]:mt-6 [&>h3]:mb-3 [&>h3]:text-xl [&>h3]:font-bold [&>p]:mb-4 [&>ul]:mb-4 [&>ul]:ml-4 [&>ul]:space-y-2 [&>ol]:mb-4 [&>ol]:ml-4 [&>ol]:space-y-2 [&>li]:theme-body [&>blockquote]:border-l-4 [&>blockquote]:border-teal-400 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:my-4 [&>code]:theme-body [&>code]:bg-slate-900 [&>code]:rounded [&>code]:px-2 [&>code]:py-1 [&>pre]:bg-slate-900 [&>pre]:rounded [&>pre]:p-4 [&>pre]:overflow-x-auto [&>a]:theme-accent-text [&>a]:underline [&>a]:underline-offset-2 [&>a]:transition [&>a]:hover:opacity-80"
-              dangerouslySetInnerHTML={{
-                __html: newsletter.content,
-              }}
-            />
+            <div className="theme-body leading-relaxed [&>h2]:theme-heading [&>h2]:mt-8 [&>h2]:mb-4 [&>h2]:text-2xl [&>h2]:font-bold [&>h3]:theme-heading [&>h3]:mt-6 [&>h3]:mb-3 [&>h3]:text-xl [&>h3]:font-bold [&>p]:mb-4 [&>ul]:mb-4 [&>ul]:ml-4 [&>ul]:space-y-2 [&>ol]:mb-4 [&>ol]:ml-4 [&>ol]:space-y-2 [&>li]:theme-body [&>blockquote]:border-l-4 [&>blockquote]:border-teal-400 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:my-4 [&>code]:theme-body [&>code]:bg-slate-900 [&>code]:rounded [&>code]:px-2 [&>code]:py-1 [&>pre]:bg-slate-900 [&>pre]:rounded [&>pre]:p-4 [&>pre]:overflow-x-auto [&>a]:theme-accent-text [&>a]:underline [&>a]:underline-offset-2 [&>a]:transition [&>a]:hover:opacity-80">
+              <MDXRemote source={newsletter.content} />
+            </div>
           </div>
 
           <footer className="theme-card-title mt-12 border-t border-slate-700/50 pt-8">
@@ -94,7 +93,7 @@ export default async function NewsletterDetailPage({
               <h3 className="mb-2 font-bold">Share this newsletter</h3>
               <div className="flex gap-3">
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out: ${newsletter.title}`)}%0A${encodeURIComponent(`https://owencodes.com/newsletters/${newsletter.slug}`)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out: ${newsletter.title}`)}%0A${encodeURIComponent(`${getSiteUrl()}/newsletters/${newsletter.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="theme-accent-text inline-flex items-center gap-1 text-sm font-semibold transition hover:opacity-70"

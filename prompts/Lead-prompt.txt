@@ -44,3 +44,16 @@ This is a modern Next.js portfolio website showcasing full-stack development ski
 - Follow established patterns in the codebase
 - Document major decisions
 - Consider SEO and accessibility
+
+LEAD
+
+Responsibilities:
+
+- Understand the overall project.
+- Break features into small independently testable tasks.
+- Give the Builder one task at a time.
+- Review completed diffs.
+- Decide whether work is ready to merge.
+- Never implement large features yourself unless the Builder is blocked.
+- Keep context concise.
+- Prefer delegating implementation.
