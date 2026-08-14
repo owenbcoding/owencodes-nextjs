@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-export type NewsletterMeta = {
+export type ArchiveItemMeta = {
   slug: string;
   title: string;
   subject: string;
@@ -11,15 +11,15 @@ export type NewsletterMeta = {
   number?: number;
 };
 
-export type Newsletter = NewsletterMeta & {
+export type ArchiveItem = ArchiveItemMeta & {
   content: string;
 };
 
-const NEWSLETTERS_DIR = path.join(process.cwd(), "content", "newsletters");
+const ARCHIVE_DIR = path.join(process.cwd(), "content", "archive");
 
-function readNewsletterFile(fileName: string): Newsletter {
+function readArchiveFile(fileName: string): ArchiveItem {
   const slug = fileName.replace(/\.mdx?$/, "");
-  const filePath = path.join(NEWSLETTERS_DIR, fileName);
+  const filePath = path.join(ARCHIVE_DIR, fileName);
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
 
@@ -34,30 +34,30 @@ function readNewsletterFile(fileName: string): Newsletter {
   };
 }
 
-export function getAllNewsletters(): Newsletter[] {
-  if (!fs.existsSync(NEWSLETTERS_DIR)) return [];
+export function getAllArchiveItems(): ArchiveItem[] {
+  if (!fs.existsSync(ARCHIVE_DIR)) return [];
 
   const files = fs
-    .readdirSync(NEWSLETTERS_DIR)
+    .readdirSync(ARCHIVE_DIR)
     .filter((file) => /\.mdx?$/.test(file));
 
   return files
-    .map(readNewsletterFile)
+    .map(readArchiveFile)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getNewsletterBySlug(slug: string): Newsletter | null {
+export function getArchiveItemBySlug(slug: string): ArchiveItem | null {
   const candidates = [`${slug}.mdx`, `${slug}.md`];
   for (const fileName of candidates) {
-    const filePath = path.join(NEWSLETTERS_DIR, fileName);
+    const filePath = path.join(ARCHIVE_DIR, fileName);
     if (fs.existsSync(filePath)) {
-      return readNewsletterFile(fileName);
+      return readArchiveFile(fileName);
     }
   }
   return null;
 }
 
-export function formatNewsletterDate(date: string): string {
+export function formatArchiveDate(date: string): string {
   const parsed = new Date(date);
   if (Number.isNaN(parsed.getTime())) return date;
   return parsed.toLocaleDateString("en-GB", {
