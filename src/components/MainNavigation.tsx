@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
@@ -69,8 +70,19 @@ export function MainNavigation() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="theme-brand-link rounded-full px-3 py-2 text-lg font-bold transition-colors duration-200"
+          className="theme-brand-link flex items-center gap-2.5 rounded-full py-2 pl-2 pr-3 text-lg font-bold transition-colors duration-200"
         >
+          {/* Served straight from /public: at 32px the optimiser round trip
+              costs more than it saves, and the source is already sized for 3x. */}
+          <Image
+            src="/images/mask-logo.png"
+            alt=""
+            width={96}
+            height={96}
+            className="h-8 w-8 shrink-0 rounded-full ring-1 ring-[rgb(20_184_166/35%)]"
+            priority
+            unoptimized
+          />
           Owencodes
         </Link>
 
