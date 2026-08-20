@@ -1,0 +1,73 @@
+name: Newsletter On Archive Push
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "content/newsletters/**"
+
+jobs:
+  notify-subscribers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Determine changed newsletter files
+        id: changed
+        run: |
+          set -euo pipefail
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+          ZERO_SHA="0000000000000000000000000000000000000000"
+
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "$ZERO_SHA" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "Falling back to git show (no usable previous SHA)."
+            FILES=$(git show --name-status --pretty=format: "$AFTER" -- content/newsletters)
+          else
+            FILES=$(git diff --name-status "$BEFORE" "$AFTER" -- content/newsletters)
+          fi
+
+          echo "Raw changed files:"
+          echo "$FILES"
+
+          # Keep only Added/Modified .md(x) files; ignore deletions and rename lines (R...)
+          RELEVANT=$(echo "$FILES" | awk '$1 ~ /^(A|M)/ && $NF ~ /\.mdx?$/ {print $1"\t"$NF}')
+
+          if [ -z "$RELEVANT" ]; then
+            echo "No added/modified newsletter files detected."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          {
+            echo "files<<EOF_FILES"
+            echo "$RELEVANT"
+            echo "EOF_FILES"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Notify subscribers about newsletter changes
+        if: steps.changed.outputs.has_changes == 'true'
+        env:
+          NEWSLETTER_SEND_ENDPOINT: ${{ secrets.NEWSLETTER_SEND_ENDPOINT }}
+          NEWSLETTER_SEND_TOKEN: ${{ secrets.NEWSLETTER_SEND_TOKEN }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          CHANGED_NEWSLETTER_FILES: ${{ steps.changed.outputs.files }}
+        run: node scripts/notify-newsletter-changes.mjs
