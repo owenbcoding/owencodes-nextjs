@@ -115,6 +115,15 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div className="mt-auto">
         <ProjectCardDescription text={project.description} idPrefix={project.slug} />
+        {project.archiveSlug ? (
+          <Link
+            href={`/project-archive/${project.archiveSlug}`}
+            className="theme-accent-text inline-flex items-center gap-1 text-sm font-semibold underline decoration-teal-500/50 underline-offset-2 transition-all hover:gap-2 hover:decoration-teal-300/80 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400/60"
+            aria-label={`Read the project archive post for ${project.title}`}
+          >
+            Read the archive post →
+          </Link>
+        ) : null}
       </div>
     </article>
   );
