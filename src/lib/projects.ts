@@ -12,6 +12,8 @@ export type Project = {
   statusLabel?: string;
   imageHref?: string;
   link?: { href: string; label: string };
+  /** Slug of the matching post in content/project-archive. */
+  archiveSlug?: string;
 };
 
 export const PROJECT_FILTERS = [
@@ -46,6 +48,7 @@ export const projects: Project[] = [
     statusLabel: "New Theme launching soon",
     imageHref: "/projects/shopify-store-preview",
     link: { href: "https://brioils.store/", label: "Visit live site" },
+    archiveSlug: "Project-Archive-003",
   },
   {
     slug: "leadscout",
@@ -56,6 +59,7 @@ export const projects: Project[] = [
     status: "live",
     imageHref: "https://www.leadscout.work/",
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
+    archiveSlug: "Project-Archive-002",
   },
   {
     slug: "specsage",
@@ -65,6 +69,7 @@ export const projects: Project[] = [
     stacks: ["Next.js", "CrewAI", "OpenAI", "Firecrawl", "AI"],
     status: "live",
     link: { href: "https://www.specsage.tech/", label: "Visit live site" },
+    archiveSlug: "Project-Archive-001",
   },
   // {
   //   slug: "hackerinn",
