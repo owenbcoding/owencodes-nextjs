@@ -5,7 +5,7 @@ import {
   formatContentDate,
 } from "./content-loader";
 
-export type NewsletterMeta = {
+export type ArchivePostMeta = {
   slug: string;
   title: string;
   subject: string;
@@ -14,17 +14,17 @@ export type NewsletterMeta = {
   number?: number;
 };
 
-export type Newsletter = NewsletterMeta & {
+export type ArchivePost = ArchivePostMeta & {
   content: string;
 };
 
-const NEWSLETTERS_DIR = path.join(process.cwd(), "content", "newsletters");
+const ARCHIVE_DIR = path.join(process.cwd(), "content", "project-archive");
 
-function mapNewsletterData(
+function mapArchivePostData(
   data: Record<string, unknown>,
   slug: string,
   content: string
-): Newsletter {
+): ArchivePost {
   return {
     slug,
     title: String(data.title ?? slug),
@@ -36,12 +36,12 @@ function mapNewsletterData(
   };
 }
 
-export function getAllNewsletters(): Newsletter[] {
-  return getAllContent(NEWSLETTERS_DIR, mapNewsletterData);
+export function getAllArchivePosts(): ArchivePost[] {
+  return getAllContent(ARCHIVE_DIR, mapArchivePostData);
 }
 
-export function getNewsletterBySlug(slug: string): Newsletter | null {
-  return getContentBySlug(slug, NEWSLETTERS_DIR, mapNewsletterData);
+export function getArchivePostBySlug(slug: string): ArchivePost | null {
+  return getContentBySlug(slug, ARCHIVE_DIR, mapArchivePostData);
 }
 
-export const formatNewsletterDate = formatContentDate;
+export const formatArchiveDate = formatContentDate;
