@@ -1,15 +1,10 @@
 name: Newsletter On Archive Push
 
-# TEMPORARILY DISABLED for the project-archive rename merge, then restored in
-# the follow-up commit. The rename makes existing posts look brand new to the
-# notifier, which would email subscribers about a post they already received.
-# on:
-#   push:
-#     branches: [master]
-#     paths:
-#       - "content/project-archive/**"
 on:
-  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "content/project-archive/**"
 
 jobs:
   notify-subscribers:
