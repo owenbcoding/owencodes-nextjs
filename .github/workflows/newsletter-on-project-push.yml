@@ -1,15 +1,10 @@
 name: Newsletter On Project Push
 
-# TEMPORARILY DISABLED for the project-archive rename merge, then restored in
-# the follow-up commit. projects.ts only gained archiveSlug fields, which is not
-# worth an email to subscribers.
-# on:
-#   push:
-#     branches: [master]
-#     paths:
-#       - "src/lib/projects.ts"
 on:
-  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "src/lib/projects.ts"
 
 jobs:
   notify-subscribers:
