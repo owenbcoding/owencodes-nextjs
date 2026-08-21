@@ -40,7 +40,7 @@ function loadEntry(change, siteUrl) {
     slug,
     title,
     description,
-    url: `${siteUrl}/newsletters/${slug}`,
+    url: `${siteUrl}/project-archive/${slug}`,
   };
 }
 
@@ -81,7 +81,7 @@ function buildDigestPayload(entries, siteUrl) {
     title: "Fresh newsletter archives from Owencodes",
     preview: `I just published or updated ${entries.length} archives on my site.`,
     content,
-    url: `${siteUrl}/newsletters`,
+    url: `${siteUrl}/project-archive`,
   };
 }
 
