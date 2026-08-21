@@ -136,8 +136,8 @@ export default function Home() {
                       disabled
                       className="rounded-full cursor-not-allowed bg-cyan-400/50 px-5 py-3 text-sm font-semibold text-slate-950 opacity-70 flex flex-col items-center gap-1"
                     >
-                      <span>Package site</span>
-                      <span className="text-xs">coming soon</span>
+                      <span>My Packages</span>
+                      <span className="text-xs">Coming Soon!</span>
                     </button>
                   </div>
                   <div className="flex flex-col items-center">
