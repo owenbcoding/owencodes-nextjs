@@ -15,7 +15,7 @@ import {
 } from "@/lib/site";
 
 const PORTRAIT_ALT =
-  "Owen - Full Stack Developer";
+  "Owen - Full Stack Dev";
 
 export const metadata: Metadata = {
   title: {
@@ -64,7 +64,7 @@ const homeStructuredData = {
       name: "Owen",
       url: getSiteUrl(),
       image: `${getSiteUrl()}/images/portrait-notint-removebg.png`,
-      jobTitle: "Full Stack Developer",
+      jobTitle: "Full Stack Dev",
       description: HOME_DESCRIPTION,
       sameAs: ["https://github.com/owenbcoding"],
     },
