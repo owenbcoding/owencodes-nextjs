@@ -1,10 +1,9 @@
-export const SITE_NAME = "Owencodes";
+export const SITE_NAME = "Owen";
 
-export const HOME_TITLE =
-  "Owencodes | Full Stack Developer & Automation Solutions";
+export const HOME_TITLE = "Owen | Full Stack Dev";
 
 export const HOME_DESCRIPTION =
-  "Full Stack Developer helping businesses and creators bring ideas to life with full-stack apps and Automation Solutions.";
+  "Full Stack Developer building practical products, automations, and experiences for people and businesses.";
 
 export function getSiteUrl() {
   if (process.env.NEXT_PUBLIC_SITE_URL) {
