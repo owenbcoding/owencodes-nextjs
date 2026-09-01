@@ -15,11 +15,11 @@ export async function generateMetadata({ params }: ArchivePostPageProps) {
   const post = getArchivePostBySlug(slug);
 
   if (!post) {
-    return { title: "Archive Post Not Found" };
+    return { title: "Archive Post Not Found | Full Stack Dev" };
   }
 
   return {
-    title: `${post.title} | Owencodes Project Archive`,
+    title: `${post.title} | Full Stack Dev`,
     description: post.preview,
     alternates: {
       canonical: `/project-archive/${slug}`,
