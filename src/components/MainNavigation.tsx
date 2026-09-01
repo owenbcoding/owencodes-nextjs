@@ -45,10 +45,8 @@ export function MainNavigation() {
   const mobileMenuId = useId();
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+  const isProjectsSection = pathname === "/projects" || pathname.startsWith("/projects/");
+  const isArchiveSection = pathname === "/project-archive" || pathname.startsWith("/project-archive/");
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -88,11 +86,18 @@ export function MainNavigation() {
 
         <ul className="hidden shrink-0 space-x-4 md:flex">
           {navItems.map((item) => {
-            const active = isActive(item.href);
+            const active =
+              item.href === "/projects"
+                ? isProjectsSection
+                : item.href === "/project-archive"
+                  ? isArchiveSection
+                  : isActive(item.href);
+
             return (
               <li key={item.name}>
                 <Link
                   href={item.href}
+                  onClick={closeMobile}
                   aria-current={active ? "page" : undefined}
                   className={`theme-nav-link rounded-full px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 ${
                     active ? "theme-nav-link-active" : ""
