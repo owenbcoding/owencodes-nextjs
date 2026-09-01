@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   applicationName: SITE_NAME,
+  icons: {
+    icon: "/images/my-logo-rounded.png",
+    shortcut: "/images/my-logo-rounded.png",
+    apple: "/images/my-logo-rounded.png",
+  },
   robots: {
     index: true,
     follow: true,
@@ -35,7 +40,7 @@ export const metadata: Metadata = {
         url: "/images/portrait-notint-removebg.png",
         width: 600,
         height: 600,
-        alt: "Owen - Full Stack Developer specializing in Automation Solutions",
+        alt: "Owen - Full Stack Dev",
       },
     ],
   },

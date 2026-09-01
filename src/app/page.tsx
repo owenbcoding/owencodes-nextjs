@@ -15,7 +15,7 @@ import {
 } from "@/lib/site";
 
 const PORTRAIT_ALT =
-  "Owen - Full Stack Developer";
+  "Owen - Full Stack Dev";
 
 export const metadata: Metadata = {
   title: {
@@ -64,7 +64,7 @@ const homeStructuredData = {
       name: "Owen",
       url: getSiteUrl(),
       image: `${getSiteUrl()}/images/portrait-notint-removebg.png`,
-      jobTitle: "Full Stack Developer",
+      jobTitle: "Full Stack Dev",
       description: HOME_DESCRIPTION,
       sameAs: ["https://github.com/owenbcoding"],
     },
@@ -132,21 +132,20 @@ export default function Home() {
 
                 <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
                   <div className="flex flex-col items-center">
+                    <Link
+                      href="/contact"
+                      className="rounded-full cursor-pointer bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                    >
+                      Book a Call
+                    </Link>
+                  </div>
+                  <div className="flex flex-col items-center">
                     <button
                       disabled
                       className="rounded-full cursor-not-allowed bg-cyan-400/50 px-5 py-3 text-sm font-semibold text-slate-950 opacity-70 flex flex-col items-center gap-1"
                     >
-                      <span>My Packages</span>
-                      <span className="text-xs">Coming Soon!</span>
+                      <span>Packages</span>
                     </button>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <Link
-                      href="/contact"
-                      className="rounded-full mt-3 cursor-pointer bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-                    >
-                      Book a Call
-                    </Link>
                   </div>
                 </div>
 
