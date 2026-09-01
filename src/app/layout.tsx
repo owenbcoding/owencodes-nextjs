@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   description: HOME_DESCRIPTION,
   applicationName: SITE_NAME,
   icons: {
-    icon: "/images/my-logo-rounded.png",
-    shortcut: "/images/my-logo-rounded.png",
-    apple: "/images/my-logo-rounded.png",
+    icon: "/images/my-logo-rounded-full.png",
+    shortcut: "/images/my-logo-rounded-full.png",
+    apple: "/images/my-logo-rounded-full.png",
   },
   robots: {
     index: true,
