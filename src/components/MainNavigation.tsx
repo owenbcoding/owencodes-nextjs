@@ -75,7 +75,7 @@ export function MainNavigation() {
           {/* Served straight from /public: at 32px the optimiser round trip
               costs more than it saves, and the source is already sized for 3x. */}
           <Image
-            src="/images/mask-logo.png"
+            src="/images/my-logo.png"
             alt=""
             width={96}
             height={96}
