@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 
 export const metadata = {
-  title: "Contact | Owencodes",
+  title: "Contact | Full Stack Dev",
   description:
     "Get in touch with Owen. Send a message or book a discovery call to start a new project.",
 };
