@@ -30,15 +30,6 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
 export const projects: Project[] = [
   {
-    slug: "tracton-biodiversity-group",
-    title: "Tracton B Group",
-    description: "A community made website for a local wildlife community",
-    image: "/images/tractontbg.png",
-    stacks: ["Next.js", "TailwindCSS", "TypeScript", "Sanity"],
-    status: "live",
-    link: { href: "https://www.tractonbiodiversity.org/", label: "Visit live site" },
-  },
-  {
     slug: "shopify-store-redesign",
     title: "Shopify Store",
     description: "A store I scaled and redesigned based in Ireland.",
@@ -49,6 +40,15 @@ export const projects: Project[] = [
     imageHref: "/projects/shopify-store-preview",
     link: { href: "https://brioils.store/", label: "Visit live site" },
     archiveSlug: "Project-Archive-003",
+  },
+  {
+    slug: "tracton-biodiversity-group",
+    title: "Tracton B Group",
+    description: "A community made website for a local wildlife community",
+    image: "/images/tractontbg.png",
+    stacks: ["Next.js", "TailwindCSS", "TypeScript", "Sanity"],
+    status: "live",
+    link: { href: "https://www.tractonbiodiversity.org/", label: "Visit live site" },
   },
   {
     slug: "leadscout",
