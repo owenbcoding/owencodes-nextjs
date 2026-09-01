@@ -44,7 +44,7 @@ export function ProjectsPageContent() {
             <br />
             Select a category to filter.
           </p>
-          <p className="theme-body mx-auto mt-4 max-w-prose text-md leading-relaxed md:text-xl">
+          <p className="theme-body mx-auto mt-4 max-w-prose text-sm leading-relaxed md:text-base">
             Some projects will be removed and updated over time. If they do, visit the <Link href="/project-archive" className="underline underline-offset-2">archive</Link> page to read about the older project and view the live link.
           </p>
           <ProjectsFilterNav active={activeFilter} onChange={setActiveFilter} />
