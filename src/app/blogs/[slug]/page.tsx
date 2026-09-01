@@ -20,9 +20,9 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const blog = getBlogBySlug(slug);
-  if (!blog) return { title: "Blog not found | Owencodes" };
+  if (!blog) return { title: "Blog not found | Full Stack Dev" };
   return {
-    title: `${blog.title} | Owencodes`,
+    title: `${blog.title} | Full Stack Dev`,
     description: blog.description,
   };
 }
