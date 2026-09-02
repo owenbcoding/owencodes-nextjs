@@ -6,7 +6,7 @@ import { BlogHyperScroll } from "@/components/BlogHyperScroll";
 import { getAllBlogs } from "@/lib/blogs";
 
 export const metadata = {
-  title: "Blogs | Full Stack Dev",
+  title: "Owen | Blogs",
   description: "Thoughts on full-stack development, projects, and tooling.",
 };
 
