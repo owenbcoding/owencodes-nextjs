@@ -5,7 +5,7 @@ import { ProjectArchiveCard } from "@/components/ProjectArchiveCard";
 import { getAllArchivePosts } from "@/lib/project-archive";
 
 export const metadata = {
-  title: "Archive | Full Stack Dev",
+  title: "Owen | Archive",
   description:
     "Read past project archive posts about full-stack development, AI, and building projects.",
   alternates: {
