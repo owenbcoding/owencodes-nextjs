@@ -1,7 +1,7 @@
 import { ProjectsPageContent } from "@/components/ProjectsPageContent";
 
 export const metadata = {
-  title: "Projects | Full Stack Dev",
+  title: "Owen | Projects",
   description: "Browse my projects and case studies.",
   alternates: {
     canonical: "/projects",
