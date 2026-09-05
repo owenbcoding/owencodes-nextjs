@@ -39,8 +39,8 @@ const BLOG_WORDS = [
   "< />",
 ];
 
-export default function BlogsPage() {
-  const blogs = getAllBlogs();
+export default async function BlogsPage() {
+  const blogs = await getAllBlogs();
 
   return (
     <div className="site-shell relative flex min-h-dvh w-full min-w-0 max-w-full flex-col overflow-x-hidden overflow-y-auto overscroll-none">
