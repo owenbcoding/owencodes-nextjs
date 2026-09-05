@@ -1,4 +1,5 @@
 import { ProjectsPageContent } from "@/components/ProjectsPageContent";
+import { getAllProjects } from "@/lib/projects";
 
 export const metadata = {
   title: "Owen | Projects",
@@ -8,6 +9,7 @@ export const metadata = {
   },
 };
 
-export default function ProjectsPage() {
-  return <ProjectsPageContent />;
+export default async function ProjectsPage() {
+  const projects = await getAllProjects();
+  return <ProjectsPageContent projects={projects} />;
 }
