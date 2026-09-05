@@ -3,10 +3,12 @@ import { getAllBlogs } from "@/lib/blogs";
 import { getAllArchivePosts } from "@/lib/project-archive";
 import { getSiteUrl } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
-  const blogs = getAllBlogs();
-  const archivePosts = getAllArchivePosts();
+  const [blogs, archivePosts] = await Promise.all([
+    getAllBlogs(),
+    getAllArchivePosts(),
+  ]);
 
   return [
     {
