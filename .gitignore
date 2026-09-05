@@ -44,3 +44,8 @@ next-env.d.ts
 PLAN.md
 .pnpm-store
 package-lock.json
+
+# local content and subscriber data
+/BLOG_TOPICS.md
+/content/blogs/newsletter-system-with-resend.mdx
+/data/newsletter-subscribers.json
