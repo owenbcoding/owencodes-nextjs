@@ -13,8 +13,8 @@ export const metadata = {
   },
 };
 
-export default function ProjectArchivePage() {
-  const posts = getAllArchivePosts();
+export default async function ProjectArchivePage() {
+  const posts = await getAllArchivePosts();
 
   return (
     <div className="site-shell relative flex min-h-screen flex-col overflow-x-hidden">
