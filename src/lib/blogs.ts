@@ -1,9 +1,12 @@
 import path from "node:path";
+import type { PortableTextBlock } from "@portabletext/types";
 import {
   getAllContent,
   getContentBySlug,
   formatContentDate,
 } from "./content-loader";
+import { sanityClient } from "@/sanity/lib/client";
+import { blogBySlugQuery, blogsQuery } from "@/sanity/lib/queries";
 
 export type BlogMeta = {
   slug: string;
@@ -13,10 +16,12 @@ export type BlogMeta = {
   date: string;
   category: string;
   readingMinutes: number;
+  coverImageUrl?: string;
 };
 
 export type Blog = BlogMeta & {
   content: string;
+  body?: PortableTextBlock[];
 };
 
 const WORDS_PER_MINUTE = 200;
@@ -56,11 +61,29 @@ function mapBlogData(
   };
 }
 
-export function getAllBlogs(): Blog[] {
+function mapSanityBlog(blog: Blog): Blog {
+  return {
+    ...blog,
+    content: "",
+    readingMinutes: blog.readingMinutes || 1,
+  };
+}
+
+export async function getAllBlogs(): Promise<Blog[]> {
+  if (sanityClient) {
+    const blogs = await sanityClient.fetch<Blog[]>(blogsQuery);
+    return blogs.map(mapSanityBlog);
+  }
+
   return getAllContent(BLOGS_DIR, mapBlogData);
 }
 
-export function getBlogBySlug(slug: string): Blog | null {
+export async function getBlogBySlug(slug: string): Promise<Blog | null> {
+  if (sanityClient) {
+    const blog = await sanityClient.fetch<Blog | null>(blogBySlugQuery, { slug });
+    return blog ? mapSanityBlog(blog) : null;
+  }
+
   return getContentBySlug(slug, BLOGS_DIR, mapBlogData);
 }
 

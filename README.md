@@ -1,4 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) portfolio backed by [Sanity](https://www.sanity.io/).
+
+## Sanity CMS
+
+Set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` in `.env.local`, then run:
+
+```bash
+pnpm dev
+```
+
+The Studio is available at `/studio`. Create and publish `Projects`, `Blog posts`, and
+`Project archive posts` there. Projects can reference their matching archive post.
+
+The site uses the existing MDX files when Sanity is not configured, so local development
+and deployments remain usable while the dataset is being populated. Contact form messages
+continue to go directly to `CONTACT_MAIL_TO` through Resend; contact submissions are not
+stored in Sanity.
 
 ## Getting Started
 
