@@ -1,3 +1,6 @@
+import { sanityClient } from "@/sanity/lib/client";
+import { projectsQuery } from "@/sanity/lib/queries";
+
 export type ProjectStatus = "live" | "coming-soon" | "in-development";
 
 export type Project = {
@@ -28,7 +31,7 @@ export const PROJECT_FILTERS = [
 
 export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 
-export const projects: Project[] = [
+const localProjects: Project[] = [
   {
     slug: "shopify-store-redesign",
     title: "Shopify Store",
@@ -106,3 +109,12 @@ export const projects: Project[] = [
   //   status: "in-development",
   // },
 ];
+
+export async function getAllProjects(): Promise<Project[]> {
+  if (!sanityClient) return localProjects;
+
+  const projects = await sanityClient.fetch<Project[]>(projectsQuery);
+  return projects;
+}
+
+export const projects = localProjects;
