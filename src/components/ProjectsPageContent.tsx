@@ -7,9 +7,9 @@ import { MainNavigation } from "@/components/MainNavigation";
 import { ParticlesBackground } from "@/components/ParticlesBackground";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectsFilterNav } from "@/components/ProjectsFilterNav";
-import { projects, type ProjectFilter } from "@/lib/projects";
+import type { Project, ProjectFilter } from "@/lib/projects";
 
-export function ProjectsPageContent() {
+export function ProjectsPageContent({ projects }: { projects: Project[] }) {
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>("All");
 
   const filteredProjects = useMemo(() => {
@@ -19,7 +19,7 @@ export function ProjectsPageContent() {
         (stack) => stack.toLowerCase() === activeFilter.toLowerCase(),
       ),
     );
-  }, [activeFilter]);
+  }, [activeFilter, projects]);
 
   return (
     <div className="site-shell relative flex min-h-screen flex-col overflow-x-hidden">

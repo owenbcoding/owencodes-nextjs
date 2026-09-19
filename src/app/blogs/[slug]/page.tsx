@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
@@ -8,9 +9,11 @@ import {
   getAllBlogs,
   getBlogBySlug,
 } from "@/lib/blogs";
+import { RichTextContent } from "@/components/RichTextContent";
 
-export function generateStaticParams() {
-  return getAllBlogs().map((blog) => ({ slug: blog.slug }));
+export async function generateStaticParams() {
+  const blogs = await getAllBlogs();
+  return blogs.map((blog) => ({ slug: blog.slug }));
 }
 
 export async function generateMetadata({
@@ -19,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = getBlogBySlug(slug);
+  const blog = await getBlogBySlug(slug);
   if (!blog) return { title: "Blog not found | Full Stack Dev" };
   return {
     title: `${blog.title} | Full Stack Dev`,
@@ -33,7 +36,7 @@ export default async function BlogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = getBlogBySlug(slug);
+  const blog = await getBlogBySlug(slug);
 
   if (!blog) notFound();
 
@@ -70,8 +73,18 @@ export default async function BlogDetailPage({
             </div>
           </header>
 
+          {blog.coverImageUrl ? (
+            <Image
+              src={blog.coverImageUrl}
+              alt=""
+              width={1200}
+              height={675}
+              className="mb-8 aspect-video w-full rounded-lg object-cover"
+            />
+          ) : null}
+
           <div className="blog-prose prose prose-invert max-w-none [&_code]:rounded [&_code]:px-1 [&_code]:py-0.5 [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-semibold [&_li]:my-1 [&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:my-4 [&_p]:leading-relaxed [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-6">
-            <MDXRemote source={blog.content} />
+            {blog.body ? <RichTextContent value={blog.body} /> : <MDXRemote source={blog.content} />}
           </div>
         </article>
       </main>
