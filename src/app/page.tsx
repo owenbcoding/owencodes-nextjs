@@ -123,13 +123,12 @@ export default function Home() {
                   About me!
                 </h2>
                 <p
-                  className="theme-body text-lg leading-relaxed whitespace-pre-line md:text-xl"
-                  style={{ minHeight: 160, overflow: "hidden" }}
+                  className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mt-5 mb-5"
                 >
-                  I am a Full Stack Developer. With a passion for coding and problem-solving, I enjoy creating innovative applications that make a difference.{" "}
-                  <TypewriterText text="Known as owencodes online." />
+                  I am a Full Stack Developer. With a passion for coding and problem-solving.
+                  
                 </p>
-
+                <p className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mb-5">I build Full stack web apps for businesses & brands.</p>
                 <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
                   <div className="flex flex-col items-center">
                     <Link
