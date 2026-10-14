@@ -18,6 +18,9 @@ stored in Sanity.
 
 ## Getting Started
 
+Use Node.js 20, matching the version used in CI. With `nvm`, select it from the
+project root with `nvm use`.
+
 First, run the development server:
 
 ```bash
