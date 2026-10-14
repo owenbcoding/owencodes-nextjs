@@ -23,7 +23,7 @@ export const projectsQuery = defineQuery(/* groq */ `
 
 export const blogsQuery = defineQuery(/* groq */ `
   *[_type == "blogPost" && defined(slug.current) && published == true]
-    | order(publishedAt desc, _createdAt desc) {
+    | order(publishedAt asc, _createdAt asc) {
       "slug": slug.current,
       title,
       emoji,
