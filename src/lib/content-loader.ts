@@ -34,7 +34,7 @@ export function getAllContent<T extends ContentMeta>(
     .sort((a, b) => {
       const dateA = (a as unknown as { date: string }).date;
       const dateB = (b as unknown as { date: string }).date;
-      return dateA < dateB ? 1 : -1;
+      return dateA.localeCompare(dateB);
     });
 }
 
