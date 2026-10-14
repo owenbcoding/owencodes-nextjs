@@ -40,6 +40,24 @@ function calculateReadingMinutes(content: string): number {
 export const BLOGS_PER_PAGE = 3;
 
 const BLOGS_DIR = path.join(process.cwd(), "content", "blogs");
+const FEATURED_BLOG_ORDER = new Map(
+  ["my-journey", "dev-logs", "tooling"].map((slug, index) => [slug, index])
+);
+
+function sortBlogsForDisplay(blogs: Blog[]): Blog[] {
+  return blogs.sort((a, b) => {
+    const aOrder = FEATURED_BLOG_ORDER.get(a.slug);
+    const bOrder = FEATURED_BLOG_ORDER.get(b.slug);
+
+    if (aOrder !== undefined || bOrder !== undefined) {
+      if (aOrder === undefined) return 1;
+      if (bOrder === undefined) return -1;
+      return aOrder - bOrder;
+    }
+
+    return a.date.localeCompare(b.date);
+  });
+}
 
 function mapBlogData(
   data: Record<string, unknown>,
@@ -72,10 +90,10 @@ function mapSanityBlog(blog: Blog): Blog {
 export async function getAllBlogs(): Promise<Blog[]> {
   if (sanityClient) {
     const blogs = await sanityClient.fetch<Blog[]>(blogsQuery);
-    return blogs.map(mapSanityBlog);
+    return sortBlogsForDisplay(blogs.map(mapSanityBlog));
   }
 
-  return getAllContent(BLOGS_DIR, mapBlogData);
+  return sortBlogsForDisplay(getAllContent(BLOGS_DIR, mapBlogData));
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
