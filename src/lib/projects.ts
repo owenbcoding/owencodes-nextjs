@@ -114,7 +114,9 @@ export async function getAllProjects(): Promise<Project[]> {
   if (!sanityClient) return localProjects;
 
   const sanityProjects = await sanityClient.fetch<Project[]>(projectsQuery);
-  const projectsBySlug = new Map(localProjects.map((project) => [project.slug, project]));
+  const projectsBySlug = new Map(
+    localProjects.map((project) => [project.slug, project]),
+  );
 
   for (const project of sanityProjects) {
     projectsBySlug.set(project.slug, project);
