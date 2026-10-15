@@ -17,6 +17,7 @@ export type BlogMeta = {
   category: string;
   readingMinutes: number;
   coverImageUrl?: string;
+  coverImageAlt?: string;
 };
 
 export type Blog = BlogMeta & {
@@ -37,7 +38,7 @@ function calculateReadingMinutes(content: string): number {
   return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
 }
 
-export const BLOGS_PER_PAGE = 3;
+export const BLOGS_PER_PAGE = 4;
 
 const BLOGS_DIR = path.join(process.cwd(), "content", "blogs");
 const FEATURED_BLOG_ORDER = new Map(
@@ -55,7 +56,7 @@ function sortBlogsForDisplay(blogs: Blog[]): Blog[] {
       return aOrder - bOrder;
     }
 
-    return a.date.localeCompare(b.date);
+    return b.date.localeCompare(a.date);
   });
 }
 
@@ -88,18 +89,35 @@ function mapSanityBlog(blog: Blog): Blog {
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
-  if (sanityClient) {
-    const blogs = await sanityClient.fetch<Blog[]>(blogsQuery);
-    return sortBlogsForDisplay(blogs.map(mapSanityBlog));
+  const localBlogs = sortBlogsForDisplay(
+    getAllContent(BLOGS_DIR, mapBlogData),
+  );
+  if (!sanityClient) return localBlogs;
+
+  const sanityBlogs = await sanityClient.fetch<Blog[]>(blogsQuery);
+  const blogsBySlug = new Map(localBlogs.map((blog) => [blog.slug, blog]));
+  const newSanityBlogs = sanityBlogs
+    .filter((blog) => !blogsBySlug.has(blog.slug))
+    .map(mapSanityBlog)
+    .sort((a, b) => a.date.localeCompare(b.date) || a.slug.localeCompare(b.slug));
+
+  for (const blog of sanityBlogs) {
+    if (blogsBySlug.has(blog.slug)) {
+      blogsBySlug.set(blog.slug, mapSanityBlog(blog));
+    }
   }
 
-  return sortBlogsForDisplay(getAllContent(BLOGS_DIR, mapBlogData));
+  for (const blog of newSanityBlogs) {
+    blogsBySlug.set(blog.slug, blog);
+  }
+
+  return Array.from(blogsBySlug.values());
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   if (sanityClient) {
     const blog = await sanityClient.fetch<Blog | null>(blogBySlugQuery, { slug });
-    return blog ? mapSanityBlog(blog) : null;
+    if (blog) return mapSanityBlog(blog);
   }
 
   return getContentBySlug(slug, BLOGS_DIR, mapBlogData);
