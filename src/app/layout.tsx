@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
+import { WhatsNewPopup } from "@/components/WhatsNewPopup";
 import { getSiteUrl, HOME_DESCRIPTION, HOME_TITLE, SITE_NAME } from "@/lib/site";
 import { THEME_COOKIE } from "@/lib/theme";
 import "./globals.css";
@@ -59,6 +60,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full w-full min-w-0 flex flex-col overflow-x-hidden">
         {children}
+        <WhatsNewPopup />
         <Analytics />
       </body>
     </html>
