@@ -30,6 +30,8 @@ export async function generateMetadata({
   };
 }
 
+export const revalidate = 60;
+
 export default async function BlogDetailPage({
   params,
 }: {
@@ -76,7 +78,7 @@ export default async function BlogDetailPage({
           {blog.coverImageUrl ? (
             <Image
               src={blog.coverImageUrl}
-              alt=""
+              alt={blog.coverImageAlt ?? ""}
               width={1200}
               height={675}
               className="mb-8 aspect-video w-full rounded-lg object-cover"
