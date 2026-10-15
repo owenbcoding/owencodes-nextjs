@@ -64,7 +64,7 @@ export function MainNavigation() {
 
   return (
     <nav className="theme-nav fixed inset-x-0 top-0 z-50 border-b p-2 shadow-[inset_0_0_8px_rgba(255,255,255,0.1),0_0_15px_rgba(45,212,191,0.15)] backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
           className="theme-brand-link flex items-center gap-2.5 rounded-full py-2 pl-2 pr-3 text-lg font-bold transition-colors duration-200"
@@ -83,7 +83,7 @@ export function MainNavigation() {
           Owencodes
         </Link>
 
-        <ul className="hidden shrink-0 space-x-4 md:flex">
+        <ul className="hidden shrink-0 items-center gap-2 md:absolute md:left-1/2 md:flex md:-translate-x-1/2">
           {navItems.map((item) => {
             const active =
               item.href === "/projects"
@@ -98,7 +98,7 @@ export function MainNavigation() {
                   href={item.href}
                   onClick={closeMobile}
                   aria-current={active ? "page" : undefined}
-                  className={`theme-nav-link rounded-full px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 ${
+                  className={`theme-nav-link rounded-full px-3 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 ${
                     active ? "theme-nav-link-active" : ""
                   }`}
                 >
