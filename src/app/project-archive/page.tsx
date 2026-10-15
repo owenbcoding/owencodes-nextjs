@@ -47,14 +47,17 @@ export default async function ProjectArchivePage({
       <MainNavigation />
 
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-4xl flex-1 flex-col px-4 py-8">
-        <section aria-labelledby="archive-heading" className="mb-12">
+        <section
+          aria-labelledby="archive-heading"
+          className="mb-12 text-center"
+        >
           <h1
             id="archive-heading"
             className="theme-heading mb-3 mt-5 text-4xl font-bold"
           >
             Project Archive
           </h1>
-          <p className="theme-body max-w-prose text-lg leading-relaxed md:text-xl">
+          <p className="theme-body mx-auto max-w-prose text-lg leading-relaxed md:text-xl">
             Explore past archive posts about full-stack development, AI, and the
             projects I&apos;m building.
           </p>
@@ -74,7 +77,7 @@ export default async function ProjectArchivePage({
                     id={`archive-section-${section.title
                       .toLowerCase()
                       .replaceAll(" ", "-")}`}
-                    className="theme-heading mb-4 text-2xl font-bold"
+                    className="theme-heading mb-4 text-center text-2xl font-bold"
                   >
                     {section.title}
                   </h2>
