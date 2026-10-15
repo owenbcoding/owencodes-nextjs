@@ -11,12 +11,17 @@ pnpm dev
 The Studio is available at `/studio`. Create and publish `Projects`, `Blog posts`, and
 `Project archive posts` there. Projects can reference their matching archive post.
 
-The site uses the existing MDX files when Sanity is not configured, so local development
-and deployments remain usable while the dataset is being populated. Contact form messages
-continue to go directly to `CONTACT_MAIL_TO` through Resend; contact submissions are not
-stored in Sanity.
+The site combines Sanity documents with the existing local content by slug: a Sanity document
+with the same slug updates the local item, while new Sanity documents are added alongside it.
+Publish blog and archive documents in Studio to make them public; drafts stay hidden. Content
+pages refresh at least once per minute so new published content appears without a code deployment.
+Contact form messages continue to go directly to `CONTACT_MAIL_TO` through Resend; contact
+submissions are not stored in Sanity.
 
 ## Getting Started
+
+Use Node.js 20, matching the version used in CI. With `nvm`, select it from the
+project root with `nvm use`.
 
 First, run the development server:
 

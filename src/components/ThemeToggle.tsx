@@ -1,12 +1,10 @@
 "use client";
 
-type Theme = "dark" | "light";
-
-const STORAGE_KEY = "owencodes-theme";
+import { THEME_COOKIE, type Theme } from "@/lib/theme";
 
 function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
-  localStorage.setItem(STORAGE_KEY, theme);
+  document.cookie = `${THEME_COOKIE}=${theme}; Path=/; Max-Age=31536000; SameSite=Lax`;
 }
 
 export function ThemeToggle() {
