@@ -90,7 +90,14 @@ export async function getAllArchivePosts(): Promise<ArchivePost[]> {
   const postsBySlug = new Map(localPosts.map((post) => [post.slug, post]));
 
   for (const post of sanityPosts) {
-    postsBySlug.set(post.slug, mapSanityArchivePost(post));
+    const mappedPost = mapSanityArchivePost(post);
+    const localPost = postsBySlug.get(post.slug);
+    postsBySlug.set(
+      post.slug,
+      localPost
+        ? { ...localPost, ...mappedPost, archiveTag: mappedPost.archiveTag ?? localPost.archiveTag }
+        : mappedPost,
+    );
   }
 
   return sortArchivePosts(Array.from(postsBySlug.values()));
