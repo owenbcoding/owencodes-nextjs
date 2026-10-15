@@ -6,7 +6,7 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
     <Link
       href={`/blogs/${blog.slug}`}
       aria-label={`Read ${blog.title} — about ${blog.readingMinutes} min`}
-      className="group block cursor-pointer rounded-lg border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/60"
+      className="group block h-full cursor-pointer rounded-lg border border-white/10 bg-black/30 p-7 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/60 md:p-8"
     >
       <h2 className="theme-title-font text-2xl font-extrabold text-teal-300 drop-shadow-[0_0_8px_rgba(45,212,191,0.35)] transition-colors group-hover:text-teal-200 md:text-3xl">
         <span aria-hidden="true" className="mr-2">
@@ -15,7 +15,7 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
         {blog.title}
       </h2>
 
-      <p className="my-6 text-base font-bold leading-relaxed text-slate-200 md:text-lg">
+      <p className="my-7 text-base font-bold leading-relaxed text-slate-200 md:text-lg">
         {blog.description}
       </p>
 
