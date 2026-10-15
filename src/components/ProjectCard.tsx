@@ -68,7 +68,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const isExternalImageLink = Boolean(imageHref?.startsWith("http"));
 
   return (
-    <article className="theme-card cursor-default flex h-full min-h-0 flex-col rounded-lg border p-6 shadow-2xl backdrop-blur-sm transition-transform duration-300 hover:scale-105">
+    <article className="theme-card cursor-default flex h-full min-h-0 flex-col rounded-lg border p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900">
       <h3 className="theme-title-font theme-card-title mb-4 shrink-0 text-center text-md font-semibold">
         {project.title}
       </h3>
