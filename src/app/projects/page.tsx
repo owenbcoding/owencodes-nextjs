@@ -1,6 +1,8 @@
 import { ProjectsPageContent } from "@/components/ProjectsPageContent";
 import { getAllProjects } from "@/lib/projects";
 
+export const revalidate = 60;
+
 export const metadata = {
   title: "Owen | Projects",
   description: "Browse my projects and case studies.",
