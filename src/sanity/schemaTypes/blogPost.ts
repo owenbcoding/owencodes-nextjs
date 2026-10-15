@@ -20,7 +20,6 @@ export const blogPost = defineType({
     defineField({ name: "description", title: "Excerpt", type: "text", rows: 3, validation: (rule) => rule.required() }),
     defineField({ name: "category", title: "Category", type: "string", validation: (rule) => rule.required() }),
     defineField({ name: "publishedAt", title: "Published at", type: "datetime", validation: (rule) => rule.required() }),
-    defineField({ name: "published", title: "Published", type: "boolean", initialValue: false }),
     defineField({ name: "readingMinutes", title: "Reading time (minutes)", type: "number", validation: (rule) => rule.integer().positive() }),
     defineField({
       name: "coverImage",

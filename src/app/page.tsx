@@ -14,8 +14,7 @@ import {
   SITE_NAME,
 } from "@/lib/site";
 
-const PORTRAIT_ALT =
-  "Owen - Full Stack Dev";
+const PORTRAIT_ALT = "Owen - Full Stack Dev";
 
 export const metadata: Metadata = {
   title: {
@@ -99,7 +98,10 @@ export default function Home() {
       <MainNavigation />
 
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
-        <section aria-labelledby="intro-heading" className="relative z-10 text-center">
+        <section
+          aria-labelledby="intro-heading"
+          className="relative z-10 text-center"
+        >
           <h1
             id="intro-heading"
             className="theme-heading mb-4 mt-5 text-4xl font-bold"
@@ -119,16 +121,14 @@ export default function Home() {
 
             <div className="mt-10 flex w-full flex-col items-center md:ml-10 md:w-1/2 md:items-start">
               <div className="mx-auto flex w-full max-w-prose flex-col items-start justify-center gap-2 text-left">
-                <h2 className="theme-heading text-4xl font-bold">
-                  About me!
-                </h2>
-                <p
-                  className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mt-5 mb-5"
-                >
-                  I am a Full Stack Developer. With a passion for coding and problem-solving.
-                  
+                <h2 className="theme-heading text-4xl font-bold">About me!</h2>
+                <p className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mt-5 mb-5">
+                  I am a Full Stack Developer. With a passion for coding and
+                  problem-solving.
                 </p>
-                <p className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mb-5">I build Full stack web apps for businesses & brands.</p>
+                <p className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mb-5">
+                  I build Full stack web apps for businesses & brands.
+                </p>
                 <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
                   <div className="flex flex-col items-center">
                     <Link
@@ -149,9 +149,12 @@ export default function Home() {
                 </div>
 
                 <div className="mt-3 w-full">
-                  <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">Stay in the loop</h3>
+                  <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">
+                    Stay in the loop
+                  </h3>
                   <p className="theme-body mt-2 text-sm leading-relaxed md:text-base">
-                    Get occasional updates when I ship a new project or publish a new post.
+                    Get occasional updates when I ship a new project or publish
+                    a new post.
                   </p>
                   <NewsletterSignup />
                 </div>

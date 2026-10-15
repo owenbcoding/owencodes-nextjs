@@ -1,9 +1,5 @@
 import { defineQuery } from "next-sanity";
 
-const imageProjection = /* groq */ `{
-  "imageUrl": asset->url,
-  "alt": coalesce(alt, "")
-}`;
 
 export const projectsQuery = defineQuery(/* groq */ `
   *[_type == "project" && defined(slug.current)] | order(orderRank asc, _createdAt desc) {
@@ -22,7 +18,7 @@ export const projectsQuery = defineQuery(/* groq */ `
 `);
 
 export const blogsQuery = defineQuery(/* groq */ `
-  *[_type == "blogPost" && defined(slug.current) && published == true]
+  *[_type == "blogPost" && defined(slug.current)]
     | order(publishedAt desc, _createdAt desc) {
       "slug": slug.current,
       title,
@@ -31,13 +27,14 @@ export const blogsQuery = defineQuery(/* groq */ `
       "date": publishedAt,
       category,
       readingMinutes,
-      coverImage ${imageProjection},
+      "coverImageUrl": coverImage.asset->url,
+      "coverImageAlt": coalesce(coverImage.alt, ""),
       body
     }
 `);
 
 export const blogBySlugQuery = defineQuery(/* groq */ `
-  *[_type == "blogPost" && slug.current == $slug && published == true][0] {
+  *[_type == "blogPost" && slug.current == $slug][0] {
     "slug": slug.current,
     title,
     emoji,
@@ -45,13 +42,14 @@ export const blogBySlugQuery = defineQuery(/* groq */ `
     "date": publishedAt,
     category,
     readingMinutes,
-    coverImage ${imageProjection},
+    "coverImageUrl": coverImage.asset->url,
+    "coverImageAlt": coalesce(coverImage.alt, ""),
     body
   }
 `);
 
 export const archivePostsQuery = defineQuery(/* groq */ `
-  *[_type == "archivePost" && defined(slug.current) && published == true]
+  *[_type == "archivePost" && defined(slug.current)]
     | order(publishedAt desc, number desc, _createdAt desc) {
       "slug": slug.current,
       title,
@@ -59,18 +57,20 @@ export const archivePostsQuery = defineQuery(/* groq */ `
       preview,
       "date": publishedAt,
       number,
+      archiveTag,
       body
     }
 `);
 
 export const archivePostBySlugQuery = defineQuery(/* groq */ `
-  *[_type == "archivePost" && slug.current == $slug && published == true][0] {
+  *[_type == "archivePost" && slug.current == $slug][0] {
     "slug": slug.current,
     title,
     subject,
     preview,
     "date": publishedAt,
     number,
+    archiveTag,
     body
   }
 `);
