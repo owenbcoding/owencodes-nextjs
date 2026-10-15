@@ -19,8 +19,18 @@ export const archivePost = defineType({
     defineField({ name: "subject", title: "Subject", type: "string" }),
     defineField({ name: "preview", title: "Preview", type: "text", rows: 3, validation: (rule) => rule.required() }),
     defineField({ name: "publishedAt", title: "Published at", type: "datetime", validation: (rule) => rule.required() }),
-    defineField({ name: "published", title: "Published", type: "boolean", initialValue: false }),
     defineField({ name: "number", title: "Archive number", type: "number", validation: (rule) => rule.integer().positive() }),
+    defineField({
+      name: "archiveTag",
+      title: "Archive tag",
+      type: "string",
+      options: {
+        list: [
+          { title: "Planned Projects", value: "planned-projects" },
+          { title: "Old Projects", value: "old-projects" },
+        ],
+      },
+    }),
     ...archivePortableTextFields,
   ],
   preview: { select: { title: "title", subtitle: "subject" } },
