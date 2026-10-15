@@ -1,9 +1,15 @@
-import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { ParticlesBackground } from "@/components/ParticlesBackground";
-import { BlogHyperScroll } from "@/components/BlogHyperScroll";
-import { getAllBlogs } from "@/lib/blogs";
+import { BlogCard } from "@/components/BlogCard";
+import { BlogsPagination } from "@/components/BlogsPagination";
+import {
+  getAllBlogs,
+  getTotalPages,
+  paginateBlogs,
+} from "@/lib/blogs";
+
+export const revalidate = 60;
 
 export const metadata = {
   title: "Owen | Blogs",
@@ -39,8 +45,20 @@ const BLOG_WORDS = [
   "< />",
 ];
 
-export default async function BlogsPage() {
+type BlogsPageProps = {
+  searchParams: Promise<{ page?: string }>;
+};
+
+export default async function BlogsPage({ searchParams }: BlogsPageProps) {
+  const { page: pageParam } = await searchParams;
   const blogs = await getAllBlogs();
+  const totalPages = getTotalPages(blogs.length);
+  const requestedPage = Number(pageParam);
+  const currentPage =
+    Number.isInteger(requestedPage) && requestedPage > 0
+      ? Math.min(requestedPage, totalPages)
+      : 1;
+  const pageBlogs = paginateBlogs(blogs, currentPage);
 
   return (
     <div className="site-shell relative flex min-h-dvh w-full min-w-0 max-w-full flex-col overflow-x-hidden overflow-y-auto overscroll-none">
@@ -52,33 +70,35 @@ export default async function BlogsPage() {
 
       <MainNavigation />
 
-      <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-start gap-0 px-4 pb-8 pt-18 md:justify-center">
+      <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pb-8 pt-24 md:pt-28">
         <h1
           id="blogs-heading"
-          className="theme-heading mb-8 shrink-0 text-center text-2xl font-bold sm:mb-12 md:mb-16 md:text-3xl lg:mb-20"
+          className="theme-heading mb-8 text-center text-2xl font-bold sm:mb-12 md:text-3xl"
         >
           My Blogs
         </h1>
 
-        <div className="relative flex h-[clamp(24rem,52dvh,36rem)] w-full shrink-0 flex-col overflow-hidden rounded-2xl border border-teal-500/15 ring-1 ring-white/5 sm:h-[clamp(26rem,55dvh,34rem)]">
-          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl">
-            <Image
-              src="/images/Animated.png"
-              alt="Illustration: learning, code, and writing"
-              width={1200}
-              height={675}
-              priority
-              className="absolute left-0 top-0 h-[180%] w-full object-cover object-top"
-              sizes="(min-width: 1200px) 72rem, 100vw"
-            />
-          </div>
-          <div className="relative z-10 flex h-full min-h-0 flex-1 flex-col">
-            <BlogHyperScroll blogs={blogs} />
-          </div>
-        </div>
+        {pageBlogs.length > 0 ? (
+          <ul
+            aria-label="Blog posts"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+          >
+            {pageBlogs.map((blog) => (
+              <li key={blog.slug} className="h-full">
+                <BlogCard blog={blog} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="theme-muted-soft mt-16 text-center">
+            No blog posts yet. Check back soon!
+          </p>
+        )}
+
+        <BlogsPagination currentPage={currentPage} totalPages={totalPages} />
       </main>
 
-      <Footer />
+      <Footer compact />
     </div>
   );
 }

@@ -31,7 +31,6 @@ function GitHubAnchor({
       onClick={onClick}
       aria-label="Open GitHub"
     >
-      <span className="text-md font-semibold">Github</span>
       <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 .5C5.3.5 0 5.8 0 12.4c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.2-1.3-1.5-1.3-1.5-1.1-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.1 2 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.4.1-2.8 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.4.2 2.5.1 2.8.7.9 1.2 1.9 1.2 3.2 0 4.5-2.8 5.4-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.8 18.7.5 12 .5z" />
       </svg>
@@ -65,7 +64,7 @@ export function MainNavigation() {
 
   return (
     <nav className="theme-nav fixed inset-x-0 top-0 z-50 border-b p-2 shadow-[inset_0_0_8px_rgba(255,255,255,0.1),0_0_15px_rgba(45,212,191,0.15)] backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
           className="theme-brand-link flex items-center gap-2.5 rounded-full py-2 pl-2 pr-3 text-lg font-bold transition-colors duration-200"
@@ -84,7 +83,7 @@ export function MainNavigation() {
           Owencodes
         </Link>
 
-        <ul className="hidden shrink-0 space-x-4 md:flex">
+        <ul className="hidden shrink-0 items-center gap-2 md:absolute md:left-1/2 md:flex md:-translate-x-1/2">
           {navItems.map((item) => {
             const active =
               item.href === "/projects"
@@ -99,7 +98,7 @@ export function MainNavigation() {
                   href={item.href}
                   onClick={closeMobile}
                   aria-current={active ? "page" : undefined}
-                  className={`theme-nav-link rounded-full px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 ${
+                  className={`theme-nav-link rounded-full px-3 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 ${
                     active ? "theme-nav-link-active" : ""
                   }`}
                 >
@@ -113,7 +112,7 @@ export function MainNavigation() {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-0.5">
             <ThemeToggle />
-            <GitHubAnchor className="theme-github-link hidden items-center gap-2 rounded-full px-4 py-2 tracking-wide transition duration-200 md:inline-flex" />
+            <GitHubAnchor className="theme-github-link hidden items-center justify-center rounded-full p-2.5 transition duration-200 md:inline-flex" />
           </div>
           <button
             type="button"
@@ -185,7 +184,7 @@ export function MainNavigation() {
             </ul>
             <div className="mt-3 border-t border-[rgb(20_184_166/20%)] pt-3">
               <GitHubAnchor
-                className="theme-github-link inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-lg font-semibold tracking-wide transition duration-200"
+                className="theme-github-link inline-flex w-full items-center justify-center rounded-lg px-4 py-3 transition duration-200"
                 onClick={closeMobile}
               />
             </div>

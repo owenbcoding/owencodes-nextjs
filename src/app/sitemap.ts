@@ -3,6 +3,8 @@ import { getAllBlogs } from "@/lib/blogs";
 import { getAllArchivePosts } from "@/lib/project-archive";
 import { getSiteUrl } from "@/lib/site";
 
+export const revalidate = 60;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
   const [blogs, archivePosts] = await Promise.all([
