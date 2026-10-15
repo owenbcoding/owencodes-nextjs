@@ -11,10 +11,10 @@ pnpm dev
 The Studio is available at `/studio`. Create and publish `Projects`, `Blog posts`, and
 `Project archive posts` there. Projects can reference their matching archive post.
 
-The site uses the existing MDX files when Sanity is not configured, so local development
-and deployments remain usable while the dataset is being populated. Contact form messages
-continue to go directly to `CONTACT_MAIL_TO` through Resend; contact submissions are not
-stored in Sanity.
+The site uses the existing MDX files when Sanity is not configured. Example placeholder
+project IDs are treated as unconfigured, so local development remains usable until you
+replace them with a real Sanity project ID and dataset. Contact form messages continue to
+go directly to `CONTACT_MAIL_TO` through Resend; contact submissions are not stored in Sanity.
 
 ## Getting Started
 
