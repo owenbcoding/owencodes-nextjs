@@ -49,11 +49,11 @@ export default async function ProjectArchivePage({
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-4xl flex-1 flex-col px-4 py-8">
         <section
           aria-labelledby="archive-heading"
-          className="mb-12 text-center"
+          className="mb-6 flex flex-col items-center gap-6 text-center"
         >
           <h1
             id="archive-heading"
-            className="theme-heading mb-3 mt-5 text-4xl font-bold"
+            className="theme-heading mt-5 text-4xl font-bold"
           >
             Project Archive
           </h1>
