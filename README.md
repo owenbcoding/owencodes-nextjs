@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) portfolio backed by [Sanity](https://www
 
 ## Sanity CMS
 
-Set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` in `.env.local`, then run:
+Set `SANITY_PROJECT_ID` and `SANITY_DATASET` in `.env.local` (and in your hosting provider for production), then run:
 
 ```bash
 pnpm dev
