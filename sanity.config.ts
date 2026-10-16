@@ -6,8 +6,8 @@ import { schemaTypes } from "./src/sanity/schemaTypes";
 export default defineConfig({
   name: "owencodes-portfolio",
   title: "Owencodes Portfolio",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "missing-project-id",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
+  projectId: process.env.SANITY_PROJECT_ID ?? process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "",
+  dataset: process.env.SANITY_DATASET ?? process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   basePath: "/studio",
   plugins: [structureTool(), visionTool()],
   schema: { types: schemaTypes },
