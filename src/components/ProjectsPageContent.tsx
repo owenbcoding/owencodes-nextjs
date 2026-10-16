@@ -75,7 +75,7 @@ export function ProjectsPageContent({ projects }: { projects: Project[] }) {
               Some projects will be removed and updated over time. When they
               are, visit the{" "}
               <Link
-                href="/project-archive"
+                href="/archive"
                 className="theme-accent-text underline underline-offset-2 hover:opacity-80"
               >
                 archive
