@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: ArchivePostPageProps) {
     title: `${post.title} | Full Stack Dev`,
     description: post.preview,
     alternates: {
-      canonical: `/project-archive/${slug}`,
+      canonical: `/archive/${slug}`,
     },
   };
 }
@@ -58,7 +58,7 @@ export default async function ArchivePostPage({
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-3xl flex-1 flex-col px-4 py-8">
         <article>
           <Link
-            href="/project-archive"
+            href="/archive"
             className="theme-accent-text inline-flex items-center gap-1 text-sm font-semibold transition hover:gap-2"
           >
             ← Back to archive
@@ -96,7 +96,7 @@ export default async function ArchivePostPage({
               <h3 className="mb-2 font-bold">Share this post</h3>
               <div className="flex gap-3">
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out: ${post.title}`)}%0A${encodeURIComponent(`${getSiteUrl()}/project-archive/${post.slug}`)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out: ${post.title}`)}%0A${encodeURIComponent(`${getSiteUrl()}/archive/${post.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="theme-accent-text inline-flex items-center gap-1 text-sm font-semibold transition hover:opacity-70"

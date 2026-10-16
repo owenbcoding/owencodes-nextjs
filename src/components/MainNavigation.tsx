@@ -9,7 +9,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const navItems = [
   { name: "Projects", href: "/projects" },
   { name: "Blogs", href: "/blogs" },
-  { name: "Archive", href: "/project-archive" },
+  { name: "Archive", href: "/archive" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -45,7 +45,7 @@ export function MainNavigation() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const isProjectsSection = pathname === "/projects" || pathname.startsWith("/projects/");
-  const isArchiveSection = pathname === "/project-archive" || pathname.startsWith("/project-archive/");
+  const isArchiveSection = pathname === "/archive" || pathname.startsWith("/archive/");
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -88,7 +88,7 @@ export function MainNavigation() {
             const active =
               item.href === "/projects"
                 ? isProjectsSection
-                : item.href === "/project-archive"
+                : item.href === "/archive"
                   ? isArchiveSection
                   : isActive(item.href);
 
