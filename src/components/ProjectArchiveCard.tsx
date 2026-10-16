@@ -8,7 +8,7 @@ interface ProjectArchiveCardProps {
 export function ProjectArchiveCard({ post }: ProjectArchiveCardProps) {
   return (
     <Link
-      href={`/project-archive/${post.slug}`}
+      href={`/archive/${post.slug}`}
       className="group block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/60"
     >
       <article className="theme-card group-hover:-translate-y-0.5 relative flex flex-col gap-3 rounded-lg border px-4 py-5 transition-all duration-300 group-hover:border-teal-400/50 group-hover:ring-2 group-hover:ring-teal-400/50 group-hover:ring-offset-2 group-hover:ring-offset-gray-900 group-hover:shadow-lg group-hover:shadow-teal-500/10 sm:px-5 sm:py-6">
