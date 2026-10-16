@@ -137,12 +137,19 @@ export default function Home() {
                     </Link>
                   </div>
                   <div className="flex flex-col items-center">
-                    <button
-                      disabled
-                      className="rounded-full cursor-not-allowed bg-cyan-400/50 px-5 py-3 text-sm font-semibold text-slate-950 opacity-70 flex flex-col items-center gap-1"
-                    >
-                      <span>Packages</span>
-                    </button>
+                    <div className="group flex flex-col items-center">
+                      <button
+                        type="button"
+                        disabled
+                        aria-label="Packages — coming soon"
+                        className="rounded-full bg-cyan-400/15 px-5 py-3 text-sm font-semibold text-cyan-200 transition-colors group-hover:bg-cyan-300 group-hover:text-slate-950"
+                      >
+                        <span className="group-hover:hidden">Packages</span>
+                        <span className="hidden group-hover:inline">
+                          Coming soon
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
