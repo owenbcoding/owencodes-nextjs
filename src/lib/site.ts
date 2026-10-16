@@ -3,7 +3,7 @@ export const SITE_NAME = "Owen";
 export const HOME_TITLE = "Owen | Full Stack Dev";
 
 export const HOME_DESCRIPTION =
-  "Full Stack Developer building practical products, automations, and experiences for people and businesses.";
+  "I am a full-stack developer with a passion for coding and problem-solving. I build full-stack web apps for businesses and AI systems for everyday work.";
 
 export function getSiteUrl() {
   if (process.env.NEXT_PUBLIC_SITE_URL) {
