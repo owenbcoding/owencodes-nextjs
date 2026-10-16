@@ -122,12 +122,10 @@ export default function Home() {
             <div className="mt-10 flex w-full flex-col items-center md:ml-10 md:w-1/2 md:items-start">
               <div className="mx-auto flex w-full max-w-prose flex-col items-start justify-center gap-2 text-left">
                 <h2 className="theme-heading text-4xl font-bold">About me!</h2>
-                <p className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mt-5 mb-5">
-                  I am a Full Stack Developer. With a passion for coding and
-                  problem-solving.
-                </p>
-                <p className="theme-body text-lg leading-relaxedwhitespace-pre-l ine md:text-xl mb-5">
-                  I build Full stack web apps for businesses & brands.
+                <p className="theme-body mb-5 mt-5 text-lg leading-relaxed md:text-xl">
+                  I am a full-stack developer with a passion for coding and
+                  problem-solving. I build full-stack web apps for businesses
+                  and AI systems for everyday work.
                 </p>
                 <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
                   <div className="flex flex-col items-center">
