@@ -6,7 +6,7 @@ type ProjectArchivePaginationProps = {
 };
 
 function pageHref(page: number): string {
-  return page === 1 ? "/project-archive" : `/project-archive?page=${page}`;
+  return page === 1 ? "/archive" : `/archive?page=${page}`;
 }
 
 export function ProjectArchivePagination({
