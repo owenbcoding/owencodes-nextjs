@@ -129,7 +129,7 @@ export function WhatsNewPopup() {
               Explore projects
             </Link>
             <Link
-              href="/project-archive"
+              href="/archive"
               onClick={dismiss}
               className="inline-flex items-center justify-center rounded-full border border-[rgb(20_184_166/35%)] px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
             >
