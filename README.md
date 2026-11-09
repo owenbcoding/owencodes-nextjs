@@ -18,6 +18,20 @@ pages refresh at least once per minute so new published content appears without 
 Contact form messages continue to go directly to `CONTACT_MAIL_TO` through Resend; contact
 submissions are not stored in Sanity.
 
+## CV Download
+
+Upload your CV PDF to Google Drive and set its general access to **Anyone with the link**
+(Viewer). Copy the file ID from its share URL (the text between `/d/` and `/view`), then set
+`NEXT_PUBLIC_CV_DOWNLOAD_URL` in `.env.local` and your deployment environment to:
+
+```text
+https://drive.google.com/uc?export=download&id=FILE_ID
+```
+
+Replace `FILE_ID` with the ID from your file's share URL. The **CV** download link appears in
+the top navigation once this variable is set. Restart the local server or redeploy after
+changing the variable.
+
 ## Getting Started
 
 Use Node.js 20, matching the version used in CI. With `nvm`, select it from the
