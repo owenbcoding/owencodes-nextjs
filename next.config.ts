@@ -14,32 +14,39 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Keep the previous archive URL working.
+      {
+        source: "/archive",
+        destination: "/skills",
+        permanent: true,
+      },
+      {
+        source: "/archive/:slug",
+        destination: "/skills",
+        permanent: true,
+      },
       {
         source: "/project-archive",
-        destination: "/archive",
+        destination: "/skills",
         permanent: true,
       },
       {
         source: "/project-archive/:slug",
-        destination: "/archive/:slug",
+        destination: "/skills",
         permanent: true,
       },
-      // Legacy newsletter URLs redirect to the archive.
       {
         source: "/newsletters",
-        destination: "/archive",
+        destination: "/skills",
         permanent: true,
       },
-      // Legacy slug from before posts were renamed to Project-Archive-00N.
       {
         source: "/newsletters/newsletter-001",
-        destination: "/archive/Project-Archive-001",
+        destination: "/skills",
         permanent: true,
       },
       {
         source: "/newsletters/:slug",
-        destination: "/archive/:slug",
+        destination: "/skills",
         permanent: true,
       },
     ];
