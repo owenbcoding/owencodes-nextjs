@@ -101,21 +101,16 @@ export function WhatsNewPopup() {
           >
             <p>Here are a few recent updates to my portfolio:</p>
             <ul className="mt-3 list-inside list-disc space-y-2 text-left">
-              <li>Added pagination to the projects and project archive pages.</li>
-              <li>
-                Organized archive projects into categories and improved how
-                archive posts are sorted and displayed.
-              </li>
+              <li>Added pagination to the projects pages.</li>
               <li>
                 Improved blog sorting, pagination, and content queries.
               </li>
               <li>
-                Made project and archive content more consistent between Sanity
-                and locally managed content.
+                Made project content more consistent between Sanity and locally
+                managed content.
               </li>
               <li>
-                Polished project cards, archive cards, blog layouts, and the
-                portfolio footer.
+                Polished project cards, blog layouts, and the portfolio footer.
               </li>
             </ul>
           </div>
@@ -129,11 +124,11 @@ export function WhatsNewPopup() {
               Explore projects
             </Link>
             <Link
-              href="/archive"
+              href="/skills"
               onClick={dismiss}
               className="inline-flex items-center justify-center rounded-full border border-[rgb(20_184_166/35%)] px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
             >
-              Browse archive
+              View skills
             </Link>
           </div>
         </section>
