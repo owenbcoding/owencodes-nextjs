@@ -108,7 +108,8 @@ export default function Home() {
           >
             Hi I&apos;m Owen,
             <span className="block">
-              Software <RotatingWord />
+              Software{"\u2009"}
+              <RotatingWord />
             </span>
           </h1>
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
