@@ -8,8 +8,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
   { name: "Projects", href: "/projects" },
+  { name: "Skills", href: "/skills" },
   { name: "Blogs", href: "/blogs" },
-  { name: "Archive", href: "/archive" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -80,8 +80,6 @@ export function MainNavigation() {
   const mobileMenuId = useId();
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
-  const isProjectsSection = pathname === "/projects" || pathname.startsWith("/projects/");
-  const isArchiveSection = pathname === "/archive" || pathname.startsWith("/archive/");
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -121,12 +119,7 @@ export function MainNavigation() {
 
         <ul className="hidden shrink-0 items-center gap-2 md:absolute md:left-1/2 md:flex md:-translate-x-1/2">
           {navItems.map((item) => {
-            const active =
-              item.href === "/projects"
-                ? isProjectsSection
-                : item.href === "/archive"
-                  ? isArchiveSection
-                  : isActive(item.href);
+            const active = isActive(item.href);
 
             return (
               <li key={item.name}>
