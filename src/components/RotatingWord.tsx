@@ -17,21 +17,16 @@ export function RotatingWord() {
 
   return (
     <span className="hero-rotating-word" aria-hidden="true">
-      {WORDS.map((word, index) => (
-        <span
-          key={word}
-          className={index === activeIndex ? "hero-rotating-word-active" : ""}
-        >
-          {Array.from(word, (letter, letterIndex) => (
-            <span
-              key={`${word}-${letterIndex}`}
-              style={{ animationDelay: `${letterIndex * 55}ms` }}
-            >
-              {letter}
-            </span>
-          ))}
-        </span>
-      ))}
+      <span key={WORDS[activeIndex]}>
+        {Array.from(WORDS[activeIndex], (letter, letterIndex) => (
+          <span
+            key={`${WORDS[activeIndex]}-${letterIndex}`}
+            style={{ animationDelay: `${letterIndex * 55}ms` }}
+          >
+            {letter}
+          </span>
+        ))}
+      </span>
     </span>
   );
 }
