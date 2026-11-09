@@ -124,9 +124,15 @@ export default function Home() {
                 <h2 className="theme-heading text-4xl font-bold">About me!</h2>
                 <p className="theme-body mb-5 mt-5 text-lg leading-relaxed md:text-xl">
                   I am a full-stack developer with a passion for coding and
-                  problem-solving. I build full-stack web apps for businesses
-                  and AI systems for everyday work.
+                  problem-solving.
                 </p>
+                <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
+                  <li>💻 Self-Taught Programmer</li>
+                  <li>☘️ Irish Content Creator</li>
+                  <li>💻 Building things that matter</li>
+                  <li>🤖 AI &amp; automation</li>
+                  <li>👨‍💻 Full Stack Dev</li>
+                </ul>
                 <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
                   <div className="flex flex-col items-center">
                     <Link
@@ -141,10 +147,10 @@ export default function Home() {
                       <button
                         type="button"
                         disabled
-                        aria-label="Packages — coming soon"
+                        aria-label="Services — coming soon"
                         className="rounded-full bg-cyan-400/15 px-5 py-3 text-sm font-semibold text-cyan-200 transition-colors group-hover:bg-cyan-300 group-hover:text-slate-950"
                       >
-                        <span className="group-hover:hidden">Packages</span>
+                        <span className="group-hover:hidden">Services</span>
                         <span className="hidden group-hover:inline">
                           Coming soon
                         </span>
