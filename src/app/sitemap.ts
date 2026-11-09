@@ -1,16 +1,12 @@
 import type { MetadataRoute } from "next";
 import { getAllBlogs } from "@/lib/blogs";
-import { getAllArchivePosts } from "@/lib/project-archive";
 import { getSiteUrl } from "@/lib/site";
 
 export const revalidate = 60;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
-  const [blogs, archivePosts] = await Promise.all([
-    getAllBlogs(),
-    getAllArchivePosts(),
-  ]);
+  const blogs = await getAllBlogs();
 
   return [
     {
@@ -32,9 +28,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/archive`,
+      url: `${siteUrl}/skills`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
@@ -46,12 +42,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogs.map((blog) => ({
       url: `${siteUrl}/blogs/${blog.slug}`,
       lastModified: blog.date ? new Date(blog.date) : new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
-    ...archivePosts.map((post) => ({
-      url: `${siteUrl}/archive/${post.slug}`,
-      lastModified: post.date ? new Date(post.date) : new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
