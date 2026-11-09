@@ -5,8 +5,7 @@ import Script from "next/script";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
-import { SkillsSection } from "@/components/SkillsSection";
-import { TypewriterText } from "@/components/TypewriterText";
+import { RotatingWord } from "@/components/RotatingWord";
 import {
   getSiteUrl,
   HOME_DESCRIPTION,
@@ -105,8 +104,13 @@ export default function Home() {
           <h1
             id="intro-heading"
             className="theme-heading mb-4 mt-5 text-4xl font-bold"
+            aria-label="Hi I'm Owen, Software Engineer, Developer, and Innovator"
           >
             Hi I&apos;m Owen,
+            <span className="block">
+              Software{"\u2009"}
+              <RotatingWord />
+            </span>
           </h1>
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
             <Image
@@ -124,9 +128,15 @@ export default function Home() {
                 <h2 className="theme-heading text-4xl font-bold">About me!</h2>
                 <p className="theme-body mb-5 mt-5 text-lg leading-relaxed md:text-xl">
                   I am a full-stack developer with a passion for coding and
-                  problem-solving. I build full-stack web apps for businesses
-                  and AI systems for everyday work.
+                  problem-solving.
                 </p>
+                <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
+                  <li>💻 Self-Taught Programmer</li>
+                  <li>☘️ Irish Content Creator</li>
+                  <li>💻 Building things that matter</li>
+                  <li>🤖 AI &amp; automation</li>
+                  <li>👨‍💻 Full Stack Dev</li>
+                </ul>
                 <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
                   <div className="flex flex-col items-center">
                     <Link
@@ -141,10 +151,10 @@ export default function Home() {
                       <button
                         type="button"
                         disabled
-                        aria-label="Packages — coming soon"
+                        aria-label="Services — coming soon"
                         className="rounded-full bg-cyan-400/15 px-5 py-3 text-sm font-semibold text-cyan-200 transition-colors group-hover:bg-cyan-300 group-hover:text-slate-950"
                       >
-                        <span className="group-hover:hidden">Packages</span>
+                        <span className="group-hover:hidden">Services</span>
                         <span className="hidden group-hover:inline">
                           Coming soon
                         </span>
@@ -168,7 +178,6 @@ export default function Home() {
           </div>
         </section>
 
-        <SkillsSection />
       </main>
 
       <Footer />
