@@ -5,7 +5,7 @@ import Script from "next/script";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
-import { TypewriterText } from "@/components/TypewriterText";
+import { RotatingWord } from "@/components/RotatingWord";
 import {
   getSiteUrl,
   HOME_DESCRIPTION,
@@ -104,8 +104,12 @@ export default function Home() {
           <h1
             id="intro-heading"
             className="theme-heading mb-4 mt-5 text-4xl font-bold"
+            aria-label="Hi I'm Owen, Software Engineer, Developer, and Innovator"
           >
             Hi I&apos;m Owen,
+            <span className="block">
+              Software <RotatingWord />
+            </span>
           </h1>
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
             <Image
