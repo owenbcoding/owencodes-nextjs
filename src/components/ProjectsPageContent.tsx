@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
@@ -14,7 +13,6 @@ const PROJECTS_PER_PAGE = 8;
 export function ProjectsPageContent({ projects }: { projects: Project[] }) {
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showArchiveInfo, setShowArchiveInfo] = useState(false);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") return projects;
@@ -58,31 +56,6 @@ export function ProjectsPageContent({ projects }: { projects: Project[] }) {
             <br />
             Select a category to filter.
           </p>
-          <button
-            type="button"
-            aria-expanded={showArchiveInfo}
-            aria-controls="archive-info"
-            onClick={() => setShowArchiveInfo((visible) => !visible)}
-            className="theme-nav-link mt-3 cursor-pointer rounded-full px-5 py-2 text-sm font-semibold tracking-wide transition-colors duration-200"
-          >
-            {showArchiveInfo ? "Read less" : "Read me"}
-          </button>
-          {showArchiveInfo && (
-            <p
-              id="archive-info"
-              className="theme-body mx-auto mt-3 max-w-prose text-sm leading-relaxed md:text-base"
-            >
-              Some projects will be removed and updated over time. When they
-              are, visit the{" "}
-              <Link
-                href="/archive"
-                className="theme-accent-text underline underline-offset-2 hover:opacity-80"
-              >
-                archive
-              </Link>{" "}
-              to read about older projects and view their live links.
-            </p>
-          )}
           <ProjectsFilterNav active={activeFilter} onChange={handleFilterChange} />
         </section>
 
