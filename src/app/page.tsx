@@ -5,7 +5,6 @@ import Script from "next/script";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
-import { SkillsSection } from "@/components/SkillsSection";
 import { TypewriterText } from "@/components/TypewriterText";
 import {
   getSiteUrl,
@@ -174,7 +173,6 @@ export default function Home() {
           </div>
         </section>
 
-        <SkillsSection />
       </main>
 
       <Footer />
