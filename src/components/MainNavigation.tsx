@@ -8,12 +8,13 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
   { name: "Projects", href: "/projects" },
+  { name: "Skills", href: "/skills" },
   { name: "Blogs", href: "/blogs" },
-  { name: "Archive", href: "/archive" },
   { name: "Contact", href: "/contact" },
 ];
 
 const GITHUB_HREF = "https://github.com/owenbcoding";
+const CV_DOWNLOAD_URL = process.env.NEXT_PUBLIC_CV_DOWNLOAD_URL;
 
 function GitHubAnchor({
   className,
@@ -38,14 +39,47 @@ function GitHubAnchor({
   );
 }
 
+function CVDownloadAnchor({
+  className,
+  onClick,
+}: {
+  className: string;
+  onClick?: () => void;
+}) {
+  if (!CV_DOWNLOAD_URL) return null;
+
+  return (
+    <a
+      href={CV_DOWNLOAD_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      onClick={onClick}
+      aria-label="Download CV"
+    >
+      <svg
+        className="h-5 w-5 shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
+      </svg>
+      <span>CV</span>
+    </a>
+  );
+}
+
 export function MainNavigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileMenuId = useId();
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
-  const isProjectsSection = pathname === "/projects" || pathname.startsWith("/projects/");
-  const isArchiveSection = pathname === "/archive" || pathname.startsWith("/archive/");
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -85,12 +119,7 @@ export function MainNavigation() {
 
         <ul className="hidden shrink-0 items-center gap-2 md:absolute md:left-1/2 md:flex md:-translate-x-1/2">
           {navItems.map((item) => {
-            const active =
-              item.href === "/projects"
-                ? isProjectsSection
-                : item.href === "/archive"
-                  ? isArchiveSection
-                  : isActive(item.href);
+            const active = isActive(item.href);
 
             return (
               <li key={item.name}>
@@ -113,6 +142,7 @@ export function MainNavigation() {
           <div className="flex items-center gap-0.5">
             <ThemeToggle />
             <GitHubAnchor className="theme-github-link hidden items-center justify-center rounded-full p-2.5 transition duration-200 md:inline-flex" />
+            <CVDownloadAnchor className="theme-github-link hidden items-center justify-center gap-1.5 rounded-full px-3 py-2 font-semibold transition duration-200 md:inline-flex" />
           </div>
           <button
             type="button"
@@ -185,6 +215,10 @@ export function MainNavigation() {
             <div className="mt-3 border-t border-[rgb(20_184_166/20%)] pt-3">
               <GitHubAnchor
                 className="theme-github-link inline-flex w-full items-center justify-center rounded-lg px-4 py-3 transition duration-200"
+                onClick={closeMobile}
+              />
+              <CVDownloadAnchor
+                className="theme-github-link mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-semibold transition duration-200"
                 onClick={closeMobile}
               />
             </div>
