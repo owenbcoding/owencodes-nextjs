@@ -14,6 +14,7 @@ const navItems = [
 ];
 
 const GITHUB_HREF = "https://github.com/owenbcoding";
+const CV_DOWNLOAD_URL = process.env.NEXT_PUBLIC_CV_DOWNLOAD_URL;
 
 function GitHubAnchor({
   className,
@@ -34,6 +35,41 @@ function GitHubAnchor({
       <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 .5C5.3.5 0 5.8 0 12.4c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.2-1.3-1.5-1.3-1.5-1.1-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.1 2 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.4.1-2.8 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.4.2 2.5.1 2.8.7.9 1.2 1.9 1.2 3.2 0 4.5-2.8 5.4-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.8 18.7.5 12 .5z" />
       </svg>
+    </a>
+  );
+}
+
+function CVDownloadAnchor({
+  className,
+  onClick,
+}: {
+  className: string;
+  onClick?: () => void;
+}) {
+  if (!CV_DOWNLOAD_URL) return null;
+
+  return (
+    <a
+      href={CV_DOWNLOAD_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      onClick={onClick}
+      aria-label="Download CV"
+    >
+      <svg
+        className="h-5 w-5 shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
+      </svg>
+      <span>CV</span>
     </a>
   );
 }
@@ -113,6 +149,7 @@ export function MainNavigation() {
           <div className="flex items-center gap-0.5">
             <ThemeToggle />
             <GitHubAnchor className="theme-github-link hidden items-center justify-center rounded-full p-2.5 transition duration-200 md:inline-flex" />
+            <CVDownloadAnchor className="theme-github-link hidden items-center justify-center gap-1.5 rounded-full px-3 py-2 font-semibold transition duration-200 md:inline-flex" />
           </div>
           <button
             type="button"
@@ -185,6 +222,10 @@ export function MainNavigation() {
             <div className="mt-3 border-t border-[rgb(20_184_166/20%)] pt-3">
               <GitHubAnchor
                 className="theme-github-link inline-flex w-full items-center justify-center rounded-lg px-4 py-3 transition duration-200"
+                onClick={closeMobile}
+              />
+              <CVDownloadAnchor
+                className="theme-github-link mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-semibold transition duration-200"
                 onClick={closeMobile}
               />
             </div>
