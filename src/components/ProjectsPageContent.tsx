@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
-import { ParticlesBackground } from "@/components/ParticlesBackground";
 import { ProjectCard } from "@/components/ProjectCard";
 import type { Project } from "@/lib/projects";
 
@@ -87,8 +86,6 @@ export function ProjectsPageContent({ projects }: { projects: Project[] }) {
       <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
       <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
       <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
-
-      <ParticlesBackground />
 
       <MainNavigation />
 
