@@ -132,7 +132,6 @@ export default function Home() {
                 </p>
                 <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
                   <li>💻 Self-Taught Programmer</li>
-                  <li>☘️ Irish Content Creator</li>
                   <li>💻 Building things that matter</li>
                   <li>🤖 AI &amp; automation</li>
                   <li>👨‍💻 Full Stack Dev</li>
