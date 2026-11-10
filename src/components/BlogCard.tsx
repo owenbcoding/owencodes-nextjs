@@ -14,7 +14,20 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-        ) : null}
+        ) : (
+          <div
+            aria-hidden="true"
+            className="blog-card-placeholder flex h-full flex-col justify-between p-5"
+          >
+            <span className="theme-accent-text text-[0.65rem] font-semibold tracking-[0.2em] uppercase">
+              {blog.category}
+            </span>
+            <span className="blog-card-placeholder-mark self-end">✳</span>
+            <span className="theme-muted text-[0.6rem] tracking-[0.18em] uppercase">
+              Field notes / {blog.date.slice(0, 4)}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col">
