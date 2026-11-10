@@ -19,7 +19,7 @@ export default function SkillsPage() {
       <MainNavigation />
 
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-4xl flex-1 flex-col px-4 py-8">
-        <h1 className="theme-heading mt-5 text-center text-4xl font-bold">
+        <h1 className="page-fade-in theme-heading mt-5 text-center text-4xl font-bold">
           Skills
         </h1>
       </main>
