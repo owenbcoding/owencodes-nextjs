@@ -377,6 +377,22 @@ body {
   background: rgb(255 255 255 / 3%);
 }
 
+.skills-hero-panel {
+  background: rgb(2 6 23 / 25%);
+}
+
+.skills-page-accent {
+  color: #5eead4;
+}
+
+.skills-focus-tag {
+  color: rgb(204 251 241 / 80%);
+}
+
+.skills-filter-active {
+  color: #ccfbf1;
+}
+
 .project-card-enter,
 .page-fade-in {
   animation: project-card-enter 650ms cubic-bezier(0.2, 0.75, 0.35, 1) both;
@@ -423,6 +439,16 @@ body {
 
 :root[data-theme="light"] .blog-card-artwork {
   background: rgb(15 23 42 / 4%);
+}
+
+:root[data-theme="light"] .skills-hero-panel {
+  background: rgb(255 255 255 / 45%);
+}
+
+:root[data-theme="light"] .skills-page-accent,
+:root[data-theme="light"] .skills-focus-tag,
+:root[data-theme="light"] .skills-filter-active {
+  color: #0f766e;
 }
 
 :root[data-theme="light"] .theme-card-strong {
