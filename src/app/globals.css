@@ -105,6 +105,54 @@ body {
   }
 }
 
+.birthday-confetti-layer {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.birthday-confetti-piece,
+.birthday-confetti-letter {
+  position: absolute;
+  top: -8vh;
+  animation: birthday-confetti-fall var(--fall-duration) ease-in
+    var(--fall-delay) 1 both;
+  will-change: transform, opacity;
+}
+
+.birthday-confetti-piece {
+  width: 10px;
+  height: 18px;
+  border-radius: 2px;
+}
+
+.birthday-confetti-letter {
+  margin-left: -0.5em;
+  font-family: var(--font-xeno-byte);
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 5px rgb(0 0 0 / 65%);
+}
+
+@keyframes birthday-confetti-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -4vh, 0)
+      rotate(calc(var(--fall-tilt) * -1));
+  }
+  8% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--fall-drift), 115vh, 0)
+      rotate(var(--fall-tilt));
+  }
+}
+
 .theme-title-font {
   font-family: var(--font-xeno-byte);
   letter-spacing: 0.035em;
@@ -575,6 +623,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .birthday-confetti-layer {
+    display: none;
+  }
+
   .animate-scroll {
     animation: none;
   }
