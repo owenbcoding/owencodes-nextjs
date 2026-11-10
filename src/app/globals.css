@@ -377,6 +377,23 @@ body {
   background: rgb(255 255 255 / 3%);
 }
 
+.blog-card-placeholder {
+  background:
+    radial-gradient(circle at 75% 40%, rgb(45 212 191 / 18%), transparent 34%),
+    linear-gradient(135deg, rgb(15 23 42 / 95%), rgb(12 12 15 / 95%));
+}
+
+.blog-card-placeholder-mark {
+  color: rgb(94 234 212 / 75%);
+  font-size: clamp(4rem, 11vw, 7rem);
+  line-height: 0.8;
+  transition: transform 500ms ease;
+}
+
+.group:hover .blog-card-placeholder-mark {
+  transform: rotate(35deg) scale(1.05);
+}
+
 @keyframes blog-card-border-shift {
   to {
     background-position: 100% 50%;
@@ -394,6 +411,16 @@ body {
 
 :root[data-theme="light"] .blog-card-artwork {
   background: rgb(15 23 42 / 4%);
+}
+
+:root[data-theme="light"] .blog-card-placeholder {
+  background:
+    radial-gradient(circle at 75% 40%, rgb(13 148 136 / 15%), transparent 34%),
+    linear-gradient(135deg, #e7e2d8, #f6f1e8);
+}
+
+:root[data-theme="light"] .blog-card-placeholder-mark {
+  color: rgb(13 148 136 / 70%);
 }
 
 :root[data-theme="light"] .theme-card-strong {
