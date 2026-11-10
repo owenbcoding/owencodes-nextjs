@@ -45,6 +45,9 @@ PLAN.md
 .pnpm-store
 package-lock.json
 
+# Local environment cleanup notes
+/env-fix-up.md
+
 # local content and subscriber data
 /BLOG_TOPICS.md
 /content/blogs/newsletter-system-with-resend.mdx
