@@ -7,7 +7,6 @@ const skills = [
   { name: "JavaScript", icon: "logos:javascript" },
   { name: "Laravel", icon: "logos:laravel" },
   { name: "Vue", icon: "logos:vue" },
-  { name: "React", icon: "logos:react" },
   { name: "Node.js", icon: "logos:nodejs-icon" },
   { name: "PHP", icon: "logos:php" },
   { name: "PostgreSQL", icon: "logos:postgresql" },
