@@ -48,7 +48,7 @@ function ProjectMedia({ project }: { project: Project }) {
         src={project.image}
         alt={project.title}
         fill
-        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+        sizes="(min-width: 768px) 50vw, 100vw"
         className="object-cover"
       />
     );
@@ -68,40 +68,48 @@ export function ProjectCard({ project }: { project: Project }) {
   const isExternalImageLink = Boolean(imageHref?.startsWith("http"));
 
   return (
-    <article className="theme-card cursor-default flex h-full min-h-0 flex-col rounded-lg border p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:border-teal-400/50 hover:ring-2 hover:ring-teal-400/50 hover:ring-offset-2 hover:ring-offset-gray-900">
-      <h3 className="theme-title-font theme-card-title mb-4 shrink-0 text-center text-md font-semibold">
-        {project.title}
-      </h3>
+    <article className="blog-card group relative h-full rounded-xl p-[1.5px]">
+      <span aria-hidden="true" className="blog-card-rgb-border" />
+      <div className="blog-card-content relative flex h-full flex-col rounded-[calc(0.75rem-1.5px)] p-5 sm:p-6">
+        <div className="blog-card-artwork relative mb-5 aspect-video shrink-0 overflow-hidden rounded-lg">
+          {hasMedia ? (
+            <ProjectMedia project={project} />
+          ) : (
+            <ProjectCardPlaceholder project={project} />
+          )}
+          {hasMedia && hasImageLink
+            ? isExternalImageLink
+              ? (
+                  <a
+                    href={imageHref!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 z-10 cursor-pointer"
+                    aria-label={`Open ${project.title} preview`}
+                  >
+                    <span className="sr-only">Open {project.title}</span>
+                  </a>
+                )
+              : (
+                  <Link
+                    href={imageHref!}
+                    className="absolute inset-0 z-10 cursor-pointer"
+                    aria-label={`Open ${project.title} preview`}
+                  >
+                    <span className="sr-only">Open {project.title}</span>
+                  </Link>
+                )
+            : null}
+        </div>
 
-      <div className="relative mt-5 aspect-video w-full shrink-0 overflow-hidden rounded-lg border border-teal-500/20 bg-teal-900/40">
-        {hasMedia ? <ProjectMedia project={project} /> : <ProjectCardPlaceholder project={project} />}
-        {hasMedia && hasImageLink
-          ? isExternalImageLink
-            ? (
-                <a
-                  href={imageHref!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-10 cursor-pointer"
-                  aria-label={`Open ${project.title} preview`}
-                >
-                  <span className="sr-only">Open {project.title}</span>
-                </a>
-              )
-            : (
-                <Link
-                  href={imageHref!}
-                  className="absolute inset-0 z-10 cursor-pointer"
-                  aria-label={`Open ${project.title} preview`}
-                >
-                  <span className="sr-only">Open {project.title}</span>
-                </Link>
-              )
-          : null}
-      </div>
-
-      <div className="mb-5 mt-6 w-full shrink-0">
-        <ul className="flex flex-wrap content-start items-start justify-start gap-x-2 gap-y-1.5">
+        <h2 className="theme-card-title mb-3 line-clamp-2 text-xl leading-snug font-semibold sm:text-2xl">
+          {project.title}
+        </h2>
+        <ProjectCardDescription
+          text={project.description}
+          idPrefix={project.slug}
+        />
+        <ul className="mt-auto flex flex-wrap gap-2 pt-4">
           {project.stacks.map((stack) => (
             <li
               key={`${project.slug}-${stack}`}
@@ -111,10 +119,6 @@ export function ProjectCard({ project }: { project: Project }) {
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="mt-auto">
-        <ProjectCardDescription text={project.description} idPrefix={project.slug} />
       </div>
     </article>
   );
