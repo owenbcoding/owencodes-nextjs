@@ -45,17 +45,16 @@ export default async function BlogsPage({
       <MainNavigation />
 
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-6xl flex-1 flex-col px-4 py-8 sm:px-6">
-        <header className="blog-hero relative mb-12 flex min-h-56 items-center justify-center overflow-hidden rounded-xl px-5 py-14 text-center sm:mb-16 sm:min-h-64">
-          <span aria-hidden="true" className="blog-hero-accent" />
+        <header className="relative mb-12 flex min-h-56 items-center justify-center px-5 py-14 text-center sm:mb-16 sm:min-h-64">
           <div className="relative z-10">
             <p className="theme-accent-text mb-3 text-xs font-semibold tracking-[0.3em] uppercase">
               Notes from the build
             </p>
             <h1 className="theme-heading text-4xl font-bold tracking-tight sm:text-6xl">
-              Owen&apos;s blogs
+              Blogs
             </h1>
             <p className="theme-muted-soft mx-auto mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
-              Projects, lessons, and ideas from my corner of the web.
+              Projects and ideas from my corner of the web.
             </p>
           </div>
         </header>
