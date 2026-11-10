@@ -45,7 +45,7 @@ export default async function BlogsPage({
       <MainNavigation />
 
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-6xl flex-1 flex-col px-4 py-8 sm:px-6">
-        <header className="relative mb-12 flex min-h-56 items-center justify-center px-5 py-14 text-center sm:mb-16 sm:min-h-64">
+        <header className="page-fade-in relative mb-12 flex min-h-56 items-center justify-center px-5 py-14 text-center sm:mb-16 sm:min-h-64">
           <div className="relative z-10">
             <h1 className="theme-heading text-4xl font-bold tracking-tight sm:text-6xl">
               {"{"}Blogs{"}"}
@@ -57,7 +57,10 @@ export default async function BlogsPage({
         </header>
 
         {featuredArticles.length > 0 ? (
-          <section aria-labelledby="featured-heading" className="mb-16">
+          <section
+            aria-labelledby="featured-heading"
+            className="page-fade-in page-fade-in-delay-1 mb-16"
+          >
             <div className="mb-6 flex items-end justify-between gap-4">
               <div>
                 <p className="theme-accent-text mb-1 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -79,7 +82,10 @@ export default async function BlogsPage({
           </section>
         ) : null}
 
-        <section aria-labelledby="all-articles-heading" className="mb-10">
+        <section
+          aria-labelledby="all-articles-heading"
+          className="page-fade-in page-fade-in-delay-2 mb-10"
+        >
           <div className="mb-6 flex items-end justify-between gap-4">
             <div>
               <p className="theme-accent-text mb-1 text-xs font-semibold tracking-[0.2em] uppercase">
