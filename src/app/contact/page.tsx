@@ -23,7 +23,7 @@ export default function ContactPage() {
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-3xl flex-1 flex-col px-4 py-8">
         <section
           aria-labelledby="contact-heading"
-          className="theme-card mx-auto mt-8 w-full max-w-xl rounded-xl border p-8 shadow-2xl backdrop-blur-md sm:p-10"
+          className="page-fade-in theme-card mx-auto mt-8 w-full max-w-xl rounded-xl border p-8 shadow-2xl backdrop-blur-md sm:p-10"
         >
           <header className="text-center">
             <h2 className="theme-heading mt-2 text-2xl font-semibold sm:text-3xl">
