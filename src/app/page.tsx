@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { Footer } from "@/components/Footer";
+import { BirthdayConfetti } from "@/components/BirthdayConfetti";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { RotatingWord } from "@/components/RotatingWord";
@@ -93,6 +94,7 @@ export default function Home() {
       <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
       <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
       <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
+      <BirthdayConfetti />
 
       <MainNavigation />
 
@@ -132,7 +134,6 @@ export default function Home() {
                 </p>
                 <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
                   <li>💻 Self-Taught Programmer</li>
-                  <li>☘️ Irish Content Creator</li>
                   <li>💻 Building things that matter</li>
                   <li>🤖 AI &amp; automation</li>
                   <li>👨‍💻 Full Stack Dev</li>

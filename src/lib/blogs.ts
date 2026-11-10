@@ -114,6 +114,13 @@ export async function getAllBlogs(): Promise<Blog[]> {
   return Array.from(blogsBySlug.values());
 }
 
+export async function getSanityBlogs(): Promise<Blog[]> {
+  if (!sanityClient) return [];
+
+  const sanityBlogs = await sanityClient.fetch<Blog[]>(blogsQuery);
+  return sanityBlogs.map(mapSanityBlog);
+}
+
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   if (sanityClient) {
     const blog = await sanityClient.fetch<Blog | null>(blogBySlugQuery, { slug });
