@@ -103,13 +103,6 @@ const skills: {
     project: "Part of my full-stack toolkit",
   },
   {
-    name: "Prisma",
-    icon: "logos:prisma",
-    category: "Backend",
-    description: "Working with databases through a type-safe ORM.",
-    project: "Part of my backend toolkit",
-  },
-  {
     name: "Shopify",
     icon: "logos:shopify",
     category: "Ecommerce",
