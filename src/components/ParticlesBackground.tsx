@@ -104,7 +104,7 @@ export function ParticlesBackground({
     detectRetina: true,
     particles: {
       number: {
-        value: 22,
+        value: 12,
         density: { enable: true, width: 1920, height: 1080 },
       },
       shape: {
@@ -124,28 +124,19 @@ export function ParticlesBackground({
       },
       opacity: {
         value: wordOpacity,
-        animation: {
-          enable: true,
-          speed: 0.4,
-          sync: false,
-          startValue: "random",
-        },
       },
       size: {
         value: { min: 14, max: 28 },
       },
       move: {
         enable: true,
-        speed: { min: 0.2, max: 0.8 },
+        speed: 0.2,
         direction: "none",
-        random: true,
         straight: false,
-        outModes: { default: "out" },
+        outModes: { default: "bounce" },
       },
       rotate: {
         value: { min: -8, max: 8 },
-        direction: "random",
-        animation: { enable: true, speed: 2, sync: false },
       },
     },
     interactivity: {
