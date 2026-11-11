@@ -18,6 +18,9 @@ pages refresh at least once per minute so new published content appears without 
 Contact form messages continue to go directly to `CONTACT_MAIL_TO` through Resend; contact
 submissions are not stored in Sanity.
 
+Newsletter unsubscribe links use `NEWSLETTER_UNSUBSCRIBE_SECRET` to sign confirmation tokens.
+If it is not set, `NEWSLETTER_SEND_TOKEN` is used as the signing secret.
+
 ## CV Download
 
 Upload your CV PDF to Google Drive and set its general access to **Anyone with the link**
