@@ -6,6 +6,15 @@ import {
 
 type UnsubscribePageState = "confirm" | "removed" | "not-found" | "invalid";
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function renderUnsubscribePage(
   state: UnsubscribePageState,
   token?: string,
