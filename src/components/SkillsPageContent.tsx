@@ -117,6 +117,13 @@ const skills: {
     project: "Shopify store redesign",
   },
   {
+    name: "Custom",
+    icon: "carbon:code",
+    category: "Ecommerce",
+    description: "Building tailored storefront features beyond standard themes.",
+    project: "Custom storefronts with the PERN or VILT stack",
+  },
+  {
     name: "Sanity",
     icon: "simple-icons:sanity",
     category: "CMS",
