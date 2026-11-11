@@ -117,6 +117,13 @@ const skills: {
     project: "Shopify store redesign",
   },
   {
+    name: "Custom",
+    icon: "carbon:code",
+    category: "Ecommerce",
+    description: "Building tailored storefront features beyond standard themes.",
+    project: "Custom storefronts with the PERN or VILT stack",
+  },
+  {
     name: "Sanity",
     icon: "simple-icons:sanity",
     category: "CMS",
@@ -195,6 +202,28 @@ export function SkillsPageContent() {
                 </span>
               ))}
             </div>
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-12 top-[6%] hidden rotate-[-13deg] rounded-2xl border border-teal-300/15 bg-slate-950/50 p-4 font-mono text-xs leading-6 text-teal-100/55 shadow-xl lg:block"
+          >
+            <span className="text-teal-400">const</span> idea ={" "}
+            <span className="text-amber-200">&quot;SaaS Project&quot;</span>;
+            <br />
+            <span className="text-teal-400">build</span>(idea);
+            <br />
+            <span className="text-teal-400">ship</span>();
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-16 top-[40%] hidden rotate-[5deg] rounded-2xl border border-teal-300/15 bg-slate-950/50 p-4 font-mono text-xs leading-6 text-teal-100/55 shadow-xl lg:block"
+          >
+            <span className="text-teal-400">const</span> idea ={""}
+            <span className="text-amber-200">&quot;Ecommerce Project&quot;</span>;
+            <br />
+            <span className="text-teal-400">build</span>(idea);
+            <br />
+            <span className="text-teal-400">ship</span>();
           </div>
           <div
             aria-hidden="true"

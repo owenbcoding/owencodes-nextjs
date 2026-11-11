@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { Resend } from "resend";
 import { getSiteUrl } from "@/lib/site";
 
@@ -82,6 +83,58 @@ function extractEmailAddress(value: string): string {
 
 function isContactAlreadyPresent(message: string): boolean {
   return /already|exists|duplicate/i.test(message);
+}
+
+function getUnsubscribeSigningSecret(): string | null {
+  const secret =
+    process.env.NEWSLETTER_UNSUBSCRIBE_SECRET ??
+    process.env.NEWSLETTER_SEND_TOKEN;
+
+  return secret?.trim() ? secret : null;
+}
+
+export function createNewsletterUnsubscribeToken(email: string): string | null {
+  const normalized = email.trim().toLowerCase();
+  const secret = getUnsubscribeSigningSecret();
+  if (!secret || !EMAIL_RE.test(normalized)) return null;
+
+  const encodedEmail = Buffer.from(normalized).toString("base64url");
+  const signature = createHmac("sha256", secret)
+    .update(normalized)
+    .digest("base64url");
+
+  return `${encodedEmail}.${signature}`;
+}
+
+export function verifyNewsletterUnsubscribeToken(token: string): string | null {
+  const secret = getUnsubscribeSigningSecret();
+  if (!secret) return null;
+
+  const parts = token.split(".");
+  if (parts.length !== 2 || parts.some((part) => !/^[A-Za-z0-9_-]+$/.test(part))) {
+    return null;
+  }
+
+  const [encodedEmail, encodedSignature] = parts;
+  const email = Buffer.from(encodedEmail, "base64url").toString("utf8");
+  if (
+    Buffer.from(email).toString("base64url") !== encodedEmail ||
+    email !== email.trim().toLowerCase() ||
+    !EMAIL_RE.test(email)
+  ) {
+    return null;
+  }
+
+  const signature = Buffer.from(encodedSignature, "base64url");
+  const expectedSignature = createHmac("sha256", secret).update(email).digest();
+  if (
+    signature.length !== expectedSignature.length ||
+    !timingSafeEqual(signature, expectedSignature)
+  ) {
+    return null;
+  }
+
+  return email;
 }
 
 export async function addNewsletterSubscriber(email: string): Promise<{
@@ -194,7 +247,14 @@ export async function sendWelcomeEmail(email: string): Promise<{
   const { resend } = config;
   const fromAddress = resolveNoReplyFromAddress();
   const siteUrl = getSiteUrl();
-  const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?email=${encodeURIComponent(trimmed)}`;
+  const unsubscribeToken = createNewsletterUnsubscribeToken(trimmed);
+  if (!unsubscribeToken) {
+    return {
+      ok: false,
+      error: "Newsletter unsubscribe signing secret is not configured.",
+    };
+  }
+  const unsubscribeUrl = `${siteUrl}/api/newsletter/unsubscribe?token=${encodeURIComponent(unsubscribeToken)}`;
 
   const { error } = await resend.emails.send({
     from: fromAddress,
