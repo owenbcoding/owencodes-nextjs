@@ -83,7 +83,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative mt-8 flex flex-col gap-5" noValidate>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
@@ -100,44 +100,46 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="contact-name"
-          className="theme-card-title text-sm font-semibold"
-        >
-          Name
-        </label>
-        <input
-          id="contact-name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          required
-          placeholder="Your Full name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="theme-input theme-input-border rounded-md border px-3 py-2 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
-        />
-      </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="contact-name"
+            className="theme-card-title text-sm font-semibold"
+          >
+            Name
+          </label>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="theme-input theme-input-border min-h-12 rounded-lg border px-4 py-3 text-sm transition focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
+          />
+        </div>
 
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="contact-email"
-          className="theme-card-title text-sm font-semibold"
-        >
-          Email
-        </label>
-        <input
-          id="contact-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          placeholder="Your Work email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="theme-input theme-input-border rounded-md border px-3 py-2 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
-        />
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="contact-email"
+            className="theme-card-title text-sm font-semibold"
+          >
+            Email
+          </label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="theme-input theme-input-border min-h-12 rounded-lg border px-4 py-3 text-sm transition focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -145,50 +147,52 @@ export function ContactForm() {
           htmlFor="contact-message"
           className="theme-card-title text-sm font-semibold"
         >
-          Message
+          Your message description
         </label>
         <textarea
           id="contact-message"
           name="message"
           required
-          rows={12}
-          placeholder={`Put anything here to start the conversation\n\nTell me about your project...\n\n• Business or project name\n• Goal of the website/app\n• Example websites you like\n• Pages required\n• Features needed (Login, User Accounts, Payments, Booking, Dashboard, etc.)\n• If you have any existing branding and or assets available\n• Domain and hosting status\n• Expected launch date\n• Budget range`}
+          rows={8}
+          placeholder="What are you looking to build? Include any goals, features, or timelines you already have in mind."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="theme-input theme-input-border resize-y rounded-md border px-3 py-2 text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
+          className="theme-input theme-input-border resize-y rounded-lg border px-4 py-3 text-sm leading-relaxed transition focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 focus:outline-none"
         />
-      </div>
-
-      <div
-        role="note"
-        className="theme-card rounded-md border px-4 py-3 text-sm"
-      >
-        <p className="theme-card-title font-bold">Prefer to talk live?</p>
-        <p className="theme-muted-soft mt-5">
-          You can send a message anytime using the form above. If you&apos;d
-          like a discovery call, book a time below &mdash; the form is great for
-          project details, and the call is for a deeper conversation.
+        <p className="theme-muted mt-1 text-xs">
+          A few details will help me understand how I can help.
         </p>
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <button
-          type="button"
-          onClick={handleBookCall}
-          className={`flex-1 rounded-md border px-4 py-2.5 text-sm font-semibold transition-colors ${
-            hasBooked
-              ? "theme-accent-text border-teal-400/60 bg-teal-500/10 hover:bg-teal-500/20"
-              : "theme-card theme-card-title hover:opacity-80"
-          }`}
-        >
-          {hasBooked ? "Call booked \u2713" : "Book discovery call"}
-        </button>
+      <div className="theme-card rounded-xl border p-4 sm:p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="theme-card-title font-semibold">Prefer to talk live?</p>
+            <p className="theme-muted-soft mt-1 text-sm leading-relaxed">
+              Book a discovery call and we can talk through your idea.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleBookCall}
+            className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 ${
+              hasBooked
+                ? "theme-accent-text border-teal-400/60 bg-teal-500/10 hover:bg-teal-500/20"
+                : "theme-card-title theme-input-border border bg-white/5 hover:border-teal-400/50 hover:bg-teal-500/10"
+            }`}
+          >
+            {hasBooked ? "Call booked \u2713" : "Book a discovery call"}
+          </button>
+        </div>
+      </div>
 
+      <div className="theme-input-border flex flex-col gap-3 border-t pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="theme-muted text-xs">I usually reply within 1–2 days.</p>
         <button
           type="submit"
           disabled={!canSend}
           aria-disabled={!canSend}
-          className="flex-1 rounded-md border border-teal-500/60 bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-500 disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-teal-900/40 disabled:text-slate-400"
+          className="rounded-full border border-teal-500/60 bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-teal-900/40 disabled:text-slate-400"
         >
           {status.kind === "sending" ? "Sending\u2026" : "Send Message"}
         </button>
@@ -211,7 +215,6 @@ export function ContactForm() {
           {status.message}
         </p>
       )}
-
     </form>
   );
 }
