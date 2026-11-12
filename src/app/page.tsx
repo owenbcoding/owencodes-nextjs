@@ -147,21 +147,6 @@ export default function Home() {
                       Book a Call
                     </Link>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <div className="group flex flex-col items-center">
-                      <button
-                        type="button"
-                        disabled
-                        aria-label="Services — coming soon"
-                        className="rounded-full bg-cyan-400/15 px-5 py-3 text-sm font-semibold text-cyan-200 transition-colors group-hover:bg-cyan-300 group-hover:text-slate-950"
-                      >
-                        <span className="group-hover:hidden">Services</span>
-                        <span className="hidden group-hover:inline">
-                          Coming soon
-                        </span>
-                      </button>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="mt-3 w-full">
