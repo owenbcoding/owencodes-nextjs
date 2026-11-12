@@ -64,40 +64,6 @@ const localProjects: Project[] = [
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
     archiveSlug: "Project-Archive-002",
   },
-  // {
-  //   slug: "hackerinn",
-  //   title: "Hackerinn",
-  //   description: "A online community platform for accountability and growth.",
-  //   image: "/images/hackerinn.png",
-  //   stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-  //   status: "coming-soon",
-  //   statusLabel: "On the roadmap",
-  // },
-  // {
-  //   slug: "playlisted",
-  //   title: "Playlisted",
-  //   description: "A social music app to chat about songs and artists.",
-  //   image: "/images/playlisted-live.png",
-  //   stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-  //   status: "coming-soon",
-  //   statusLabel: "Planned",
-  // },
-  // {
-  //   slug: "devstories",
-  //   title: "DevStories",
-  //   description: "A platform for sharing developer stories.",
-  //   image: "/images/devstories.png",
-  //   stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-  //   status: "coming-soon",
-  //   statusLabel: "Concept",
-  // },
-  // {
-  //   slug: "task-app",
-  //   title: "Task App",
-  //   description: "A smart, AI-powered to-do app.",
-  //   stacks: ["Laravel", "TailwindCSS", "Blade", "PrismPHP", "Livewire", "AI"],
-  //   status: "in-development",
-  // },
 ];
 
 export async function getAllProjects(): Promise<Project[]> {
