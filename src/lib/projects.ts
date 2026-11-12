@@ -46,7 +46,7 @@ const localProjects: Project[] = [
   },
   {
     slug: "tracton-biodiversity-group",
-    title: "Tracton B Group",
+    title: "Tracton Community",
     description: "A community made website for a local wildlife community",
     image: "/images/tractontbg.png",
     stacks: ["Next.js", "TailwindCSS", "TypeScript", "Sanity"],
@@ -64,50 +64,6 @@ const localProjects: Project[] = [
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
     archiveSlug: "Project-Archive-002",
   },
-  {
-    slug: "specsage",
-    title: "Specsage",
-    description: "Specsage is a AI-powered PC builder assistant.",
-    image: "/images/Specsage.png",
-    stacks: ["Next.js", "CrewAI", "OpenAI", "Firecrawl", "AI"],
-    status: "live",
-    link: { href: "https://www.specsage.tech/", label: "Visit live site" },
-    archiveSlug: "Project-Archive-001",
-  },
-  // {
-  //   slug: "hackerinn",
-  //   title: "Hackerinn",
-  //   description: "A online community platform for accountability and growth.",
-  //   image: "/images/hackerinn.png",
-  //   stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-  //   status: "coming-soon",
-  //   statusLabel: "On the roadmap",
-  // },
-  // {
-  //   slug: "playlisted",
-  //   title: "Playlisted",
-  //   description: "A social music app to chat about songs and artists.",
-  //   image: "/images/playlisted-live.png",
-  //   stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-  //   status: "coming-soon",
-  //   statusLabel: "Planned",
-  // },
-  // {
-  //   slug: "devstories",
-  //   title: "DevStories",
-  //   description: "A platform for sharing developer stories.",
-  //   image: "/images/devstories.png",
-  //   stacks: ["Laravel", "TailwindCSS", "Vue.js", "PostgreSQL"],
-  //   status: "coming-soon",
-  //   statusLabel: "Concept",
-  // },
-  // {
-  //   slug: "task-app",
-  //   title: "Task App",
-  //   description: "A smart, AI-powered to-do app.",
-  //   stacks: ["Laravel", "TailwindCSS", "Blade", "PrismPHP", "Livewire", "AI"],
-  //   status: "in-development",
-  // },
 ];
 
 export async function getAllProjects(): Promise<Project[]> {
@@ -119,7 +75,13 @@ export async function getAllProjects(): Promise<Project[]> {
   );
 
   for (const project of sanityProjects) {
-    projectsBySlug.set(project.slug, project);
+    if (project.slug === "specsage") continue;
+    projectsBySlug.set(
+      project.slug,
+      project.slug === "tracton-biodiversity-group"
+        ? { ...project, title: "Tracton Community" }
+        : project,
+    );
   }
 
   return Array.from(projectsBySlug.values());
