@@ -46,7 +46,7 @@ const localProjects: Project[] = [
   },
   {
     slug: "tracton-biodiversity-group",
-    title: "Tracton B Group",
+    title: "Tracton Community",
     description: "A community made website for a local wildlife community",
     image: "/images/tractontbg.png",
     stacks: ["Next.js", "TailwindCSS", "TypeScript", "Sanity"],
@@ -76,7 +76,12 @@ export async function getAllProjects(): Promise<Project[]> {
 
   for (const project of sanityProjects) {
     if (project.slug === "specsage") continue;
-    projectsBySlug.set(project.slug, project);
+    projectsBySlug.set(
+      project.slug,
+      project.slug === "tracton-biodiversity-group"
+        ? { ...project, title: "Tracton Community" }
+        : project,
+    );
   }
 
   return Array.from(projectsBySlug.values());
