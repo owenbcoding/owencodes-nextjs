@@ -64,16 +64,6 @@ const localProjects: Project[] = [
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
     archiveSlug: "Project-Archive-002",
   },
-  {
-    slug: "specsage",
-    title: "Specsage",
-    description: "Specsage is a AI-powered PC builder assistant.",
-    image: "/images/Specsage.png",
-    stacks: ["Next.js", "CrewAI", "OpenAI", "Firecrawl", "AI"],
-    status: "live",
-    link: { href: "https://www.specsage.tech/", label: "Visit live site" },
-    archiveSlug: "Project-Archive-001",
-  },
   // {
   //   slug: "hackerinn",
   //   title: "Hackerinn",
@@ -119,6 +109,7 @@ export async function getAllProjects(): Promise<Project[]> {
   );
 
   for (const project of sanityProjects) {
+    if (project.slug === "specsage") continue;
     projectsBySlug.set(project.slug, project);
   }
 
