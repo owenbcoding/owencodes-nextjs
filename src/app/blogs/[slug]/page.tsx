@@ -58,7 +58,7 @@ export default async function BlogDetailPage({
           <span aria-hidden="true">&larr;</span> Back to blogs
         </Link>
 
-        <article className="theme-card rounded-lg border p-8 shadow-2xl backdrop-blur-sm">
+        <article className="theme-card blog-detail-content rounded-lg border p-8 shadow-2xl backdrop-blur-sm">
           <header className="mb-6 border-b border-white/5 pb-4">
             <h1 className="theme-title-font theme-accent-text text-3xl font-bold">
               <span aria-hidden="true" className="mr-2">
