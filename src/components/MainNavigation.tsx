@@ -82,6 +82,10 @@ export function MainNavigation() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     if (!mobileOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
@@ -97,10 +101,14 @@ export function MainNavigation() {
   const closeMobile = () => setMobileOpen(false);
 
   return (
-    <nav className="theme-nav fixed inset-x-0 top-0 z-50 border-b p-2 shadow-[inset_0_0_8px_rgba(255,255,255,0.1),0_0_15px_rgba(45,212,191,0.15)] backdrop-blur-xl">
+    <nav
+      aria-label="Main navigation"
+      className="theme-nav fixed inset-x-0 top-0 z-50 border-b p-2 shadow-[inset_0_0_8px_rgba(255,255,255,0.1),0_0_15px_rgba(45,212,191,0.15)] backdrop-blur-xl"
+    >
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
+          onClick={closeMobile}
           className="theme-brand-link flex items-center gap-2.5 rounded-full py-2 pl-2 pr-3 text-lg font-bold transition-colors duration-200"
         >
           {/* Served straight from /public: at 32px the optimiser round trip
@@ -182,48 +190,41 @@ export function MainNavigation() {
       </div>
 
       {mobileOpen && (
-        <>
-          <div
-            className="fixed inset-x-0 bottom-0 top-18 z-40 bg-black/50 backdrop-blur-sm md:hidden"
-            onClick={closeMobile}
-            aria-hidden
-          />
-          <div
-            id={mobileMenuId}
-            className="theme-nav absolute left-0 right-0 top-full z-50 max-h-[min(70vh,calc(100dvh-4.5rem))] overflow-y-auto border-b border-t border-[rgb(20_184_166/20%)] p-4 shadow-lg backdrop-blur-xl md:hidden"
-            aria-label="Menu"
-          >
-            <ul className="flex flex-col gap-0.5">
-              {navItems.map((item) => {
-                const active = isActive(item.href);
-                return (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      onClick={closeMobile}
-                      aria-current={active ? "page" : undefined}
-                      className={`theme-nav-link block rounded-lg px-4 py-3 text-lg font-semibold ${
-                        active ? "theme-nav-link-active" : ""
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="mt-3 border-t border-[rgb(20_184_166/20%)] pt-3">
-              <GitHubAnchor
-                className="theme-github-link inline-flex w-full items-center justify-center rounded-lg px-4 py-3 transition duration-200"
-                onClick={closeMobile}
-              />
-              <CVDownloadAnchor
-                className="theme-github-link mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-semibold transition duration-200"
-                onClick={closeMobile}
-              />
-            </div>
+        <div
+          id={mobileMenuId}
+          className="theme-mobile-menu absolute left-0 right-0 top-full z-50 max-h-[min(70vh,calc(100dvh-4.5rem))] overflow-y-auto rounded-b-xl border p-4 shadow-lg md:hidden"
+          aria-label="Menu"
+        >
+          <ul className="flex flex-col gap-0.5">
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    onClick={closeMobile}
+                    aria-current={active ? "page" : undefined}
+                    className={`theme-nav-link block rounded-lg px-4 py-3 text-lg font-semibold ${
+                      active ? "theme-nav-link-active theme-mobile-nav-active" : ""
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="mt-3 border-t border-[rgb(20_184_166/20%)] pt-3">
+            <GitHubAnchor
+              className="theme-github-link inline-flex w-full items-center justify-center rounded-lg px-4 py-3 transition duration-200"
+              onClick={closeMobile}
+            />
+            <CVDownloadAnchor
+              className="theme-github-link mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-semibold transition duration-200"
+              onClick={closeMobile}
+            />
           </div>
-        </>
+        </div>
       )}
     </nav>
   );
