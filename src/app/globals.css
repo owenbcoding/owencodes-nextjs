@@ -429,7 +429,8 @@ body {
   animation: blog-card-border-shift 3s linear infinite;
 }
 
-.blog-card-content {
+.blog-card-content,
+.blog-detail-content {
   background: #0c0c0f;
 }
 
@@ -510,7 +511,8 @@ body {
   background: rgb(255 255 255 / 65%);
 }
 
-:root[data-theme="light"] .blog-card-content {
+:root[data-theme="light"] .blog-card-content,
+:root[data-theme="light"] .blog-detail-content {
   background: #f6f1e8;
 }
 
