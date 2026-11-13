@@ -48,9 +48,9 @@ export default async function BlogsPage({
       <MainNavigation />
 
       <main className="relative z-10 mx-auto mt-18 flex w-full max-w-6xl flex-1 flex-col px-4 py-8 sm:px-6">
-        <header className="relative mb-12 flex min-h-56 items-center justify-center px-5 py-14 text-center sm:mb-16 sm:min-h-64">
+        <header className="relative mb-6 text-center">
           <div className="relative z-10">
-            <h1 className="theme-heading text-4xl font-bold tracking-tight sm:text-6xl">
+            <h1 className="theme-heading mb-4 mt-5 text-4xl font-bold">
               Blogs
             </h1>
             <p className="theme-muted-soft mx-auto mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
