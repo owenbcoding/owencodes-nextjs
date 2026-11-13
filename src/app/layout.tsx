@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   description: HOME_DESCRIPTION,
   applicationName: SITE_NAME,
   icons: {
-    icon: "/owencodes-icon.svg",
-    shortcut: "/owencodes-icon.svg",
-    apple: "/owencodes-icon.svg",
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
   },
   robots: {
     index: true,
