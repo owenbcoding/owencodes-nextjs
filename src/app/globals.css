@@ -3,6 +3,7 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --brand-cyan: #00e5cf;
   --font-readable-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-readable: var(--font-readable-mono);
 }
@@ -172,13 +173,18 @@ body {
 
 .theme-brand-link {
   color: #ffffff;
-  font-family: var(--font-readable);
-  letter-spacing: 0.04em;
+}
+
+.brand-wordmark {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.brand-wordmark-accent {
+  color: var(--brand-cyan);
 }
 
 .theme-brand-link:hover {
   background: rgb(255 255 255 / 10%);
-  color: #5eead4;
 }
 
 .theme-nav-link {
@@ -269,20 +275,22 @@ body {
   background: rgb(255 255 255 / 55%);
 }
 
-:root[data-theme="light"] .theme-brand-link,
 :root[data-theme="light"] .theme-nav-link,
 :root[data-theme="light"] .theme-github-link,
 :root[data-theme="light"] .theme-toggle {
   color: #2dd4bf;
 }
 
-:root[data-theme="light"] .theme-brand-link:hover,
 :root[data-theme="light"] .theme-nav-link:hover,
 :root[data-theme="light"] .theme-nav-link-active,
 :root[data-theme="light"] .theme-github-link:hover,
 :root[data-theme="light"] .theme-toggle:hover {
   background: rgb(15 23 42 / 8%);
   color: #0f766e;
+}
+
+:root[data-theme="light"] .theme-brand-link:hover {
+  background: rgb(15 23 42 / 8%);
 }
 
 :root[data-theme="light"] .theme-toggle-moon {
