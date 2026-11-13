@@ -1,17 +1,9 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Xeno Byte";
-  src: url("/fonts/XenoByte.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --font-xeno-byte: "Xeno Byte", "Courier New", monospace;
+  --brand-cyan: #00e5cf;
   --font-readable-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-readable: var(--font-readable-mono);
 }
@@ -65,7 +57,7 @@ body {
 
 .theme-heading {
   color: #ffffff;
-  font-family: var(--font-xeno-byte);
+  font-family: var(--font-readable);
   letter-spacing: 0.035em;
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 60%));
 }
@@ -130,7 +122,7 @@ body {
 
 .birthday-confetti-letter {
   margin-left: -0.5em;
-  font-family: var(--font-xeno-byte);
+  font-family: var(--font-readable);
   font-size: clamp(1.25rem, 3vw, 2rem);
   font-weight: 700;
   line-height: 1;
@@ -154,7 +146,7 @@ body {
 }
 
 .theme-title-font {
-  font-family: var(--font-xeno-byte);
+  font-family: var(--font-readable);
   letter-spacing: 0.035em;
 }
 
@@ -181,18 +173,23 @@ body {
 
 .theme-brand-link {
   color: #ffffff;
-  font-family: var(--font-xeno-byte);
-  letter-spacing: 0.04em;
+}
+
+.brand-wordmark {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.brand-wordmark-accent {
+  color: var(--brand-cyan);
 }
 
 .theme-brand-link:hover {
   background: rgb(255 255 255 / 10%);
-  color: #5eead4;
 }
 
 .theme-nav-link {
   color: #e5e7eb;
-  font-family: var(--font-xeno-byte);
+  font-family: var(--font-readable);
   letter-spacing: 0.04em;
 }
 
@@ -278,20 +275,22 @@ body {
   background: rgb(255 255 255 / 55%);
 }
 
-:root[data-theme="light"] .theme-brand-link,
 :root[data-theme="light"] .theme-nav-link,
 :root[data-theme="light"] .theme-github-link,
 :root[data-theme="light"] .theme-toggle {
   color: #2dd4bf;
 }
 
-:root[data-theme="light"] .theme-brand-link:hover,
 :root[data-theme="light"] .theme-nav-link:hover,
 :root[data-theme="light"] .theme-nav-link-active,
 :root[data-theme="light"] .theme-github-link:hover,
 :root[data-theme="light"] .theme-toggle:hover {
   background: rgb(15 23 42 / 8%);
   color: #0f766e;
+}
+
+:root[data-theme="light"] .theme-brand-link:hover {
+  background: rgb(15 23 42 / 8%);
 }
 
 :root[data-theme="light"] .theme-toggle-moon {
