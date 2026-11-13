@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Script from "next/script";
 import { Footer } from "@/components/Footer";
 import { BirthdayConfetti } from "@/components/BirthdayConfetti";
@@ -138,17 +137,6 @@ export default function Home() {
                   <li>🤖 AI &amp; automation</li>
                   <li>👨‍💻 Full Stack Dev</li>
                 </ul>
-                <div className="flex flex-col gap-4 sm:flex-row sm:gap-3">
-                  <div className="flex flex-col items-center">
-                    <Link
-                      href="/contact"
-                      className="rounded-full cursor-pointer bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-                    >
-                      Book a Call
-                    </Link>
-                  </div>
-                </div>
-
                 <div className="mt-3 w-full">
                   <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">
                     Stay in the loop
