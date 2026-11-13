@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
@@ -109,20 +109,10 @@ export function MainNavigation() {
         <Link
           href="/"
           onClick={closeMobile}
-          className="theme-brand-link flex items-center gap-2.5 rounded-full py-2 pl-2 pr-3 text-lg font-bold transition-colors duration-200"
+          aria-label="Owencodes home"
+          className="theme-brand-link flex items-center rounded-full py-2 pl-2 pr-3 text-lg transition-colors duration-200"
         >
-          {/* Served straight from /public: at 32px the optimiser round trip
-              costs more than it saves, and the source is already sized for 3x. */}
-          <Image
-            src="/images/my-logo.png"
-            alt=""
-            width={96}
-            height={96}
-            className="h-8 w-8 shrink-0 rounded-full ring-1 ring-[rgb(20_184_166/35%)]"
-            priority
-            unoptimized
-          />
-          Owencodes
+          <BrandLogo />
         </Link>
 
         <ul className="hidden shrink-0 items-center gap-2 md:absolute md:left-1/2 md:flex md:-translate-x-1/2">
