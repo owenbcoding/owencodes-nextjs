@@ -38,19 +38,17 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
           {blog.description}
         </p>
         <div className="theme-muted mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-4 text-xs">
-          <time dateTime={blog.date}>{formatBlogDate(blog.date)}</time>
-          <span aria-hidden="true" className="theme-accent-text">
-            ·
-          </span>
           <span className="theme-accent-text font-medium">{blog.category}</span>
           <span aria-hidden="true" className="ml-auto">
             {blog.readingMinutes} min read
           </span>
         </div>
-        <span className="theme-accent-text mt-4 inline-flex items-center gap-2 text-sm font-semibold transition-[gap] group-hover:gap-3">
+        <span className="theme-accent-text mt-4 inline-flex text-sm font-semibold">
           Read More . . .
-          <span aria-hidden="true">→</span>
         </span>
+        <time className="theme-muted mt-2 text-xs" dateTime={blog.date}>
+          {formatBlogDate(blog.date)}
+        </time>
       </div>
     </>
   );
