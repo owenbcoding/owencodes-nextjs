@@ -53,9 +53,6 @@ export default async function BlogsPage({
             <h1 className="theme-heading mb-4 mt-5 text-4xl font-bold">
               Blogs
             </h1>
-            <p className="theme-muted-soft mx-auto mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
-              Projects and ideas from my corner of the web.
-            </p>
           </div>
         </header>
 
