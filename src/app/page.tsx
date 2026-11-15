@@ -14,6 +14,7 @@ import {
 } from "@/lib/site";
 
 const PORTRAIT_ALT = "Owen - Full Stack Dev";
+const CV_DOWNLOAD_URL = process.env.NEXT_PUBLIC_CV_DOWNLOAD_URL;
 
 export const metadata: Metadata = {
   title: {
@@ -30,10 +31,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/portrait-notint-removebg.png",
-        width: 600,
-        height: 600,
-        alt: PORTRAIT_ALT,
+        url: "/images/Turquoise%20Owen%20Codes%20Logo%20Banner%20(1).png",
+        width: 2172,
+        height: 724,
+        alt: "Turquoise Owen Codes logo banner",
       },
     ],
   },
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
-    images: ["/images/portrait-notint-removebg.png"],
+    images: ["/images/Turquoise%20Owen%20Codes%20Logo%20Banner%20(1).png"],
   },
 };
 
@@ -137,6 +138,29 @@ export default function Home() {
                   <li>🤖 AI &amp; automation</li>
                   <li>👨‍💻 Full Stack Dev</li>
                 </ul>
+                {CV_DOWNLOAD_URL && (
+                  <a
+                    href={CV_DOWNLOAD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Download my CV or resume"
+                    className="theme-github-link mb-6 inline-flex items-center gap-2 rounded-full border border-[rgb(20_184_166/30%)] px-5 py-3 font-semibold transition duration-200"
+                  >
+                    <svg
+                      className="h-5 w-5 shrink-0"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
+                    </svg>
+                    <span>Download CV / Resume</span>
+                  </a>
+                )}
                 <div className="mt-3 w-full">
                   <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">
                     Stay in the loop
