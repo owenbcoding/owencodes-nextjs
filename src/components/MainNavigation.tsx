@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CV_DOWNLOAD_URL } from "@/lib/cv";
 
 const navItems = [
   { name: "Skills", href: "/skills" },
@@ -14,7 +15,6 @@ const navItems = [
 ];
 
 const GITHUB_HREF = "https://github.com/owenbcoding";
-const CV_DOWNLOAD_URL = process.env.NEXT_PUBLIC_CV_DOWNLOAD_URL;
 
 function GitHubAnchor({
   className,
@@ -46,8 +46,6 @@ function CVDownloadAnchor({
   className: string;
   onClick?: () => void;
 }) {
-  if (!CV_DOWNLOAD_URL) return null;
-
   return (
     <a
       href={CV_DOWNLOAD_URL}

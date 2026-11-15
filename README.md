@@ -23,24 +23,16 @@ If it is not set, `NEWSLETTER_SEND_TOKEN` is used as the signing secret.
 
 ## CV Download
 
-Upload your CV PDF to Google Drive and set its general access to **Anyone with the link**
-(Viewer). Copy the file ID from its share URL (the text between `/d/` and `/view`), then set
-`NEXT_PUBLIC_CV_DOWNLOAD_URL` in `.env.local` and your deployment environment to:
-
-```text
-https://drive.google.com/uc?export=download&id=FILE_ID
-```
-
-Replace `FILE_ID` with the ID from your file's share URL. The **CV** download link appears in
-the top navigation and below the About section once this variable is set. For the current CV,
-the share URL's file ID is `1fGFrOXXg3EnGMA5QuJpQWmkQkF3W1p6I`, so its direct-download URL is:
+The homepage and navigation download buttons use a direct-download URL defined in
+[src/lib/cv.ts](./src/lib/cv.ts), so no environment variable is needed. The current CV is hosted
+on Google Drive; set its general access to **Anyone with the link** (Viewer).
 
 ```text
 https://drive.google.com/uc?export=download&id=1fGFrOXXg3EnGMA5QuJpQWmkQkF3W1p6I
 ```
 
-Set this value in `.env.local` for local development and in your deployment environment.
-Restart the local server or redeploy after changing the variable.
+To use a different CV, replace the URL in `src/lib/cv.ts` with a direct-download URL using the
+file ID from the share URL (the text between `/d/` and `/view`).
 
 ## Getting Started
 
