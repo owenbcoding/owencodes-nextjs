@@ -32,8 +32,15 @@ https://drive.google.com/uc?export=download&id=FILE_ID
 ```
 
 Replace `FILE_ID` with the ID from your file's share URL. The **CV** download link appears in
-the top navigation once this variable is set. Restart the local server or redeploy after
-changing the variable.
+the top navigation and below the About section once this variable is set. For the current CV,
+the share URL's file ID is `1fGFrOXXg3EnGMA5QuJpQWmkQkF3W1p6I`, so its direct-download URL is:
+
+```text
+https://drive.google.com/uc?export=download&id=1fGFrOXXg3EnGMA5QuJpQWmkQkF3W1p6I
+```
+
+Set this value in `.env.local` for local development and in your deployment environment.
+Restart the local server or redeploy after changing the variable.
 
 ## Getting Started
 
