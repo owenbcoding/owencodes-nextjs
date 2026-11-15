@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/portrait-notint-removebg.png",
-        width: 600,
-        height: 600,
-        alt: PORTRAIT_ALT,
+        url: "/images/Turquoise%20Owen%20Codes%20Logo%20Banner%20(1).png",
+        width: 2172,
+        height: 724,
+        alt: "Turquoise Owen Codes logo banner",
       },
     ],
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
-    images: ["/images/portrait-notint-removebg.png"],
+    images: ["/images/Turquoise%20Owen%20Codes%20Logo%20Banner%20(1).png"],
   },
 };
 
