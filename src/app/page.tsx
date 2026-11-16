@@ -129,7 +129,7 @@ export default function Home() {
               <div className="mx-auto flex w-full max-w-prose flex-col items-start justify-center gap-2 text-left">
                 <h2 className="theme-heading text-4xl font-bold">About me!</h2>
                 <p className="theme-body mb-5 mt-5 text-lg leading-relaxed md:text-xl">
-                  I am a full-stack developer with a passion for coding and
+                  I am a Self taught developer with a passion for coding and
                   problem-solving.
                 </p>
                 <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
