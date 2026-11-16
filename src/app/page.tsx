@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/Turquoise%20Owen%20Codes%20Logo%20Banner%20(1).png",
+        url: "/images/OwenCodes%20Navy%20Tech%20Banner.png",
         width: 2172,
         height: 724,
-        alt: "Turquoise Owen Codes logo banner",
+        alt: "Owen Codes navy tech banner",
       },
     ],
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
-    images: ["/images/Turquoise%20Owen%20Codes%20Logo%20Banner%20(1).png"],
+    images: ["/images/OwenCodes%20Navy%20Tech%20Banner.png"],
   },
 };
 
