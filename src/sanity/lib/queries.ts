@@ -21,6 +21,7 @@ export const blogsQuery = defineQuery(/* groq */ `
   *[_type == "blogPost" && defined(slug.current)]
     | order(publishedAt desc, _createdAt desc) {
       "slug": slug.current,
+      "sanityCreatedAt": _createdAt,
       title,
       emoji,
       description,
@@ -36,6 +37,7 @@ export const blogsQuery = defineQuery(/* groq */ `
 export const blogBySlugQuery = defineQuery(/* groq */ `
   *[_type == "blogPost" && slug.current == $slug][0] {
     "slug": slug.current,
+    "sanityCreatedAt": _createdAt,
     title,
     emoji,
     description,
