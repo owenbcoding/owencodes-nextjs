@@ -138,27 +138,39 @@ export default function Home() {
                   <li>🤖 AI &amp; automation</li>
                   <li>👨‍💻 Full Stack Dev</li>
                 </ul>
-                <a
-                  href={CV_DOWNLOAD_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Download my CV or resume"
-                  className="theme-github-link mb-6 inline-flex items-center gap-2 rounded-full border border-[rgb(20_184_166/30%)] px-5 py-3 font-semibold transition duration-200"
-                >
-                  <svg
-                    className="h-5 w-5 shrink-0"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
+                <div className="mb-6 flex flex-wrap items-center gap-3">
+                  <a
+                    href={CV_DOWNLOAD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Download my CV or resume"
+                    className="theme-github-link inline-flex items-center gap-2 rounded-full border border-[rgb(20_184_166/30%)] px-5 py-3 font-semibold transition duration-200"
                   >
-                    <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
-                  </svg>
-                  <span>Download CV / Resume</span>
-                </a>
+                    <svg
+                      className="h-5 w-5 shrink-0"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
+                    </svg>
+                    <span>Download CV / Resume</span>
+                  </a>
+                  <a
+                    href="https://buymeacoffee.com/y6nrvkq"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Buy me a coffee"
+                    className="theme-github-link inline-flex items-center gap-2 rounded-full border border-[rgb(20_184_166/30%)] px-5 py-3 font-semibold transition duration-200"
+                  >
+                    <span aria-hidden="true">☕</span>
+                    <span>Buy me a coffee</span>
+                  </a>
+                </div>
                 <div className="mt-3 w-full">
                   <h3 className="theme-heading pb-2 text-xl leading-[1.6] font-semibold">
                     Stay in the loop
