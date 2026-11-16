@@ -2,7 +2,7 @@ import { BlogCard } from "@/components/BlogCard";
 import { BlogsPagination } from "@/components/BlogsPagination";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
-import { getSanityBlogs } from "@/lib/blogs";
+import { getAllBlogs } from "@/lib/blogs";
 
 const ARTICLES_PER_PAGE = 9;
 const FEATURED_POSTS_COUNT = 3;
@@ -24,7 +24,7 @@ export default async function BlogsPage({
 }) {
   const [{ page: pageParam }, blogs] = await Promise.all([
     searchParams,
-    getSanityBlogs(),
+    getAllBlogs(),
   ]);
   const featuredPosts = blogs.slice(0, FEATURED_POSTS_COUNT);
   const articles = blogs.slice(FEATURED_POSTS_COUNT);
