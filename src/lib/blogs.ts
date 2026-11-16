@@ -1,7 +1,6 @@
 import path from "node:path";
 import type { PortableTextBlock } from "@portabletext/types";
 import {
-  getAllContent,
   getContentBySlug,
   formatContentDate,
 } from "./content-loader";
@@ -25,6 +24,10 @@ export type Blog = BlogMeta & {
   body?: PortableTextBlock[];
 };
 
+type SanityBlog = Omit<Blog, "content"> & {
+  sanityCreatedAt: string;
+};
+
 const WORDS_PER_MINUTE = 200;
 
 function calculateReadingMinutes(content: string): number {
@@ -41,24 +44,7 @@ function calculateReadingMinutes(content: string): number {
 export const BLOGS_PER_PAGE = 4;
 
 const BLOGS_DIR = path.join(process.cwd(), "content", "blogs");
-const FEATURED_BLOG_ORDER = new Map(
-  ["my-journey", "dev-logs", "tooling"].map((slug, index) => [slug, index])
-);
-
-function sortBlogsForDisplay(blogs: Blog[]): Blog[] {
-  return blogs.sort((a, b) => {
-    const aOrder = FEATURED_BLOG_ORDER.get(a.slug);
-    const bOrder = FEATURED_BLOG_ORDER.get(b.slug);
-
-    if (aOrder !== undefined || bOrder !== undefined) {
-      if (aOrder === undefined) return 1;
-      if (bOrder === undefined) return -1;
-      return aOrder - bOrder;
-    }
-
-    return b.date.localeCompare(a.date);
-  });
-}
+const FEATURED_BLOGS_COUNT = 3;
 
 function mapBlogData(
   data: Record<string, unknown>,
@@ -80,50 +66,51 @@ function mapBlogData(
   };
 }
 
-function mapSanityBlog(blog: Blog): Blog {
+function mapSanityBlog(blog: SanityBlog): Blog {
   return {
-    ...blog,
+    slug: blog.slug,
+    title: blog.title,
+    emoji: blog.emoji,
+    description: blog.description,
+    date: blog.date,
+    category: blog.category,
+    coverImageUrl: blog.coverImageUrl,
+    coverImageAlt: blog.coverImageAlt,
     content: "",
+    body: blog.body,
     readingMinutes: blog.readingMinutes || 1,
   };
 }
 
 export async function getAllBlogs(): Promise<Blog[]> {
-  const localBlogs = sortBlogsForDisplay(
-    getAllContent(BLOGS_DIR, mapBlogData),
-  );
-  if (!sanityClient) return localBlogs;
+  if (!sanityClient) return [];
 
-  const sanityBlogs = await sanityClient.fetch<Blog[]>(blogsQuery);
-  const blogsBySlug = new Map(localBlogs.map((blog) => [blog.slug, blog]));
-  const newSanityBlogs = sanityBlogs
-    .filter((blog) => !blogsBySlug.has(blog.slug))
-    .map(mapSanityBlog)
-    .sort((a, b) => a.date.localeCompare(b.date) || a.slug.localeCompare(b.slug));
+  const sanityBlogs = await sanityClient.fetch<SanityBlog[]>(blogsQuery);
+  const featuredBlogs = [...sanityBlogs]
+    .sort(
+      (a, b) =>
+        a.sanityCreatedAt.localeCompare(b.sanityCreatedAt) ||
+        a.slug.localeCompare(b.slug),
+    )
+    .slice(0, FEATURED_BLOGS_COUNT);
+  const featuredSlugs = new Set(featuredBlogs.map((blog) => blog.slug));
+  const articles = sanityBlogs
+    .filter((blog) => !featuredSlugs.has(blog.slug))
+    .sort(
+      (a, b) =>
+        b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug),
+    );
 
-  for (const blog of sanityBlogs) {
-    if (blogsBySlug.has(blog.slug)) {
-      blogsBySlug.set(blog.slug, mapSanityBlog(blog));
-    }
-  }
-
-  for (const blog of newSanityBlogs) {
-    blogsBySlug.set(blog.slug, blog);
-  }
-
-  return Array.from(blogsBySlug.values());
+  return [...featuredBlogs, ...articles].map(mapSanityBlog);
 }
 
 export async function getSanityBlogs(): Promise<Blog[]> {
-  if (!sanityClient) return [];
-
-  const sanityBlogs = await sanityClient.fetch<Blog[]>(blogsQuery);
-  return sanityBlogs.map(mapSanityBlog);
+  return getAllBlogs();
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   if (sanityClient) {
-    const blog = await sanityClient.fetch<Blog | null>(blogBySlugQuery, { slug });
+    const blog = await sanityClient.fetch<SanityBlog | null>(blogBySlugQuery, { slug });
     if (blog) return mapSanityBlog(blog);
   }
 
