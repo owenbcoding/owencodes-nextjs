@@ -153,6 +153,60 @@ const skills: {
   },
 ];
 
+const otherSkills: { name: string; badge: string | null }[] = [
+  {
+    name: "Virtual Machines",
+    badge:
+      "https://img.shields.io/badge/Virtual_Machines-183A61?logo=virtualbox&logoColor=white",
+  },
+  {
+    name: "Cybersecurity",
+    badge: null,
+  },
+  {
+    name: "Docker",
+    badge: "https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white",
+  },
+  {
+    name: "DigitalOcean",
+    badge:
+      "https://img.shields.io/badge/DigitalOcean-0080FF?logo=digitalocean&logoColor=white",
+  },
+  {
+    name: "Nginx",
+    badge: "https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white",
+  },
+  {
+    name: "DBeaver",
+    badge:
+      "https://img.shields.io/badge/DBeaver-382923?logo=dbeaver&logoColor=white",
+  },
+  {
+    name: "Vercel",
+    badge: "https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white",
+  },
+  {
+    name: "Unix / Linux",
+    badge:
+      "https://img.shields.io/badge/Unix_/_Linux-FCC624?logo=linux&logoColor=black",
+  },
+  {
+    name: "VirtualBox",
+    badge:
+      "https://img.shields.io/badge/VirtualBox-183A61?logo=virtualbox&logoColor=white",
+  },
+  {
+    name: "VMware",
+    badge:
+      "https://img.shields.io/badge/VMware-607078?logo=vmware&logoColor=white",
+  },
+  {
+    name: "MobaXterm",
+    badge:
+      "https://img.shields.io/badge/MobaXterm-FF712C?logo=windows-terminal&logoColor=white",
+  },
+];
+
 export function SkillsPageContent() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
@@ -365,6 +419,46 @@ export function SkillsPageContent() {
               );
             })}
           </div>
+        </section>
+
+        <section
+          aria-labelledby="other-skills-heading"
+          className="mt-12 sm:mt-16"
+        >
+          <p className="theme-accent-text font-mono text-xs uppercase tracking-[0.2em]">
+            02 / Beyond the core stack
+          </p>
+          <h2
+            id="other-skills-heading"
+            className="theme-heading mt-2 border-b border-white/10 pb-2 text-xl font-semibold"
+          >
+            Other Skills
+          </h2>
+          <ul
+            aria-label="Other skills"
+            className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-1"
+          >
+            {otherSkills.map((skill) => (
+              <li key={skill.name}>
+                {skill.badge ? (
+                  <>
+                    {/* Shields.io serves these generated SVG badges directly. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`${skill.badge}&style=flat`}
+                      alt={skill.name}
+                      height="20"
+                      className="h-5 w-auto"
+                    />
+                  </>
+                ) : (
+                  <span className="inline-flex h-5 items-center border border-green-500/60 bg-black px-1.5 font-mono text-[11px] font-semibold leading-none text-green-400">
+                    {skill.name}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="mt-14 rounded-2xl border border-teal-300/15 bg-teal-300/[0.04] px-6 py-8 text-center sm:mt-20 sm:px-10">
