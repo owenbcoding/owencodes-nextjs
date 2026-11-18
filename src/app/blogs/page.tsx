@@ -1,11 +1,14 @@
 import { BlogCard } from "@/components/BlogCard";
 import { BlogsPagination } from "@/components/BlogsPagination";
+import { DailyDevPostCard } from "@/components/DailyDevPostCard";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { getAllBlogs } from "@/lib/blogs";
+import { getDailyDevPosts } from "@/lib/daily-dev";
 
 const ARTICLES_PER_PAGE = 9;
 const FEATURED_POSTS_COUNT = 3;
+const DAILY_DEV_POSTS_COUNT = 6;
 
 export const metadata = {
   title: "Owen's Blogs",
@@ -22,9 +25,10 @@ export default async function BlogsPage({
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
-  const [{ page: pageParam }, blogs] = await Promise.all([
+  const [{ page: pageParam }, blogs, dailyDevPosts] = await Promise.all([
     searchParams,
     getAllBlogs(),
+    getDailyDevPosts(),
   ]);
   const featuredPosts = blogs.slice(0, FEATURED_POSTS_COUNT);
   const articles = blogs.slice(FEATURED_POSTS_COUNT);
@@ -118,6 +122,34 @@ export default async function BlogsPage({
             ) : null}
           </>
         )}
+
+        {dailyDevPosts.length > 0 ? (
+          <section aria-labelledby="daily-dev-heading" className="mb-10">
+            <div className="mb-6">
+              <p className="theme-accent-text mb-1 text-xs font-semibold tracking-[0.2em] uppercase">
+                From my feed
+              </p>
+              <h2
+                id="daily-dev-heading"
+                className="theme-heading text-2xl font-semibold sm:text-3xl"
+              >
+                Saved &amp; upvoted on daily.dev
+              </h2>
+              <p className="theme-muted-soft mt-2 max-w-2xl text-sm leading-relaxed sm:text-base">
+                Dev news I bookmarked or upvoted while keeping up with the
+                community, collected in one place.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+              {dailyDevPosts
+                .slice(0, DAILY_DEV_POSTS_COUNT)
+                .map((post) => (
+                  <DailyDevPostCard key={post.id} post={post} />
+                ))}
+            </div>
+          </section>
+        ) : null}
       </main>
 
       <Footer />
