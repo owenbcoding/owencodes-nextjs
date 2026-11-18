@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProjectCardDescription } from "@/components/ProjectCardDescription";
-import type { Project } from "@/lib/projects";
+import { PROJECT_CATEGORY_LABELS, type Project } from "@/lib/projects";
 
 function projectPlaceholderLabel(project: Project) {
   if (project.statusLabel) return project.statusLabel;
@@ -48,7 +48,7 @@ function ProjectMedia({ project }: { project: Project }) {
         src={project.image}
         alt={project.title}
         fill
-        sizes="(min-width: 768px) 50vw, 100vw"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         className="object-cover"
       />
     );
@@ -70,13 +70,24 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="blog-card group relative h-full rounded-xl p-[1.5px]">
       <span aria-hidden="true" className="blog-card-rgb-border" />
-      <div className="blog-card-content relative flex h-full flex-col rounded-[calc(0.75rem-1.5px)] p-5 sm:p-6">
-        <div className="blog-card-artwork relative mb-5 aspect-video shrink-0 overflow-hidden rounded-lg">
+      <div className="blog-card-content relative flex h-full flex-col rounded-[calc(0.75rem-1.5px)] p-3 sm:p-4">
+        <h3 className="theme-heading mb-2 line-clamp-2 text-base leading-snug font-semibold sm:text-lg">
+          {project.title}
+        </h3>
+
+        <div className="blog-card-artwork relative mb-3 aspect-[1.65] shrink-0 overflow-hidden rounded-lg">
           {hasMedia ? (
             <ProjectMedia project={project} />
           ) : (
             <ProjectCardPlaceholder project={project} />
           )}
+
+          {project.status !== "live" ? (
+            <span className="pointer-events-none absolute right-2.5 bottom-2.5 z-30 rounded-full border border-teal-400/30 bg-teal-500/20 px-2 py-0.5 text-[0.6rem] font-semibold text-teal-100 backdrop-blur-sm">
+              {projectPlaceholderLabel(project)}
+            </span>
+          ) : null}
+
           {hasMedia && hasImageLink
             ? isExternalImageLink
               ? (
@@ -84,7 +95,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     href={imageHref!}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 z-10 cursor-pointer"
+                    className="absolute inset-0 z-20 cursor-pointer"
                     aria-label={`Open ${project.title} preview`}
                   >
                     <span className="sr-only">Open {project.title}</span>
@@ -93,7 +104,7 @@ export function ProjectCard({ project }: { project: Project }) {
               : (
                   <Link
                     href={imageHref!}
-                    className="absolute inset-0 z-10 cursor-pointer"
+                    className="absolute inset-0 z-20 cursor-pointer"
                     aria-label={`Open ${project.title} preview`}
                   >
                     <span className="sr-only">Open {project.title}</span>
@@ -102,23 +113,26 @@ export function ProjectCard({ project }: { project: Project }) {
             : null}
         </div>
 
-        <h2 className="theme-card-title mb-3 line-clamp-2 text-xl leading-snug font-semibold sm:text-2xl">
-          {project.title}
-        </h2>
         <ProjectCardDescription
           text={project.description}
           idPrefix={project.slug}
         />
-        <ul className="mt-auto flex flex-wrap gap-2 pt-4">
-          {project.stacks.map((stack) => (
-            <li
-              key={`${project.slug}-${stack}`}
-              className="theme-accent-text rounded-md bg-teal-500/15 px-2 py-0.5 text-xs font-medium"
-            >
-              {stack}
-            </li>
-          ))}
-        </ul>
+
+        <div className="mt-auto flex flex-col items-start pt-2">
+          <span className="theme-accent-text rounded-full border border-teal-400/30 bg-teal-500/15 px-2 py-0.5 text-[0.6rem] font-semibold tracking-[0.14em] uppercase">
+            {PROJECT_CATEGORY_LABELS[project.category]}
+          </span>
+          <ul className="mt-2 flex flex-wrap gap-1.5">
+            {project.stacks.map((stack) => (
+              <li
+                key={`${project.slug}-${stack}`}
+                className="theme-accent-text rounded-md bg-teal-500/15 px-1.5 py-0.5 text-[0.65rem] font-medium"
+              >
+                {stack}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </article>
   );

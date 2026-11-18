@@ -4,8 +4,9 @@ import { defineQuery } from "next-sanity";
 export const projectsQuery = defineQuery(/* groq */ `
   *[_type == "project" && defined(slug.current)] | order(orderRank asc, _createdAt desc) {
     "slug": slug.current,
-    "createdAt": _createdAt,
+    "createdAt": coalesce(publishedAt, _createdAt),
     title,
+    category,
     description,
     status,
     statusLabel,

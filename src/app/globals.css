@@ -480,6 +480,10 @@ body {
   animation-delay: 100ms;
 }
 
+.project-card-enter-3 {
+  animation-delay: 200ms;
+}
+
 .page-fade-in-delay-2 {
   animation-delay: 200ms;
 }

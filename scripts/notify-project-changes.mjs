@@ -9,17 +9,20 @@ function stripComments(text) {
 }
 
 function extractEntries(text) {
-  const marker = "projects: Project[] = [";
-  const startIdx = text.indexOf(marker);
-  if (startIdx === -1) return [];
+  // Match the declaration, not a fixed name: `localProjects`, `Projects` and
+  // `projects` all resolve to the same array of project literals.
+  const declaration = /const\s+\w*[Pp]rojects\s*:\s*Project\[\]\s*=\s*\[/;
+  const match = declaration.exec(text);
+  if (!match) return [];
 
+  const startIdx = match.index + match[0].length;
   const entries = [];
   let depth = 0;
   let entryStart = -1;
   let inString = null;
   let escaped = false;
 
-  for (let i = startIdx + marker.length; i < text.length; i++) {
+  for (let i = startIdx; i < text.length; i++) {
     const ch = text[i];
 
     if (inString) {
