@@ -1,0 +1,202 @@
+VERIFIED NEWSLETTER NOTES
+=========================
+Checked: 2026-11-18
+Branch: Dev (remote git@github.com:owenbcoding/owencodes-nextjs.git)
+Default branch: master @ 13719f7
+Method: live HTTP requests to production, DNS lookups, git inspection of master,
+        reading the newsletter code on master. No secrets were read.
+
+Nothing in this file was guessed. Each item says how it was verified.
+
+
+1. LIVE PRODUCTION ENDPOINT CHECKS  (https://www.owencodes.dev)
+----------------------------------------------------------------
+a) POST /api/newsletter/subscribe  {"email":"not-an-email"}
+   Result: HTTP 400, application/json
+   Body:   {"ok":false,"created":false,"message":"Please enter a valid email address."}
+   Meaning: the route exists in production and is validating input. It did NOT
+   reach Resend, so this says nothing about whether RESEND_API_KEY is set.
+
+b) POST /api/newsletter/sanity-webhook  (header sanity-webhook-signature: bogus)
+   Result: HTTP 500, application/json
+   Body:   {"ok":false,"error":"Sanity webhook secret is not configured."}
+   Meaning: the webhook route exists in production, but SANITY_WEBHOOK_SECRET is
+   not set in the Vercel environment. This is the real blocker for automatic
+   newsletter sending on publish. The request was rejected before any signature
+   check, so no webhook can currently be authenticated.
+
+c) POST /api/newsletter/send  {}
+   Result: HTTP 200, text/html (the site's 404 page markup)
+   Meaning: the old manual send route does not exist in production. Expected -
+   master removed it on 2026-11-16.
+
+d) POST /api/contact  (invalid payload)
+   Result: HTTP 400 JSON
+   Meaning: contact route works; unrelated to newsletter sending.
+
+e) Apex https://owencodes.dev returns 307 to https://www.owencodes.dev
+   Meaning: use the www host everywhere (Sanity webhook URL, site URL).
+
+
+2. GIT / GITHUB STATE
+---------------------
+- master removed the GitHub Actions newsletter pipeline on 2026-11-16:
+    5488326  feat: remove newsletter sending functionality
+    8d38f58  feat: remove send newsletter script
+    b44c7a1  feat: remove newsletter automation workflow for project pushes
+    bb01b49  feat: remove newsletter automation workflow for content updates
+    2253dcc  feat: remove newsletter automation workflow for blog pushes
+    01e4d10  feat: remove newsletter automation workflow on archive push
+- ace8485 "feat: implement Sanity webhook for newsletter publishing" is the
+  replacement design that is now on master.
+- Verified with `git ls-tree FETCH_HEAD:.github/workflows` on master: no
+  workflows remain there.
+- GitHub repository currently reports 0 workflows registered.
+- Dev (local working tree) still contains 4 stale workflow files:
+    .github/workflows/newsletter-on-archive-push.yml
+    .github/workflows/newsletter-on-blog-push.yml
+    .github/workflows/newsletter-on-content-update.yml
+    .github/workflows/newsletter-on-project-push.yml
+  These are leftovers. master deleted the same files, so landing Dev on master
+  does not re-add them (checked with `git merge-tree --write-tree FETCH_HEAD HEAD`),
+  but they are dead code while they sit on Dev.
+- Verified with `git ls-tree -r FETCH_HEAD -- src/app/api/newsletter`: master has
+  only these three routes:
+    src/app/api/newsletter/sanity-webhook/route.ts
+    src/app/api/newsletter/subscribe/route.ts
+    src/app/api/newsletter/unsubscribe/route.ts
+  There is no send route and no GitHub Actions path on master anymore.
+
+Conclusion: GitHub Actions is NOT part of the current design. The newsletter is
+driven by a Sanity webhook -> /api/newsletter/sanity-webhook -> Resend broadcasts.
+
+
+3. ENVIRONMENT VARIABLES THE MASTER CODE ACTUALLY READS
+-------------------------------------------------------
+Verified with `git grep -o -E "process\.env\.[A-Z_0-9]+" FETCH_HEAD -- src/lib/newsletter.ts src/app/api/newsletter`:
+
+  RESEND_API_KEY                 required to talk to Resend at all
+  RESEND_AUDIENCE_ID             audience contacts get added to
+  RESEND_SEGMENT_ID              optional, broadcast segment
+  RESEND_WELCOME_TEMPLATE_ID     welcome email on subscribe
+  RESEND_KEY                     fallback name for the API key
+  SANITY_WEBHOOK_SECRET          REQUIRED - currently missing in production
+  MAIL_FROM_ADDRESS              sender, e.g. newsletter@owencodes.dev
+  MAIL_FROM_NAME                 sender display name, e.g. Owencodes
+  CONTACT_FROM_EMAIL             overrides MAIL_FROM_ADDRESS for contact + newsletter
+  NEWSLETTER_NO_REPLY_FROM       no-reply sender for transactional mail
+  NEWSLETTER_UNSUBSCRIBE_SECRET  signs unsubscribe links (falls back to NEWSLETTER_SEND_TOKEN)
+  NEWSLETTER_SEND_TOKEN          old token, still used as unsubscribe fallback
+  MAIL_PASSWORD                  legacy SMTP-era var, unused by Resend
+
+Notes verified by reading the code:
+- If MAIL_FROM_ADDRESS is not set, the sender falls back to
+  "Owencodes Newsletter <onboarding@resend.dev>". onboarding@resend.dev can only
+  send to the Resend account owner's own address, so in practice every real
+  subscriber would fail until a domain address is configured.
+- If NEWSLETTER_NO_REPLY_FROM is not set, it also falls back to onboarding@resend.dev.
+- getSiteUrl() reads NEXT_PUBLIC_SITE_URL, then VERCEL_URL, then localhost.
+- SITE_URL (the old GitHub Actions variable) is now unused by the app.
+- Sending goes through resend.broadcasts.create({ send: true }), i.e. a real
+  broadcast to the whole audience - not a single test email.
+
+
+4. RESEND DOMAIN / DNS VERIFICATION
+-----------------------------------
+Verified with node:dns/promises (dig and nslookup are not installed on this machine).
+- TXT send.owencodes.dev
+    v=spf1 include:amazonses.com ~all                          PRESENT
+- MX  send.owencodes.dev
+    feedback-smtp.eu-west-1.amazonses.com (priority 0)          PRESENT
+- TXT resend._domainkey.owencodes.dev
+    p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDR9I7W...          PRESENT (DKIM)
+- TXT _dmarc.owencodes.dev                                      ENOTFOUND
+- TXT _dmarc.send.owencodes.dev                                 ENOTFOUND
+
+Meaning: the Resend sending domain (send.owencodes.dev) is set up correctly -
+SPF, Amazon SES feedback MX and DKIM are all published, and the sending region
+is eu-west-1. DMARC is missing at both the apex and the subdomain, so there is
+no policy telling receivers what to do with unauthenticated mail. Mail can still
+deliver without it, but adding a start-off policy is recommended:
+    _dmarc.owencodes.dev  TXT  "v=DMARC1; p=none; rua=mailto:you@owencodes.dev"
+This was not something I changed - DNS is outside this repository.
+
+
+5. WHAT I COULD NOT VERIFY, AND WHY
+-----------------------------------
+- Whether RESEND_API_KEY / RESEND_AUDIENCE_ID are set in Vercel: values are not
+  readable from here and no deploy env was available.
+- Whether the Resend audience has subscribers: needs the API key or dashboard.
+- Whether a real email lands: NO TEST MESSAGE WAS SENT, for three reasons:
+    1. .env.local contains only NEXT_PUBLIC_CV_DOWNLOAD_URL - there is no
+       RESEND_API_KEY locally, so nothing could be sent from this machine.
+    2. The production send path is a Resend broadcast to the entire audience;
+       triggering it would email real subscribers.
+    3. /api/newsletter/send does not exist in production (verified above), and
+       the webhook is unconfigured (verified above).
+- GitHub Actions secrets exist but their values are write-only:
+  NEWSLETTER_SEND_ENDPOINT, NEWSLETTER_SEND_TOKEN, RESEND_AUDIENCE_ID, SITE_URL.
+  They are now unused on master and can be deleted.
+
+Bottom line: sending was never proven end to end. The only reason there is no
+email from Resend is that the pipeline has never been switched on.
+
+
+6. WHAT STILL NEEDS TO BE DONE FOR IT TO WORK
+---------------------------------------------
+In Vercel (production + preview), then redeploy:
+  SANITY_WEBHOOK_SECRET      = <random long string, same value in Sanity>
+  RESEND_API_KEY             = re_...
+  RESEND_AUDIENCE_ID         = ...
+  RESEND_WELCOME_TEMPLATE_ID = ... (optional, welcome email)
+  RESEND_SEGMENT_ID          = ... (optional)
+  MAIL_FROM_ADDRESS          = newsletter@owencodes.dev
+  MAIL_FROM_NAME             = Owencodes
+  NEXT_PUBLIC_SITE_URL       = https://www.owencodes.dev
+  NEWSLETTER_UNSUBSCRIBE_SECRET = <random long string>
+Leave CONTACT_FROM_EMAIL unset unless contact mail should use a different sender,
+because it overrides MAIL_FROM_ADDRESS for the newsletter too.
+
+In Sanity (project -> API -> Webhooks), create one webhook:
+  URL:        https://www.owencodes.dev/api/newsletter/sanity-webhook
+  Triggers:   create + update
+  Secret:     same value as SANITY_WEBHOOK_SECRET
+  Filter:     _type in ["blogPost","project","archivePost"] && !(_id in path("drafts.**"))
+  Projection: {"_id":_id,"_type":_type,"title":title,"slug":slug,
+               "description":description,"subject":subject,"preview":preview}
+
+In GitHub: delete the now-unused newsletter secrets listed in section 5.
+
+Local: add DAILY_DEV_API_TOKEN only if testing the daily.dev feed; it is unrelated
+to the newsletter.
+
+
+7. HOW TO TEST SAFELY (single recipient, no mass email)
+-------------------------------------------------------
+Do not use the production broadcast path for a test - it mails every confirmed
+contact in the audience.
+  1. Create a SECOND Resend audience, e.g. "newsletter-test", and add only your
+     own address to it.
+  2. In a preview deployment, point RESEND_AUDIENCE_ID at that test audience and
+     set the rest of the vars. Never point production at it.
+  3. Publish a draft blog post in Sanity (not in production content) and watch
+     the preview deployment logs for the webhook request.
+  4. Confirm the email arrives from newsletter@owencodes.dev, not
+     onboarding@resend.dev, and that the unsubscribe link resolves.
+  5. Delete the test audience and preview env vars afterwards.
+
+
+8. KNOWN ISSUES / THINGS TO WATCH
+---------------------------------
+- Duplicate sends: a Sanity webhook fires on both create and update, so editing
+  and re-publishing the same document sends the broadcast again. There is no
+  "already sent" guard in the current code.
+- Unsubscribed contacts: broadcasts go to the audience; make sure unsubscribe
+  updates actually remove or suppress the contact, otherwise people who clicked
+  unsubscribe keep receiving mail.
+- Legacy file data/newsletter-subscribers.json is still tracked but unused by the
+  Resend flow. It is also in .gitignore now, so it will not be updated again.
+- The 4 stale workflow files and the scripts they call are dead code on Dev and
+  should be deleted in a follow-up so nobody re-enables the old path by mistake.
+
+---------------------------- end of verified notes ----------------------------
