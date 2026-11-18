@@ -17,6 +17,8 @@ export type Project = {
   link?: { href: string; label: string };
   /** Slug of the matching post in content/project-archive. */
   archiveSlug?: string;
+  /** When the project went live; newest projects are listed first. */
+  createdAt?: string;
 };
 
 export const PROJECT_FILTERS = [
@@ -43,6 +45,7 @@ const localProjects: Project[] = [
     imageHref: "/projects/shopify-store-preview",
     link: { href: "https://brioils.store/", label: "Visit live site" },
     archiveSlug: "Project-Archive-003",
+    createdAt: "2026-08-21",
   },
   {
     slug: "tracton-biodiversity-group",
@@ -52,6 +55,7 @@ const localProjects: Project[] = [
     stacks: ["Next.js", "TailwindCSS", "TypeScript", "Sanity"],
     status: "live",
     link: { href: "https://www.tractonbiodiversity.org/", label: "Visit live site" },
+    createdAt: "2026-08-08",
   },
   {
     slug: "leadscout",
@@ -63,11 +67,16 @@ const localProjects: Project[] = [
     imageHref: "https://www.leadscout.work/",
     link: { href: "https://www.leadscout.work/", label: "Visit live site" },
     archiveSlug: "Project-Archive-002",
+    createdAt: "2026-08-18",
   },
 ];
 
+function byNewest(a: Project, b: Project): number {
+  return (b.createdAt ?? "").localeCompare(a.createdAt ?? "");
+}
+
 export async function getAllProjects(): Promise<Project[]> {
-  if (!sanityClient) return localProjects;
+  if (!sanityClient) return [...localProjects].sort(byNewest);
 
   const sanityProjects = await sanityClient.fetch<Project[]>(projectsQuery);
   const projectsBySlug = new Map(
@@ -84,7 +93,7 @@ export async function getAllProjects(): Promise<Project[]> {
     );
   }
 
-  return Array.from(projectsBySlug.values());
+  return Array.from(projectsBySlug.values()).sort(byNewest);
 }
 
 export const projects = localProjects;
