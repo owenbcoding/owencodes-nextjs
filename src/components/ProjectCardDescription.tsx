@@ -30,7 +30,7 @@ export function ProjectCardDescription({ text, idPrefix }: ProjectCardDescriptio
   }, [measure, text]);
 
   return (
-    <div className="mb-4 shrink-0">
+    <div className="shrink-0">
       <p
         ref={pRef}
         id={descId}

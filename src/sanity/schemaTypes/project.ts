@@ -15,6 +15,23 @@ export const project = defineType({
       options: { source: "title", maxLength: 96 },
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "category",
+      title: "Category",
+      description:
+        "Which section of the projects page this appears in. Planned work uses Status = \"Coming soon\" and still shows under its category.",
+      type: "string",
+      options: {
+        list: [
+          { title: "Web apps", value: "software" },
+          { title: "Hardware", value: "hardware" },
+          { title: "IoT", value: "iot" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "software",
+      validation: (rule) => rule.required(),
+    }),
     defineField({ name: "description", title: "Card description", type: "text", rows: 3, validation: (rule) => rule.required() }),
     defineField({
       name: "status",
@@ -32,6 +49,14 @@ export const project = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({ name: "statusLabel", title: "Status label", type: "string" }),
+    defineField({
+      name: "publishedAt",
+      title: "Published date",
+      description:
+        "When this project went live. The projects page lists newest first, so a freshly published project appears at the front (left) of its row.",
+      type: "datetime",
+      initialValue: () => new Date().toISOString(),
+    }),
     defineField({
       name: "stacks",
       title: "Technology tags",
@@ -78,6 +103,6 @@ export const project = defineType({
     defineField({ name: "orderRank", title: "Display order", type: "number", initialValue: 0 }),
   ],
   preview: {
-    select: { title: "title", subtitle: "status", media: "image" },
+    select: { title: "title", subtitle: "category", media: "image" },
   },
 });
