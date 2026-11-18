@@ -21,6 +21,18 @@ submissions are not stored in Sanity.
 Newsletter unsubscribe links use `NEWSLETTER_UNSUBSCRIBE_SECRET` to sign confirmation tokens.
 If it is not set, `NEWSLETTER_SEND_TOKEN` is used as the signing secret.
 
+## daily.dev feed
+
+The blogs page has a "Saved & upvoted on daily.dev" section with the posts you bookmarked or
+upvoted. Create a personal access token at [daily.dev/settings/api](https://daily.dev/settings/api)
+(every account can) and set `DAILY_DEV_API_TOKEN` in `.env.local` and in your hosting provider.
+Without the token the section is hidden.
+
+The public API has no standalone upvotes endpoint, so upvoted posts come from your reading
+history (`upvoted: true`) and saved posts come from `/bookmarks/`. Responses are cached for 12
+hours because the free plan allows 200 requests a month (two requests every 12 hours is about
+120), so new saves and upvotes can take up to half a day to appear.
+
 ## CV Download
 
 The homepage and navigation download buttons use a direct-download URL defined in
