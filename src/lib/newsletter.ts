@@ -89,7 +89,6 @@ function getUnsubscribeSigningSecret(): string | null {
   const secret =
     process.env.NEWSLETTER_UNSUBSCRIBE_SECRET ??
     process.env.NEWSLETTER_SEND_TOKEN;
-
   return secret?.trim() ? secret : null;
 }
 

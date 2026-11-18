@@ -19,7 +19,40 @@ Contact form messages continue to go directly to `CONTACT_MAIL_TO` through Resen
 submissions are not stored in Sanity.
 
 Newsletter unsubscribe links use `NEWSLETTER_UNSUBSCRIBE_SECRET` to sign confirmation tokens.
-If it is not set, `NEWSLETTER_SEND_TOKEN` is used as the signing secret.
+For compatibility with existing deployments, `NEWSLETTER_SEND_TOKEN` is still accepted as a
+fallback signing secret; new deployments should set `NEWSLETTER_UNSUBSCRIBE_SECRET` explicitly.
+
+## Sanity newsletter notifications
+
+Newsletter broadcasts are sent directly from the Sanity publish webhook; GitHub Actions do not
+watch content files or send these emails. Configure `SANITY_WEBHOOK_SECRET` in the production
+hosting environment and use the exact same value as the signing secret for a Sanity webhook.
+
+In Sanity, create a webhook for the production dataset with:
+
+- URL: `https://your-site.example/api/newsletter/sanity-webhook`
+- Events: **Create** and **Update** only (do not select Delete)
+- Filter: `_type in ["blogPost", "project", "archivePost"] && !(_id in path("drafts.**"))`
+- Projection:
+
+  ```groq
+  {
+    "_id": _id,
+    "_type": _type,
+    "title": title,
+    "slug": slug.current,
+    "description": description,
+    "subject": subject,
+    "preview": preview
+  }
+  ```
+
+The webhook's signed request is verified before sending. Publishing or updating a published blog,
+project, or archive document sends an email; editing a draft or deleting a document does not.
+Ensure the production host also has `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`, and a verified sender
+address (`CONTACT_FROM_EMAIL` or `MAIL_FROM_ADDRESS`) configured, along with
+`NEXT_PUBLIC_SITE_URL` set to the canonical production URL for links in the email. Set
+`NEWSLETTER_UNSUBSCRIBE_SECRET` separately for unsubscribe links.
 
 ## daily.dev feed
 
