@@ -19,7 +19,7 @@ export type NewsletterSendPayload = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function resolveResendConfig():
-  | { resend: Resend; audienceId: string }
+  | { resend: Resend; segmentId: string }
   | { error: string } {
   const apiKey =
     process.env.RESEND_API_KEY ??
@@ -30,19 +30,21 @@ function resolveResendConfig():
     return { error: "Resend API key is not configured." };
   }
 
-  const audienceId =
-    process.env.RESEND_AUDIENCE_ID ?? process.env.RESEND_SEGMENT_ID;
+  // Resend replaced Audiences with Segments; the existing audience ID is the
+  // segment ID, so either variable works here.
+  const segmentId =
+    process.env.RESEND_SEGMENT_ID ?? process.env.RESEND_AUDIENCE_ID;
 
-  if (!audienceId) {
+  if (!segmentId) {
     return {
       error:
-        "Resend audience is not configured. Set RESEND_AUDIENCE_ID.",
+        "Resend segment is not configured. Set RESEND_SEGMENT_ID (or RESEND_AUDIENCE_ID).",
     };
   }
 
   return {
     resend: new Resend(apiKey),
-    audienceId,
+    segmentId,
   };
 }
 
@@ -160,12 +162,9 @@ export async function addNewsletterSubscriber(email: string): Promise<{
     };
   }
 
-  const { resend, audienceId } = config;
+  const { resend, segmentId } = config;
 
-  const existing = await resend.contacts.get({
-    audienceId,
-    email: trimmed,
-  });
+  const existing = await resend.contacts.get({ email: trimmed });
 
   if (existing.data) {
     return {
@@ -181,9 +180,9 @@ export async function addNewsletterSubscriber(email: string): Promise<{
   }
 
   const created = await resend.contacts.create({
-    audienceId,
     email: trimmed,
     unsubscribed: false,
+    segments: [{ id: segmentId }],
   });
 
   if (created.error) {
@@ -288,19 +287,13 @@ export async function removeNewsletterSubscriber(email: string): Promise<boolean
     return false;
   }
 
-  const { resend, audienceId } = config;
-  const existing = await resend.contacts.get({
-    audienceId,
-    email: trimmed,
-  });
+  const { resend } = config;
+  const existing = await resend.contacts.get({ email: trimmed });
   if (!existing.data) {
     return false;
   }
 
-  const removed = await resend.contacts.remove({
-    audienceId,
-    email: trimmed,
-  });
+  const removed = await resend.contacts.remove({ email: trimmed });
 
   return Boolean(removed.data?.deleted);
 }
@@ -327,7 +320,7 @@ export async function sendNewsletter(payload: NewsletterSendPayload): Promise<{
     };
   }
 
-  const { resend, audienceId } = config;
+  const { resend, segmentId } = config;
   const fromAddress = resolveFromAddress();
   const siteUrl = getSiteUrl();
 
@@ -360,7 +353,7 @@ export async function sendNewsletter(payload: NewsletterSendPayload): Promise<{
   `;
 
   const { data, error } = await resend.broadcasts.create({
-    audienceId,
+    segmentId,
     from: fromAddress,
     subject: payload.subject,
     previewText: payload.preview,

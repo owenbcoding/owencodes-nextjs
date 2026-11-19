@@ -5,6 +5,10 @@ import { formatBlogDate, type BlogMeta } from "@/lib/blogs";
 export function BlogCard({ blog }: { blog: BlogMeta }) {
   const cardContent = (
     <>
+      <h3 className="theme-card-title mb-3 line-clamp-2 text-lg leading-snug font-semibold transition-colors group-hover:text-teal-300 sm:text-xl">
+        {blog.title}
+      </h3>
+
       <div className="blog-card-artwork relative mb-4 aspect-[1.65] overflow-hidden rounded-lg">
         {blog.coverImageUrl ? (
           <Image
@@ -31,16 +35,13 @@ export function BlogCard({ blog }: { blog: BlogMeta }) {
       </div>
 
       <div className="flex flex-1 flex-col">
-        <h3 className="theme-card-title mb-2 line-clamp-2 text-lg leading-snug font-semibold transition-colors group-hover:text-teal-300 sm:text-xl">
-          {blog.title}
-        </h3>
         <p className="theme-muted-soft line-clamp-3 text-sm leading-relaxed sm:text-base">
           {blog.description}
         </p>
-        <span className="theme-accent-text mt-4 inline-flex text-sm font-semibold">
+        <span className="theme-accent-text mt-auto inline-flex pt-4 text-sm font-semibold">
           Read More . . .
         </span>
-        <div className="theme-muted mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-2 text-xs">
+        <div className="theme-muted flex flex-wrap items-center gap-x-2 gap-y-1 pt-2 text-xs">
           <span className="theme-accent-text font-medium">{blog.category}</span>
           <time dateTime={blog.date}>{formatBlogDate(blog.date)}</time>
           <span aria-hidden="true" className="ml-auto">
