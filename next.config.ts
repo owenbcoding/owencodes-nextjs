@@ -12,6 +12,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        // Allow the Sanity Dashboard (sanity.io) to embed the studio in an iframe.
+        source: "/studio/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self' https://*.sanity.io",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {
