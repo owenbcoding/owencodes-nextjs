@@ -53,3 +53,4 @@ package-lock.json
 /content/blogs/newsletter-system-with-resend.mdx
 /data/newsletter-subscribers.json
 /env-fix-up.md
+/.env.example
