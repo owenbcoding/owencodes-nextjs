@@ -1,14 +1,7 @@
 packages: []
 
 allowBuilds:
-  '@tsparticles/engine': set this to true or false
-  esbuild: set this to true or false
-  sharp: set this to true or false
-  unrs-resolver: set this to true or false
-
-ignoredBuiltDependencies:
-  - sharp
-
-onlyBuiltDependencies:
-  - '@tsparticles/engine'
-  - unrs-resolver
+  '@tsparticles/engine': true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
