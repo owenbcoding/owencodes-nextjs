@@ -79,9 +79,11 @@ export function MainNavigation() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-  useEffect(() => {
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (!mobileOpen) return;

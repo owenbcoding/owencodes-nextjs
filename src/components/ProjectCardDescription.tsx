@@ -18,7 +18,7 @@ export function ProjectCardDescription({ text, idPrefix }: ProjectCardDescriptio
     if (!el) return;
     if (expanded) return;
     setIsTruncated(el.scrollHeight > el.clientHeight + 1);
-  }, [expanded, text]);
+  }, [expanded]);
 
   useLayoutEffect(() => {
     measure();
@@ -27,7 +27,7 @@ export function ProjectCardDescription({ text, idPrefix }: ProjectCardDescriptio
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [measure, text]);
+  }, [measure]);
 
   return (
     <div className="shrink-0">

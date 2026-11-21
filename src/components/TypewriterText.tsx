@@ -16,25 +16,31 @@ export function TypewriterText({
   startDelayMs = 300,
 }: TypewriterTextProps) {
   const [charCount, setCharCount] = useState(0);
+  const [lastText, setLastText] = useState(text);
+  if (lastText !== text) {
+    setLastText(text);
+    setCharCount(0);
+  }
 
   useEffect(() => {
-    setCharCount(0);
+    let interval: ReturnType<typeof setInterval> | undefined;
 
     const startTimeout = setTimeout(() => {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setCharCount((count) => {
           if (count >= text.length) {
-            clearInterval(interval);
+            if (interval) clearInterval(interval);
             return count;
           }
           return count + 1;
         });
       }, speedMs);
-
-      return () => clearInterval(interval);
     }, startDelayMs);
 
-    return () => clearTimeout(startTimeout);
+    return () => {
+      clearTimeout(startTimeout);
+      if (interval) clearInterval(interval);
+    };
   }, [text, speedMs, startDelayMs]);
 
   const isDone = charCount >= text.length;
