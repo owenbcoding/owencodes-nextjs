@@ -10,9 +10,39 @@ import type { Project } from "@/lib/projects";
  * entry added at the top of a category appears at the front of its row.
  */
 export const plannedProjects: Project[] = [
-  // Planned hardware and IoT cards are hidden for now. Uncomment the block
-  // below to bring the 6 hardware + 6 IoT placeholder cards back.
+  // New hardware ideas — commented out until they are ready to show.
   /*
+  {
+    slug: "home-lab",
+    title: "Home Lab",
+    description:
+      "A small rack for self-hosted services, backups and network testing.",
+    category: "hardware",
+    stacks: ["Proxmox", "Docker", "Networking"],
+    status: "coming-soon",
+    createdAt: "2026-11-10",
+  },
+  {
+    slug: "pi-diy-tv",
+    title: "Pi DIY TV",
+    description:
+      "A Raspberry Pi retro TV build in a printed case with a custom front end.",
+    category: "hardware",
+    stacks: ["Raspberry Pi", "Linux", "3D printing"],
+    status: "coming-soon",
+    createdAt: "2026-10-20",
+  },
+  {
+    slug: "retro-handheld",
+    title: "Retro Handheld",
+    description:
+      "A Raspberry Pi based handheld emulator with a printed shell and battery pack.",
+    category: "hardware",
+    stacks: ["Raspberry Pi", "RetroPie", "3D printing"],
+    status: "coming-soon",
+    createdAt: "2026-09-28",
+  },
+  */
   {
     slug: "desk-clock",
     title: "Desk Clock",
@@ -67,6 +97,39 @@ export const plannedProjects: Project[] = [
     status: "coming-soon",
     createdAt: "2026-02-14",
   },
+  // New IoT ideas — commented out until they are ready to show.
+  /*
+  {
+    slug: "smart-letterbox",
+    title: "Smart Letterbox",
+    description:
+      "A contact sensor and camera that let me know when the post has arrived.",
+    category: "iot",
+    stacks: ["ESP32", "Sensors", "Home Assistant"],
+    status: "coming-soon",
+    createdAt: "2026-11-05",
+  },
+  {
+    slug: "water-tank-monitor",
+    title: "Water Tank Monitor",
+    description:
+      "An ultrasonic sensor tracking the water level of an outdoor tank.",
+    category: "iot",
+    stacks: ["ESP32", "Ultrasonic sensor", "MQTT"],
+    status: "coming-soon",
+    createdAt: "2026-10-12",
+  },
+  {
+    slug: "pet-feeder",
+    title: "Pet Feeder",
+    description:
+      "A scheduled feeder that confirms each portion actually dropped into the bowl.",
+    category: "iot",
+    stacks: ["ESP32", "Servo", "Home Assistant"],
+    status: "coming-soon",
+    createdAt: "2026-09-20",
+  },
+  */
   {
     slug: "greenhouse-monitor",
     title: "Greenhouse Monitor",
@@ -121,5 +184,4 @@ export const plannedProjects: Project[] = [
     status: "coming-soon",
     createdAt: "2026-02-02",
   },
-  */
 ];
