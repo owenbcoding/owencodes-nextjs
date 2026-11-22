@@ -5,7 +5,8 @@ import { Footer } from "@/components/Footer";
 import { BirthdayConfetti } from "@/components/BirthdayConfetti";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
-import { RotatingWord } from "@/components/RotatingWord";
+// Commented out along with the hero tagline below; restore when re-enabling it.
+// import { RotatingWord } from "@/components/RotatingWord";
 import { CV_DOWNLOAD_URL } from "@/lib/cv";
 import {
   getSiteUrl,
@@ -106,13 +107,16 @@ export default function Home() {
           <h1
             id="intro-heading"
             className="theme-heading mb-4 mt-5 text-4xl font-bold"
-            aria-label="Hi I'm Owen, Software Engineer, Developer, and Innovator"
+            aria-label="Hi I'm Owen"
           >
             Hi I&apos;m Owen,
+            {/* Commented out for now: the "Software Engineer / Developer / Innovator" tagline. */}
+            {/*
             <span className="block">
               Software{"\u2009"}
               <RotatingWord />
             </span>
+            */}
           </h1>
           <div className="mt-2 flex flex-col items-center justify-center gap-8 md:flex-row">
             <Image
