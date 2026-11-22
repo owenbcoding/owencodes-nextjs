@@ -18,7 +18,7 @@ const SECTIONS: {
     category: "software",
     eyebrow: "Web, apps & stores",
     title: "Apps I made",
-    titleAside: "My work experience",
+    titleAside: "My Work",
     description:
       "Sites, apps and experiments I designed and built for clients or myself.",
     emptyMessage: "No web app projects yet. Check back soon.",
