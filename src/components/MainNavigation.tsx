@@ -103,7 +103,7 @@ export function MainNavigation() {
   return (
     <nav
       aria-label="Main navigation"
-      className="theme-nav fixed inset-x-0 top-0 z-50 border-b p-2 shadow-[inset_0_0_8px_rgba(255,255,255,0.1),0_0_15px_rgba(45,212,191,0.15)] backdrop-blur-xl"
+      className="theme-nav fixed inset-x-0 top-0 z-50 border-b p-2 shadow-[inset_0_0_8px_rgba(255,255,255,0.1),0_0_15px_rgba(45,212,191,0.15)]"
     >
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link

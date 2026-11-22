@@ -168,7 +168,6 @@ body {
 
 .theme-nav {
   border-color: rgb(20 184 166 / 20%);
-  background: rgb(255 255 255 / 5%);
 }
 
 .theme-brand-link {
@@ -272,7 +271,6 @@ body {
 
 :root[data-theme="light"] .theme-nav {
   border-color: rgb(15 23 42 / 10%);
-  background: rgb(255 255 255 / 55%);
 }
 
 :root[data-theme="light"] .theme-nav-link,

@@ -61,6 +61,13 @@ const skills: {
     project: "Used across my websites and web apps",
   },
   {
+    name: "Python",
+    icon: "logos:python",
+    category: "Backend",
+    description: "Writing scripts for automation, data work, and small tools.",
+    project: "Custom automation and data scripts",
+  },
+  {
     name: "TypeScript",
     icon: "logos:typescript-icon",
     category: "Frontend",

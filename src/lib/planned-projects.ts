@@ -10,39 +10,40 @@ import type { Project } from "@/lib/projects";
  * entry added at the top of a category appears at the front of its row.
  */
 export const plannedProjects: Project[] = [
-  // New hardware ideas — commented out until they are ready to show.
+  // {
+  //   slug: "home-lab",
+  //   title: "Home Lab",
+  //   description:
+  //     "A small rack for self-hosted services, backups and network testing.",
+  //   category: "hardware",
+  //   stacks: ["Proxmox", "Docker", "Networking"],
+  //   status: "coming-soon",
+  //   createdAt: "2026-11-10",
+  // },
+  // {
+  //   slug: "pi-diy-tv",
+  //   title: "Pi DIY TV",
+  //   description:
+  //     "A Raspberry Pi 5 with 10 inch screen TV build in a printed case with a custom front end.",
+  //   category: "hardware",
+  //   stacks: ["Raspberry Pi", "Linux", "3D printing"],
+  //   status: "coming-soon",
+  //   createdAt: "2026-10-20",
+  // },
+  // {
+  //   slug: "budget-internet",
+  //   title: "Budget Internet",
+  //   description:
+  //     "Getting online cheaply with a router, and a cheaper internet subscription.",
+  //   category: "hardware",
+  //   stacks: ["4G router", "External antenna", "Networking"],
+  //   status: "coming-soon",
+  //   createdAt: "2026-09-28",
+  // },
+  // Older placeholder hardware cards — commented out so the real builds above
+  // are the only hardware cards on the projects page. Uncomment the block to
+  // bring them back.
   /*
-  {
-    slug: "home-lab",
-    title: "Home Lab",
-    description:
-      "A small rack for self-hosted services, backups and network testing.",
-    category: "hardware",
-    stacks: ["Proxmox", "Docker", "Networking"],
-    status: "coming-soon",
-    createdAt: "2026-11-10",
-  },
-  {
-    slug: "pi-diy-tv",
-    title: "Pi DIY TV",
-    description:
-      "A Raspberry Pi retro TV build in a printed case with a custom front end.",
-    category: "hardware",
-    stacks: ["Raspberry Pi", "Linux", "3D printing"],
-    status: "coming-soon",
-    createdAt: "2026-10-20",
-  },
-  {
-    slug: "retro-handheld",
-    title: "Retro Handheld",
-    description:
-      "A Raspberry Pi based handheld emulator with a printed shell and battery pack.",
-    category: "hardware",
-    stacks: ["Raspberry Pi", "RetroPie", "3D printing"],
-    status: "coming-soon",
-    createdAt: "2026-09-28",
-  },
-  */
   {
     slug: "desk-clock",
     title: "Desk Clock",
@@ -60,15 +61,6 @@ export const plannedProjects: Project[] = [
     stacks: ["RP2040", "KiCad", "QMK"],
     status: "coming-soon",
     createdAt: "2026-04-28",
-  },
-  {
-    slug: "plant-waterer",
-    title: "Plant Waterer",
-    description: "An automatic watering rig that reads soil moisture before pumping.",
-    category: "hardware",
-    stacks: ["ESP32", "Sensors", "3D printing"],
-    status: "coming-soon",
-    createdAt: "2026-04-09",
   },
   {
     slug: "pi-nas",
@@ -97,6 +89,7 @@ export const plannedProjects: Project[] = [
     status: "coming-soon",
     createdAt: "2026-02-14",
   },
+  */
   // New IoT ideas — commented out until they are ready to show.
   /*
   {
@@ -130,15 +123,36 @@ export const plannedProjects: Project[] = [
     createdAt: "2026-09-20",
   },
   */
-  {
-    slug: "greenhouse-monitor",
-    title: "Greenhouse Monitor",
-    description: "Soil moisture and temperature readings published over MQTT.",
-    category: "iot",
-    stacks: ["ESP32", "MQTT", "Home Assistant"],
-    status: "coming-soon",
-    createdAt: "2026-05-06",
-  },
+  // {
+  //   slug: "plant-waterer",
+  //   title: "Plant Waterer",
+  //   description: "An automatic watering rig that reads soil moisture before pumping.",
+  //   category: "iot",
+  //   stacks: ["ESP32", "Sensors", "3D printing"],
+  //   status: "coming-soon",
+  //   createdAt: "2026-05-06",
+  // },
+  // {
+  //   slug: "air-quality-map",
+  //   title: "Air Quality Map",
+  //   description: "Sensor nodes reporting PM2.5 readings onto a local map.",
+  //   category: "iot",
+  //   stacks: ["ESP32", "Sensors", "Next.js"],
+  //   status: "coming-soon",
+  //   createdAt: "2026-03-11",
+  // },
+  // {
+  //   slug: "energy-meter",
+  //   title: "Energy Meter",
+  //   description: "A CT clamp meter streaming household power use to a dashboard.",
+  //   category: "iot",
+  //   stacks: ["ESP32", "MQTT", "Grafana"],
+  //   status: "coming-soon",
+  //   createdAt: "2026-03-30",
+  // },
+  // Older placeholder IoT cards — commented out so only the three above show.
+  // Uncomment the block to bring them back.
+  /*
   {
     slug: "bin-day-reminder",
     title: "Bin Day Reminder",
@@ -147,24 +161,6 @@ export const plannedProjects: Project[] = [
     stacks: ["ESP32", "Home Assistant", "Automation"],
     status: "coming-soon",
     createdAt: "2026-04-17",
-  },
-  {
-    slug: "energy-meter",
-    title: "Energy Meter",
-    description: "A CT clamp meter streaming household power use to a dashboard.",
-    category: "iot",
-    stacks: ["ESP32", "MQTT", "Grafana"],
-    status: "coming-soon",
-    createdAt: "2026-03-30",
-  },
-  {
-    slug: "air-quality-map",
-    title: "Air Quality Map",
-    description: "Sensor nodes reporting PM2.5 readings onto a local map.",
-    category: "iot",
-    stacks: ["ESP32", "Sensors", "Next.js"],
-    status: "coming-soon",
-    createdAt: "2026-03-11",
   },
   {
     slug: "garage-door",
@@ -184,4 +180,5 @@ export const plannedProjects: Project[] = [
     status: "coming-soon",
     createdAt: "2026-02-02",
   },
+  */
 ];
