@@ -8,7 +8,7 @@ export type ProjectStatus = "live" | "coming-soon" | "in-development";
 export type ProjectCategory = "software" | "hardware" | "iot";
 
 export const PROJECT_CATEGORY_LABELS: Record<ProjectCategory, string> = {
-  software: "Web apps",
+  software: "Web app",
   hardware: "Hardware",
   iot: "IoT",
 };
@@ -21,6 +21,8 @@ export type Project = {
   image?: string;
   /** Muted video thumbnail for the card (e.g. product walkthrough). */
   video?: string;
+  /** Overrides the category tag shown on the card. */
+  categoryLabel?: string;
   stacks: string[];
   status: ProjectStatus;
   statusLabel?: string;
@@ -47,7 +49,7 @@ export type ProjectFilter = (typeof PROJECT_FILTERS)[number];
 const localProjects: Project[] = [
   {
     slug: "shopify-store-redesign",
-    title: "Shopify Store",
+    title: "Shopify Ecommerce",
     description: "A store I scaled and redesigned based in Ireland.",
     category: "software",
     video: "/images/shopify-new.mp4",
@@ -61,7 +63,7 @@ const localProjects: Project[] = [
   },
   {
     slug: "tracton-biodiversity-group",
-    title: "Tracton Website",
+    title: "Tracton Community",
     description: "A community made website for a local wildlife community",
     category: "software",
     image: "/images/tractontbg.png",
@@ -75,6 +77,7 @@ const localProjects: Project[] = [
     title: "Leadscout App",
     description: "A freelancing program to help find clients nearby online.",
     category: "software",
+    categoryLabel: "SaaS",
     image: "/images/Leadscout-app.png",
     stacks: ["Next.js", "TailwindCSS", "TypeScript", "AI"],
     status: "live",
@@ -124,10 +127,11 @@ export async function getAllProjects(): Promise<Project[]> {
       category: normalizeCategory(project.category),
     };
     if (project.slug === "tracton-biodiversity-group") {
-      normalized.title = "Tracton Website";
+      normalized.title = "Tracton Community";
     }
     if (project.slug === "leadscout") {
       normalized.title = "Leadscout App";
+      normalized.categoryLabel = "SaaS";
     }
     projectsBySlug.set(project.slug, normalized);
   }

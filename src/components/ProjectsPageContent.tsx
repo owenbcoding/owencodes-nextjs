@@ -17,7 +17,7 @@ const SECTIONS: {
     id: "web-apps-heading",
     category: "software",
     eyebrow: "Web, apps & stores",
-    title: "Web apps",
+    title: "Apps I made",
     titleAside: "My work experience",
     description:
       "Sites, apps and experiments I designed and built for clients or myself.",

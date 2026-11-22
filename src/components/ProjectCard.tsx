@@ -120,7 +120,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <div className="mt-auto flex flex-col items-start pt-2">
           <span className="theme-accent-text rounded-full border border-teal-400/30 bg-teal-500/15 px-2 py-0.5 text-[0.6rem] font-semibold tracking-[0.14em] uppercase">
-            {PROJECT_CATEGORY_LABELS[project.category]}
+            {project.categoryLabel ?? PROJECT_CATEGORY_LABELS[project.category]}
           </span>
           <ul className="mt-2 flex flex-wrap gap-1.5">
             {project.stacks.map((stack) => (
