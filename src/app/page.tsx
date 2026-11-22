@@ -134,41 +134,47 @@ export default function Home() {
                 </p>
                 <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
                   <li>💻 Self-Taught Programmer</li>
-                  <li>💻 Building things that matter</li>
+                  <li>🛠️ Building things that matter</li>
                   <li>🤖 AI &amp; automation</li>
                   <li>👨‍💻 Full Stack Dev</li>
                 </ul>
-                <div className="mb-6 flex flex-wrap items-center gap-3">
-                  <a
-                    href={CV_DOWNLOAD_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Download my CV or resume"
-                    className="theme-github-link inline-flex items-center gap-2 rounded-full border border-[rgb(20_184_166/30%)] px-5 py-3 font-semibold transition duration-200"
-                  >
-                    <svg
-                      className="h-5 w-5 shrink-0"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
-                    </svg>
-                    <span>Download CV / Resume</span>
-                  </a>
+                <div className="mb-6 flex flex-col items-start gap-3">
                   <a
                     href="https://buymeacoffee.com/y6nrvkq"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Buy me a coffee"
-                    className="theme-github-link inline-flex items-center gap-2 rounded-full border border-[rgb(20_184_166/30%)] px-5 py-3 font-semibold transition duration-200"
+                    className="blog-card group relative inline-flex rounded-full p-[1.5px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/70"
                   >
-                    <span aria-hidden="true">☕</span>
-                    <span>Buy me a coffee</span>
+                    <span aria-hidden="true" className="blog-card-rgb-border" />
+                    <span className="blog-card-content theme-title-font relative inline-flex items-center gap-2 rounded-full px-5 py-3 text-white transition-colors duration-300 group-hover:text-teal-300">
+                      <span aria-hidden="true">☕</span>
+                      <span>Buy me a coffee</span>
+                    </span>
+                  </a>
+                  <a
+                    href={CV_DOWNLOAD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Download my CV or resume"
+                    className="blog-card group relative inline-flex rounded-full p-[1.5px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/70"
+                  >
+                    <span aria-hidden="true" className="blog-card-rgb-border" />
+                    <span className="blog-card-content theme-title-font relative inline-flex items-center gap-2 rounded-full px-5 py-3 text-white transition-colors duration-300 group-hover:text-teal-300">
+                      <svg
+                        className="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 3v11m0 0 4-4m-4 4-4-4M4 15v5h16v-5" />
+                      </svg>
+                      <span>Download CV / Resume</span>
+                    </span>
                   </a>
                 </div>
                 <div className="mt-3 w-full">
