@@ -23,6 +23,9 @@ const SECTIONS: {
       "Sites, apps and experiments I designed and built for clients or myself.",
     emptyMessage: "No web app projects yet. Check back soon.",
   },
+  // Hidden for now until there are hardware projects to show. Restore by
+  // uncommenting these entries (nothing was deleted).
+  /*
   {
     id: "hardware-projects-heading",
     category: "hardware",
@@ -43,6 +46,7 @@ const SECTIONS: {
       "Connected devices and sensor projects, from the board to the dashboard.",
     emptyMessage: "No IoT projects yet. Check back soon.",
   },
+  */
 ];
 
 export function ProjectsPageContent({ projects }: { projects: Project[] }) {
