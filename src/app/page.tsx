@@ -128,10 +128,21 @@ export default function Home() {
             <div className="mt-10 flex w-full flex-col items-center md:ml-10 md:w-1/2 md:items-start">
               <div className="mx-auto flex w-full max-w-prose flex-col items-start justify-center gap-2 text-left">
                 <h2 className="theme-heading text-4xl font-bold">About me!</h2>
-                <p className="theme-body mb-5 mt-5 text-lg leading-relaxed md:text-xl">
+                <p className="theme-body mb-5 text-lg leading-relaxed md:text-xl">
                   I am a Self taught developer with a passion for coding and
                   problem-solving.
                 </p>
+                <a
+                  href="/projects#hardware-projects-heading"
+                  aria-label="Save money the smart way - see my hardware projects"
+                  className="blog-card group relative mb-5 inline-flex rounded-full p-[1.5px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/70"
+                >
+                  <span aria-hidden="true" className="blog-card-rgb-border" />
+                  <span className="blog-card-content theme-title-font relative inline-flex items-center gap-2 rounded-full px-5 py-3 text-white transition-colors duration-300 group-hover:text-teal-300">
+                    <span>Save money the smart way</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </a>
                 <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
                   <li>💻 Self-Taught Programmer</li>
                   <li>🛠️ Building things that matter</li>

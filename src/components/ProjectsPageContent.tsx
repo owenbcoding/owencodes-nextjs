@@ -9,6 +9,7 @@ const SECTIONS: {
   category: ProjectCategory;
   eyebrow: string;
   title: string;
+  titleAside?: string;
   description: string;
   emptyMessage: string;
 }[] = [
@@ -17,6 +18,7 @@ const SECTIONS: {
     category: "software",
     eyebrow: "Web, apps & stores",
     title: "Web apps",
+    titleAside: "My work experience",
     description:
       "Sites, apps and experiments I designed and built for clients or myself.",
     emptyMessage: "No web app projects yet. Check back soon.",
@@ -26,6 +28,7 @@ const SECTIONS: {
     category: "hardware",
     eyebrow: "Built to touch",
     title: "Hardware projects",
+    titleAside: "Save money the smart way fun DIY home projects",
     description:
       "Physical builds and electronics I have put together on the bench.",
     emptyMessage: "No hardware projects yet. Check back soon.",
@@ -35,6 +38,7 @@ const SECTIONS: {
     category: "iot",
     eyebrow: "Connected devices",
     title: "IoT projects",
+    titleAside: "Fun home DIY projects",
     description:
       "Connected devices and sensor projects, from the board to the dashboard.",
     emptyMessage: "No IoT projects yet. Check back soon.",
@@ -68,6 +72,7 @@ export function ProjectsPageContent({ projects }: { projects: Project[] }) {
             id={section.id}
             eyebrow={section.eyebrow}
             title={section.title}
+            titleAside={section.titleAside}
             description={section.description}
             emptyMessage={section.emptyMessage}
             projects={projects.filter(

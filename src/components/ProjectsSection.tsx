@@ -10,6 +10,7 @@ type Props = {
   id: string;
   eyebrow: string;
   title: string;
+  titleAside?: string;
   description: string;
   projects: Project[];
   emptyMessage: string;
@@ -22,6 +23,7 @@ export function ProjectsSection({
   id,
   eyebrow,
   title,
+  titleAside,
   description,
   projects,
   emptyMessage,
@@ -50,9 +52,25 @@ export function ProjectsSection({
           <p className="theme-accent-text mb-1 text-[0.65rem] font-semibold tracking-[0.2em] uppercase">
             {eyebrow}
           </p>
-          <h2 id={id} className="theme-heading text-2xl font-semibold sm:text-3xl">
-            {title}
-          </h2>
+          <div className="flex flex-wrap items-center gap-3">
+            <h2
+              id={id}
+              className="theme-heading scroll-mt-24 text-2xl font-semibold sm:text-3xl"
+            >
+              {title}
+            </h2>
+            {titleAside ? (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="h-6 w-px shrink-0 bg-teal-400/40 sm:h-7"
+                />
+                <span className="theme-muted-soft text-sm leading-snug sm:text-base">
+                  {titleAside}
+                </span>
+              </>
+            ) : null}
+          </div>
           <p className="theme-muted-soft mt-1 max-w-2xl text-sm leading-relaxed">
             {description}
           </p>
