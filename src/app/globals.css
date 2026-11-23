@@ -168,6 +168,8 @@ body {
 
 .theme-nav {
   border-color: rgb(20 184 166 / 20%);
+  /* Solid so scrolling page content cannot show through the fixed bar. */
+  background-color: #0c0c0f;
 }
 
 .theme-brand-link {
@@ -271,6 +273,7 @@ body {
 
 :root[data-theme="light"] .theme-nav {
   border-color: rgb(15 23 42 / 10%);
+  background-color: #f6f1e8;
 }
 
 :root[data-theme="light"] .theme-nav-link,
