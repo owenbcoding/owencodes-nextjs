@@ -218,6 +218,15 @@ body {
   border-color: rgb(20 184 166 / 20%);
 }
 
+/* Matches the fixed navigation bar so the home page reads as one solid frame. */
+.theme-footer-solid {
+  background-color: #0c0c0f;
+}
+
+:root[data-theme="light"] .theme-footer-solid {
+  background-color: #f6f1e8;
+}
+
 .theme-footer-text {
   color: #d1d5db;
 }

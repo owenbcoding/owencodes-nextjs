@@ -1,7 +1,7 @@
 export function Footer({ compact = false }: { compact?: boolean }) {
   return (
     <footer
-      className={`theme-footer relative z-40 mt-auto border-t backdrop-blur-md ${
+      className={`theme-footer theme-footer-solid relative z-40 mt-auto border-t backdrop-blur-md ${
         compact ? "py-4" : "py-8"
       }`}
     >
