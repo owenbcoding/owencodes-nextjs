@@ -52,7 +52,7 @@ export function NewsletterSignup() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="Enter email to Subscribe its free!"
-          className="theme-input w-full min-w-0 flex-1 text-center rounded-full border border-cyan-400/40 px-4 py-3 text-sm outline-none transition focus:border-cyan-400"
+          className="theme-input newsletter-input w-full min-w-0 flex-1 text-center rounded-full border border-cyan-400/40 px-4 py-3 text-sm outline-none transition focus:border-cyan-400"
         />
         <button
           type="submit"
