@@ -30,7 +30,10 @@ export type Project = {
   link?: { href: string; label: string };
   /** Slug of the matching post in content/project-archive. */
   archiveSlug?: string;
-  /** When the project went live (or was published); newest projects are listed first. */
+  /**
+   * When the project went live (or was published). Unpinned projects are listed
+   * ahead of the pinned ones, newest first.
+   */
   createdAt?: string;
 };
 
@@ -99,6 +102,17 @@ function normalizeCategory(value?: string): ProjectCategory {
   return "software";
 }
 
+/**
+ * Order the projects page opens with: Leadscout, then the Shopify store, then
+ * Tracton Community. These three stay in this order; any project that is not
+ * listed here (a newer build or a fresh Sanity entry) is shown ahead of them.
+ */
+const PINNED_PROJECT_SLUGS = [
+  "leadscout",
+  "shopify-store-redesign",
+  "tracton-biodiversity-group",
+];
+
 function byNewest(a: Project, b: Project): number {
   const aTime = a.createdAt ? Date.parse(a.createdAt) : Number.NaN;
   const bTime = b.createdAt ? Date.parse(b.createdAt) : Number.NaN;
@@ -112,8 +126,20 @@ function byNewest(a: Project, b: Project): number {
   return bTime - aTime;
 }
 
+function byProjectsPageOrder(a: Project, b: Project): number {
+  const aPin = PINNED_PROJECT_SLUGS.indexOf(a.slug);
+  const bPin = PINNED_PROJECT_SLUGS.indexOf(b.slug);
+
+  // Unpinned projects come first, so a new project always appears before
+  // Leadscout rather than being slotted in after the pinned row.
+  if (aPin === -1 && bPin === -1) return byNewest(a, b);
+  if (aPin === -1) return -1;
+  if (bPin === -1) return 1;
+  return aPin - bPin;
+}
+
 export async function getAllProjects(): Promise<Project[]> {
-  if (!sanityClient) return [...codeProjects].sort(byNewest);
+  if (!sanityClient) return [...codeProjects].sort(byProjectsPageOrder);
 
   const sanityProjects = await sanityClient.fetch<SanityProject[]>(projectsQuery);
   const projectsBySlug = new Map(
@@ -136,7 +162,7 @@ export async function getAllProjects(): Promise<Project[]> {
     projectsBySlug.set(project.slug, normalized);
   }
 
-  return Array.from(projectsBySlug.values()).sort(byNewest);
+  return Array.from(projectsBySlug.values()).sort(byProjectsPageOrder);
 }
 
 export const projects = localProjects;
