@@ -5,6 +5,7 @@ import { BlogsPagination } from "@/components/BlogsPagination";
 // import { DailyDevPostCard } from "@/components/DailyDevPostCard";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
+import { WaveBackground } from "@/components/WaveBackground";
 import { getAllBlogs } from "@/lib/blogs";
 // import { getDailyDevPosts } from "@/lib/daily-dev";
 
@@ -51,9 +52,7 @@ export default async function BlogsPage({
 
   return (
     <div className="site-shell relative flex min-h-screen flex-col overflow-x-hidden">
-      <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
-      <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
-      <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
+      <WaveBackground />
 
       <MainNavigation />
 
