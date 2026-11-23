@@ -21,6 +21,24 @@ const DEFAULT_TECH_WORDS = [
   "PostgreSQL",
   "OpenAI",
   "REST APIs",
+  "SaaS",
+  "SaaS Projects",
+  "Ecommerce",
+  "Tools",
+  "Web Apps",
+  "Dashboards",
+  "Hardware",
+  "IoT Projects",
+  "Automation",
+  "AI Agents",
+  "Full Stack",
+  "APIs",
+  "Cloud",
+  "DevOps",
+  "UI/UX",
+  "Integrations",
+  "Databases",
+  "Payments",
   "</>",
   "{ }",
   "[ ]",
@@ -44,6 +62,10 @@ const DARK_WORD_COLORS = [
   "#336791", // PostgreSQL
   "#10A37F", // OpenAI
   "#A3A3A3", // Generic symbols / APIs
+  "#F97316", // SaaS / Tools
+  "#22D3EE", // Cloud / DevOps
+  "#E879F9", // UI/UX / Mobile
+  "#34D399", // Payments / Integrations
 ];
 
 // Same palette, deepened so each word stays readable against the light
@@ -63,6 +85,10 @@ const LIGHT_WORD_COLORS = [
   "#172F4D", // PostgreSQL
   "#065F46", // OpenAI
   "#3F3F46", // Generic symbols / APIs
+  "#9A3412", // SaaS / Tools
+  "#0E7490", // Cloud / DevOps
+  "#86198F", // UI/UX / Mobile
+  "#166534", // Payments / Integrations
 ];
 
 // Alpha-blending math means low opacity over a light background reads as
@@ -70,7 +96,7 @@ const LIGHT_WORD_COLORS = [
 // opacity over the cream background comes out close to rgb(191,189,186)),
 // so light mode needs a much higher opacity floor/ceiling than dark mode
 // to actually look readable rather than washed out.
-const DARK_WORD_OPACITY = { min: 0.24, max: 0.48 };
+const DARK_WORD_OPACITY = { min: 0.35, max: 0.6 };
 const LIGHT_WORD_OPACITY = { min: 0.55, max: 0.85 };
 
 type ParticlesBackgroundProps = {
@@ -104,7 +130,7 @@ export function ParticlesBackground({
     detectRetina: true,
     particles: {
       number: {
-        value: 12,
+        value: 30,
         density: { enable: true, width: 1920, height: 1080 },
       },
       shape: {
@@ -126,11 +152,11 @@ export function ParticlesBackground({
         value: wordOpacity,
       },
       size: {
-        value: { min: 14, max: 28 },
+        value: { min: 16, max: 32 },
       },
       move: {
         enable: true,
-        speed: 0.2,
+        speed: 0.6,
         direction: "none",
         straight: false,
         outModes: { default: "bounce" },
@@ -150,7 +176,7 @@ export function ParticlesBackground({
   };
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 w-full min-w-0 max-w-full overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 z-[1] w-full min-w-0 max-w-full overflow-hidden">
       <Particles key={theme} id={id} options={options} className="!size-full" />
     </div>
   );
