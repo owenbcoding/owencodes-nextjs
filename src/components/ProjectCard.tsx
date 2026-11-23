@@ -70,7 +70,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="blog-card group relative h-full rounded-xl p-[1.5px]">
       <span aria-hidden="true" className="blog-card-rgb-border" />
-      <div className="blog-card-content relative flex h-full flex-col rounded-[calc(0.75rem-1.5px)] p-3 sm:p-4">
+      <div className="blog-card-content project-card-content relative flex h-full flex-col rounded-[calc(0.75rem-1.5px)] p-3 sm:p-4">
         <h3 className="theme-heading mb-2 line-clamp-2 text-base leading-snug font-semibold sm:text-lg">
           {project.title}
         </h3>
