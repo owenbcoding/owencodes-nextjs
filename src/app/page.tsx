@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { BirthdayConfetti } from "@/components/BirthdayConfetti";
 import { MainNavigation } from "@/components/MainNavigation";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { WaveBackground } from "@/components/WaveBackground";
 // Commented out along with the hero tagline below; restore when re-enabling it.
 // import { RotatingWord } from "@/components/RotatingWord";
 import { CV_DOWNLOAD_URL } from "@/lib/cv";
@@ -92,9 +93,7 @@ export default function Home() {
         }}
       />
 
-      <div className="site-bg-primary pointer-events-none absolute inset-0 z-0" />
-      <div className="site-bg-side pointer-events-none absolute inset-0 z-0" />
-      <div className="site-bg-bottom pointer-events-none absolute inset-0 z-0" />
+      <WaveBackground />
       <BirthdayConfetti />
 
       <MainNavigation />
