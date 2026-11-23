@@ -346,6 +346,16 @@ body {
   color: #64748b;
 }
 
+/* Fully opaque so the wave background never shows through the field. */
+.newsletter-input {
+  background: #000000;
+  color: #ffffff;
+}
+
+.newsletter-input::placeholder {
+  color: rgb(255 255 255 / 80%);
+}
+
 .theme-input-border {
   border-color: rgb(255 255 255 / 20%);
 }
@@ -432,6 +442,11 @@ body {
 .blog-card-content,
 .blog-detail-content {
   background: #0c0c0f;
+}
+
+/* Project cards sit above the animated word layer, so keep them fully opaque. */
+.project-card-content {
+  background: #000000;
 }
 
 .blog-card-artwork {
