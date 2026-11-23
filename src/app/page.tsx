@@ -136,6 +136,9 @@ export default function Home() {
                   I am a Self taught developer with a passion for coding and
                   problem-solving.
                 </p>
+                {/* Hidden for now: links to the hardware projects section, which
+                    is also hidden. Restore by uncommenting this block. */}
+                {/*
                 <a
                   href="/projects#hardware-projects-heading"
                   aria-label="Save money the smart way - see my hardware projects"
@@ -147,6 +150,7 @@ export default function Home() {
                     <span aria-hidden="true">&rarr;</span>
                   </span>
                 </a>
+                */}
                 <ul className="theme-body mb-5 flex w-full flex-col gap-2 text-lg leading-relaxed md:text-xl">
                   <li>💻 Self-Taught Programmer</li>
                   <li>🛠️ Building things that matter</li>

@@ -1,14 +1,16 @@
 import { BlogCard } from "@/components/BlogCard";
 import { BlogsPagination } from "@/components/BlogsPagination";
-import { DailyDevPostCard } from "@/components/DailyDevPostCard";
+// Hidden for now until the daily.dev feed is finished. Restore by
+// uncommenting these two imports and the section at the bottom of the page.
+// import { DailyDevPostCard } from "@/components/DailyDevPostCard";
 import { Footer } from "@/components/Footer";
 import { MainNavigation } from "@/components/MainNavigation";
 import { getAllBlogs } from "@/lib/blogs";
-import { getDailyDevPosts } from "@/lib/daily-dev";
+// import { getDailyDevPosts } from "@/lib/daily-dev";
 
 const ARTICLES_PER_PAGE = 9;
 const FEATURED_POSTS_COUNT = 3;
-const DAILY_DEV_POSTS_COUNT = 6;
+// const DAILY_DEV_POSTS_COUNT = 6;
 
 export const metadata = {
   title: "Owen's Blogs",
@@ -25,10 +27,14 @@ export default async function BlogsPage({
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
-  const [{ page: pageParam }, blogs, dailyDevPosts] = await Promise.all([
+  const [
+    { page: pageParam },
+    blogs,
+    // dailyDevPosts,
+  ] = await Promise.all([
     searchParams,
     getAllBlogs(),
-    getDailyDevPosts(),
+    // getDailyDevPosts(),
   ]);
   const featuredPosts = blogs.slice(0, FEATURED_POSTS_COUNT);
   const articles = blogs.slice(FEATURED_POSTS_COUNT);
@@ -123,6 +129,9 @@ export default async function BlogsPage({
           </>
         )}
 
+        {/* daily.dev feed section hidden for now. Restore by uncommenting
+            this block together with the imports and constants at the top. */}
+        {/*
         {dailyDevPosts.length > 0 ? (
           <section aria-labelledby="daily-dev-heading" className="mb-10">
             <div className="mb-6">
@@ -150,6 +159,7 @@ export default async function BlogsPage({
             </div>
           </section>
         ) : null}
+        */}
       </main>
 
       <Footer />
