@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   applicationName: SITE_NAME,
+  // The site ships its own dark/light theme; stop the Dark Reader extension
+  // from rewriting the server HTML, which breaks hydration with cosmetic
+  // data-darkreader-* attributes and inline style overrides.
+  other: {
+    "darkreader-lock": "darkreader-lock",
+  },
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
