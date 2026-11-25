@@ -323,13 +323,14 @@ body {
 
 .theme-nav .theme-mobile-menu {
   border-color: rgb(20 184 166 / 25%);
-  background-color: #111827;
+  /* Matches the desktop navigation bar background. */
+  background-color: #0c0c0f;
 }
 
 .theme-nav .theme-mobile-menu .theme-mobile-nav-active {
   border: 1.5px solid transparent;
   background:
-    linear-gradient(#111827, #111827) padding-box,
+    linear-gradient(#0c0c0f, #0c0c0f) padding-box,
     linear-gradient(120deg, #ff286f, #a855f7, #20d9ed, #4ade80, #ffb52e, #ff286f) border-box;
 }
 
